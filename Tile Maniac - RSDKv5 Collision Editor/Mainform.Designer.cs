@@ -34,8 +34,6 @@
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openUncompressedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveUncompressedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsUncompressedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showPathBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -133,6 +131,7 @@
             this.CTileLabel = new System.Windows.Forms.Label();
             this.TilePicBox = new System.Windows.Forms.PictureBox();
             this.CollisionPicBox = new System.Windows.Forms.PictureBox();
+            this.saveUncompressedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -203,7 +202,6 @@
             this.openToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
-            this.openUncompressedToolStripMenuItem,
             this.saveUncompressedToolStripMenuItem,
             this.saveAsUncompressedToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -214,7 +212,7 @@
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(311, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -222,39 +220,26 @@
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(311, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
+            this.saveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.S)));
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(311, 22);
             this.saveAsToolStripMenuItem.Text = "Save As...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
-            // 
-            // openUncompressedToolStripMenuItem
-            // 
-            this.openUncompressedToolStripMenuItem.Name = "openUncompressedToolStripMenuItem";
-            this.openUncompressedToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-            | System.Windows.Forms.Keys.O)));
-            this.openUncompressedToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
-            this.openUncompressedToolStripMenuItem.Text = "Open (Uncompressed) ";
-            this.openUncompressedToolStripMenuItem.Click += new System.EventHandler(this.openUncompressedToolStripMenuItem_Click);
-            // 
-            // saveUncompressedToolStripMenuItem
-            // 
-            this.saveUncompressedToolStripMenuItem.Name = "saveUncompressedToolStripMenuItem";
-            this.saveUncompressedToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-            | System.Windows.Forms.Keys.S)));
-            this.saveUncompressedToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
-            this.saveUncompressedToolStripMenuItem.Text = "Save (Uncompressed) ";
-            this.saveUncompressedToolStripMenuItem.Click += new System.EventHandler(this.saveUncompressedToolStripMenuItem_Click);
             // 
             // saveAsUncompressedToolStripMenuItem
             // 
             this.saveAsUncompressedToolStripMenuItem.Name = "saveAsUncompressedToolStripMenuItem";
-            this.saveAsUncompressedToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
+            this.saveAsUncompressedToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.S)));
+            this.saveAsUncompressedToolStripMenuItem.Size = new System.Drawing.Size(311, 22);
             this.saveAsUncompressedToolStripMenuItem.Text = "Save As... (Uncompressed) ";
             this.saveAsUncompressedToolStripMenuItem.Click += new System.EventHandler(this.saveAsUncompressedToolStripMenuItem_Click);
             // 
@@ -1576,6 +1561,15 @@
             this.CollisionPicBox.TabIndex = 0;
             this.CollisionPicBox.TabStop = false;
             // 
+            // saveUncompressedToolStripMenuItem
+            // 
+            this.saveUncompressedToolStripMenuItem.Name = "saveUncompressedToolStripMenuItem";
+            this.saveUncompressedToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.S)));
+            this.saveUncompressedToolStripMenuItem.Size = new System.Drawing.Size(311, 22);
+            this.saveUncompressedToolStripMenuItem.Text = "Save (Uncompressed) ";
+            this.saveUncompressedToolStripMenuItem.Click += new System.EventHandler(this.saveUncompressedToolStripMenuItem_Click);
+            // 
             // Mainform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1702,8 +1696,6 @@
         private System.Windows.Forms.PictureBox RGBox5;
         private System.Windows.Forms.PictureBox RGBox3;
         private System.Windows.Forms.PictureBox RGBox4;
-        private System.Windows.Forms.ToolStripMenuItem openUncompressedToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveUncompressedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsUncompressedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem1;
         private System.Windows.Forms.Label VPLabel;
@@ -1752,6 +1744,7 @@
         private System.Windows.Forms.Label SlopeLabel;
         internal System.Windows.Forms.ListBox lb02;
         internal System.Windows.Forms.ListBox lb01;
+        private System.Windows.Forms.ToolStripMenuItem saveUncompressedToolStripMenuItem;
     }
 }
 

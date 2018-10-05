@@ -518,24 +518,6 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor
             }
         }
 
-        private void openUncompressedToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Title = "Open Uncompressed";
-            dlg.DefaultExt = ".bin";
-            dlg.Filter = "Uncompressed RSDKv5 Tileconfig Files (TileConfig.bin)|TileConfig.bin";
-
-            if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
-            {
-                curColisionMask = 0; //Make sure we start at Collision Mask 0
-                filepath = dlg.FileName; //Set the filepath
-                tcf = new RSDKv5.TilesConfig(dlg.FileName, true); //Tell it to read an uncompressed tileconfig
-                string t = filepath.Replace("TileConfig.bin", "16x16tiles.gif"); //get the path to the stage's tileset
-                LoadTileSet(new Bitmap(t)); //load each 16x16 tile into the list
-                RefreshUI(); //update the UI
-            }
-        }
-
         private void saveUncompressedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (filepath != null) //Did we open a file?
