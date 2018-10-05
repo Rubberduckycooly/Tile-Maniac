@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
 
 namespace Tile_Maniac___RSDKv5_Collision_Editor
 {
@@ -175,11 +176,11 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor
             if (tcf != null)
             {
                 CurMaskLabel.Text = "Collision Mask "+ (curColisionMask+1) +" of "+ 1024; //what collision mask are we on?
-                TilePicBox.BackgroundImage = Tiles[curColisionMask]; //update the tile preview
+                TilePicBox.Image = Tiles[curColisionMask]; //update the tile preview
                 
                 if (!showPathB) //if we are showing Path A then refresh the values accordingly
                 {
-                    CollisionPicBox.BackgroundImage = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
+                    CollisionPicBox.Image = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
                     SlopeNUD.Value = (decimal)(tcf.CollisionPath1[curColisionMask].slopeAngle / (0xFF / 360f));
                     PhysicsNUD.Value = tcf.CollisionPath1[curColisionMask].physics;
                     MomentumNUD.Value = tcf.CollisionPath1[curColisionMask].momentum;
@@ -340,7 +341,7 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor
 
                 if (showPathB) //if we are showing Path B then refresh the values accordingly
                 {
-                    CollisionPicBox.BackgroundImage = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(0, 255, 0));
+                    CollisionPicBox.Image = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(0, 255, 0));
                     SlopeNUD.Value = (decimal)(tcf.CollisionPath2[curColisionMask].slopeAngle / (0xFF / 360f));
                     PhysicsNUD.Value = tcf.CollisionPath2[curColisionMask].physics;
                     MomentumNUD.Value = tcf.CollisionPath2[curColisionMask].momentum;
@@ -1200,6 +1201,15 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor
                 RefreshUI();
             }
         }
-#endregion
+        #endregion
+
+        public class PictureBoxNearestNeighbor : PictureBox
+        {
+            protected override void OnPaint(PaintEventArgs paintEventArgs)
+            {
+                paintEventArgs.Graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
+                base.OnPaint(paintEventArgs);
+            }
+        }
     }
 }

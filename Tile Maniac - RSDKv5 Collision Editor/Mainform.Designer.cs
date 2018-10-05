@@ -34,6 +34,7 @@
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveUncompressedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsUncompressedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showPathBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -129,9 +130,8 @@
             this.RGBox4 = new System.Windows.Forms.PictureBox();
             this.CMaskLabel = new System.Windows.Forms.Label();
             this.CTileLabel = new System.Windows.Forms.Label();
-            this.TilePicBox = new System.Windows.Forms.PictureBox();
-            this.CollisionPicBox = new System.Windows.Forms.PictureBox();
-            this.saveUncompressedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TilePicBox = new Tile_Maniac___RSDKv5_Collision_Editor.Mainform.PictureBoxNearestNeighbor();
+            this.CollisionPicBox = new Tile_Maniac___RSDKv5_Collision_Editor.Mainform.PictureBoxNearestNeighbor();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -232,6 +232,15 @@
             this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(311, 22);
             this.saveAsToolStripMenuItem.Text = "Save As...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
+            // 
+            // saveUncompressedToolStripMenuItem
+            // 
+            this.saveUncompressedToolStripMenuItem.Name = "saveUncompressedToolStripMenuItem";
+            this.saveUncompressedToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.S)));
+            this.saveUncompressedToolStripMenuItem.Size = new System.Drawing.Size(311, 22);
+            this.saveUncompressedToolStripMenuItem.Text = "Save (Uncompressed) ";
+            this.saveUncompressedToolStripMenuItem.Click += new System.EventHandler(this.saveUncompressedToolStripMenuItem_Click);
             // 
             // saveAsUncompressedToolStripMenuItem
             // 
@@ -1521,7 +1530,7 @@
             // 
             this.CMaskLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.CMaskLabel.AutoSize = true;
-            this.CMaskLabel.Location = new System.Drawing.Point(10, 222);
+            this.CMaskLabel.Location = new System.Drawing.Point(12, 222);
             this.CMaskLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.CMaskLabel.Name = "CMaskLabel";
             this.CMaskLabel.Size = new System.Drawing.Size(111, 13);
@@ -1532,7 +1541,7 @@
             // 
             this.CTileLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CTileLabel.AutoSize = true;
-            this.CTileLabel.Location = new System.Drawing.Point(130, 222);
+            this.CTileLabel.Location = new System.Drawing.Point(132, 222);
             this.CTileLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.CTileLabel.Name = "CTileLabel";
             this.CTileLabel.Size = new System.Drawing.Size(61, 13);
@@ -1542,33 +1551,26 @@
             // TilePicBox
             // 
             this.TilePicBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.TilePicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.TilePicBox.Location = new System.Drawing.Point(130, 241);
+            this.TilePicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.TilePicBox.Location = new System.Drawing.Point(132, 241);
             this.TilePicBox.Margin = new System.Windows.Forms.Padding(2);
             this.TilePicBox.Name = "TilePicBox";
             this.TilePicBox.Size = new System.Drawing.Size(96, 104);
+            this.TilePicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.TilePicBox.TabIndex = 1;
             this.TilePicBox.TabStop = false;
             // 
             // CollisionPicBox
             // 
             this.CollisionPicBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CollisionPicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.CollisionPicBox.Location = new System.Drawing.Point(13, 240);
+            this.CollisionPicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.CollisionPicBox.Location = new System.Drawing.Point(15, 240);
             this.CollisionPicBox.Margin = new System.Windows.Forms.Padding(2);
             this.CollisionPicBox.Name = "CollisionPicBox";
             this.CollisionPicBox.Size = new System.Drawing.Size(96, 104);
+            this.CollisionPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.CollisionPicBox.TabIndex = 0;
             this.CollisionPicBox.TabStop = false;
-            // 
-            // saveUncompressedToolStripMenuItem
-            // 
-            this.saveUncompressedToolStripMenuItem.Name = "saveUncompressedToolStripMenuItem";
-            this.saveUncompressedToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-            | System.Windows.Forms.Keys.S)));
-            this.saveUncompressedToolStripMenuItem.Size = new System.Drawing.Size(311, 22);
-            this.saveUncompressedToolStripMenuItem.Text = "Save (Uncompressed) ";
-            this.saveUncompressedToolStripMenuItem.Click += new System.EventHandler(this.saveUncompressedToolStripMenuItem_Click);
             // 
             // Mainform
             // 
@@ -1648,8 +1650,8 @@
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.PictureBox TilePicBox;
-        private System.Windows.Forms.PictureBox CollisionPicBox;
+        private Mainform.PictureBoxNearestNeighbor TilePicBox;
+        private Mainform.PictureBoxNearestNeighbor CollisionPicBox;
         private System.Windows.Forms.Label CMaskLabel;
         private System.Windows.Forms.Label CTileLabel;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
