@@ -91,7 +91,7 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor
             RGBoxE.Image = ColActivatedImges[0];
             RGBoxF.Image = ColActivatedImges[0];
 
-            ToolTip.SetToolTip(SlopeNUD, "Controls the slope angle of the tile");
+            ToolTip.SetToolTip(SlopeNUD, "Controls the slope angle of the tile in degrees");
             ToolTip.SetToolTip(PhysicsNUD, "Controls the physics of the player interacting with the tile");
             ToolTip.SetToolTip(MomentumNUD, "Controls the momentum the player gets from the tile");
             ToolTip.SetToolTip(UnknownNUD, "Controls the Unknown Value of the tile");
@@ -180,7 +180,7 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor
                 if (!showPathB) //if we are showing Path A then refresh the values accordingly
                 {
                     CollisionPicBox.BackgroundImage = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    SlopeNUD.Value = tcf.CollisionPath1[curColisionMask].slopeAngle;
+                    SlopeNUD.Value = (decimal)(tcf.CollisionPath1[curColisionMask].slopeAngle / (0xFF / 360f));
                     PhysicsNUD.Value = tcf.CollisionPath1[curColisionMask].physics;
                     MomentumNUD.Value = tcf.CollisionPath1[curColisionMask].momentum;
                     UnknownNUD.Value = tcf.CollisionPath1[curColisionMask].unknown;
@@ -341,7 +341,7 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor
                 if (showPathB) //if we are showing Path B then refresh the values accordingly
                 {
                     CollisionPicBox.BackgroundImage = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(0, 255, 0));
-                    SlopeNUD.Value = tcf.CollisionPath2[curColisionMask].slopeAngle;
+                    SlopeNUD.Value = (decimal)(tcf.CollisionPath2[curColisionMask].slopeAngle / (0xFF / 360f));
                     PhysicsNUD.Value = tcf.CollisionPath2[curColisionMask].physics;
                     MomentumNUD.Value = tcf.CollisionPath2[curColisionMask].momentum;
                     UnknownNUD.Value = tcf.CollisionPath2[curColisionMask].unknown;
@@ -616,11 +616,11 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor
             {
                 if (!showPathB)
                 {
-                    tcf.CollisionPath1[curColisionMask].slopeAngle = (byte)SlopeNUD.Value; //Set Slope angle for Path A
+                    tcf.CollisionPath1[curColisionMask].slopeAngle = (byte)((float)SlopeNUD.Value * (0xFF / 360f)); //Set Slope angle for Path A
                 }
                 if (showPathB)
                 {
-                    tcf.CollisionPath2[curColisionMask].slopeAngle = (byte)SlopeNUD.Value; //Set Slope angle for Path B
+                    tcf.CollisionPath2[curColisionMask].slopeAngle = (byte)((float)SlopeNUD.Value * (0xFF / 360f)); //Set Slope angle for Path B
                 }
                 RefreshUI();
             }

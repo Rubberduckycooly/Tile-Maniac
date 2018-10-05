@@ -42,52 +42,6 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.GotoButton = new System.Windows.Forms.Button();
-            this.GotoLabel = new System.Windows.Forms.Label();
-            this.GotoNUD = new System.Windows.Forms.NumericUpDown();
-            this.PrevButton = new System.Windows.Forms.Button();
-            this.NextButton = new System.Windows.Forms.Button();
-            this.CurMaskLabel = new System.Windows.Forms.Label();
-            this.CollisionVIEW = new System.Windows.Forms.GroupBox();
-            this.PlaceHolderTXT1 = new System.Windows.Forms.Label();
-            this.CMaskLabel = new System.Windows.Forms.Label();
-            this.CTileLabel = new System.Windows.Forms.Label();
-            this.RGBoxF = new System.Windows.Forms.PictureBox();
-            this.Viewer16 = new System.Windows.Forms.PictureBox();
-            this.RGBox0 = new System.Windows.Forms.PictureBox();
-            this.RGBoxE = new System.Windows.Forms.PictureBox();
-            this.Viewer15 = new System.Windows.Forms.PictureBox();
-            this.Viewer14 = new System.Windows.Forms.PictureBox();
-            this.RGBoxD = new System.Windows.Forms.PictureBox();
-            this.Viewer13 = new System.Windows.Forms.PictureBox();
-            this.Viewer12 = new System.Windows.Forms.PictureBox();
-            this.RGBoxC = new System.Windows.Forms.PictureBox();
-            this.Viewer11 = new System.Windows.Forms.PictureBox();
-            this.Viewer10 = new System.Windows.Forms.PictureBox();
-            this.RGBoxB = new System.Windows.Forms.PictureBox();
-            this.Viewer9 = new System.Windows.Forms.PictureBox();
-            this.Viewer8 = new System.Windows.Forms.PictureBox();
-            this.RGBoxA = new System.Windows.Forms.PictureBox();
-            this.Viewer7 = new System.Windows.Forms.PictureBox();
-            this.Viewer6 = new System.Windows.Forms.PictureBox();
-            this.RGBox9 = new System.Windows.Forms.PictureBox();
-            this.Viewer5 = new System.Windows.Forms.PictureBox();
-            this.Viewer4 = new System.Windows.Forms.PictureBox();
-            this.RGBox8 = new System.Windows.Forms.PictureBox();
-            this.Viewer3 = new System.Windows.Forms.PictureBox();
-            this.Viewer2 = new System.Windows.Forms.PictureBox();
-            this.RGBox7 = new System.Windows.Forms.PictureBox();
-            this.Viewer1 = new System.Windows.Forms.PictureBox();
-            this.RGBox6 = new System.Windows.Forms.PictureBox();
-            this.RGBox1 = new System.Windows.Forms.PictureBox();
-            this.RGBox2 = new System.Windows.Forms.PictureBox();
-            this.RGBox5 = new System.Windows.Forms.PictureBox();
-            this.RGBox3 = new System.Windows.Forms.PictureBox();
-            this.RGBox4 = new System.Windows.Forms.PictureBox();
-            this.TilePicBox = new System.Windows.Forms.PictureBox();
-            this.CollisionPicBox = new System.Windows.Forms.PictureBox();
-            this.VPLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cb15 = new System.Windows.Forms.CheckBox();
             this.cb10 = new System.Windows.Forms.CheckBox();
@@ -133,11 +87,63 @@
             this.SlopeLabel = new System.Windows.Forms.Label();
             this.lb02 = new System.Windows.Forms.ListBox();
             this.lb01 = new System.Windows.Forms.ListBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.VPLabel = new System.Windows.Forms.Label();
+            this.GotoButton = new System.Windows.Forms.Button();
+            this.GotoLabel = new System.Windows.Forms.Label();
+            this.GotoNUD = new System.Windows.Forms.NumericUpDown();
+            this.PrevButton = new System.Windows.Forms.Button();
+            this.NextButton = new System.Windows.Forms.Button();
+            this.CurMaskLabel = new System.Windows.Forms.Label();
+            this.CollisionVIEW = new System.Windows.Forms.GroupBox();
+            this.RGBoxF = new System.Windows.Forms.PictureBox();
+            this.Viewer16 = new System.Windows.Forms.PictureBox();
+            this.RGBox0 = new System.Windows.Forms.PictureBox();
+            this.RGBoxE = new System.Windows.Forms.PictureBox();
+            this.Viewer15 = new System.Windows.Forms.PictureBox();
+            this.Viewer14 = new System.Windows.Forms.PictureBox();
+            this.RGBoxD = new System.Windows.Forms.PictureBox();
+            this.Viewer13 = new System.Windows.Forms.PictureBox();
+            this.Viewer12 = new System.Windows.Forms.PictureBox();
+            this.RGBoxC = new System.Windows.Forms.PictureBox();
+            this.Viewer11 = new System.Windows.Forms.PictureBox();
+            this.Viewer10 = new System.Windows.Forms.PictureBox();
+            this.RGBoxB = new System.Windows.Forms.PictureBox();
+            this.Viewer9 = new System.Windows.Forms.PictureBox();
+            this.Viewer8 = new System.Windows.Forms.PictureBox();
+            this.RGBoxA = new System.Windows.Forms.PictureBox();
+            this.Viewer7 = new System.Windows.Forms.PictureBox();
+            this.Viewer6 = new System.Windows.Forms.PictureBox();
+            this.RGBox9 = new System.Windows.Forms.PictureBox();
+            this.Viewer5 = new System.Windows.Forms.PictureBox();
+            this.Viewer4 = new System.Windows.Forms.PictureBox();
+            this.RGBox8 = new System.Windows.Forms.PictureBox();
+            this.Viewer3 = new System.Windows.Forms.PictureBox();
+            this.Viewer2 = new System.Windows.Forms.PictureBox();
+            this.RGBox7 = new System.Windows.Forms.PictureBox();
+            this.Viewer1 = new System.Windows.Forms.PictureBox();
+            this.PlaceHolderTXT1 = new System.Windows.Forms.Label();
+            this.RGBox6 = new System.Windows.Forms.PictureBox();
+            this.RGBox1 = new System.Windows.Forms.PictureBox();
+            this.RGBox2 = new System.Windows.Forms.PictureBox();
+            this.RGBox5 = new System.Windows.Forms.PictureBox();
+            this.RGBox3 = new System.Windows.Forms.PictureBox();
+            this.RGBox4 = new System.Windows.Forms.PictureBox();
+            this.CMaskLabel = new System.Windows.Forms.Label();
+            this.CTileLabel = new System.Windows.Forms.Label();
+            this.TilePicBox = new System.Windows.Forms.PictureBox();
+            this.CollisionPicBox = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SpecialNUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UnknownNUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MomentumNUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PhysicsNUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SlopeNUD)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GotoNUD)).BeginInit();
             this.CollisionVIEW.SuspendLayout();
@@ -175,12 +181,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.RGBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TilePicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CollisionPicBox)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SpecialNUD)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UnknownNUD)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.MomentumNUD)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PhysicsNUD)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SlopeNUD)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -286,7 +286,7 @@
             // aboutToolStripMenuItem1
             // 
             this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem1.Text = "About";
             this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
             // 
@@ -313,482 +313,6 @@
             this.splitContainer1.SplitterDistance = 350;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 1;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.VPLabel);
-            this.panel1.Controls.Add(this.GotoButton);
-            this.panel1.Controls.Add(this.GotoLabel);
-            this.panel1.Controls.Add(this.GotoNUD);
-            this.panel1.Controls.Add(this.PrevButton);
-            this.panel1.Controls.Add(this.NextButton);
-            this.panel1.Controls.Add(this.CurMaskLabel);
-            this.panel1.Location = new System.Drawing.Point(5, 318);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(342, 56);
-            this.panel1.TabIndex = 66;
-            // 
-            // GotoButton
-            // 
-            this.GotoButton.Location = new System.Drawing.Point(247, 27);
-            this.GotoButton.Name = "GotoButton";
-            this.GotoButton.Size = new System.Drawing.Size(34, 20);
-            this.GotoButton.TabIndex = 5;
-            this.GotoButton.Text = "GO!";
-            this.GotoButton.UseVisualStyleBackColor = true;
-            this.GotoButton.Click += new System.EventHandler(this.GotoButton_Click);
-            // 
-            // GotoLabel
-            // 
-            this.GotoLabel.AutoSize = true;
-            this.GotoLabel.Location = new System.Drawing.Point(125, 29);
-            this.GotoLabel.Name = "GotoLabel";
-            this.GotoLabel.Size = new System.Drawing.Size(62, 13);
-            this.GotoLabel.TabIndex = 4;
-            this.GotoLabel.Text = "Goto Mask:";
-            // 
-            // GotoNUD
-            // 
-            this.GotoNUD.Location = new System.Drawing.Point(190, 27);
-            this.GotoNUD.Maximum = new decimal(new int[] {
-            1024,
-            0,
-            0,
-            0});
-            this.GotoNUD.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.GotoNUD.Name = "GotoNUD";
-            this.GotoNUD.Size = new System.Drawing.Size(51, 20);
-            this.GotoNUD.TabIndex = 3;
-            this.GotoNUD.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.GotoNUD.ValueChanged += new System.EventHandler(this.GotoNUD_ValueChanged);
-            // 
-            // PrevButton
-            // 
-            this.PrevButton.Location = new System.Drawing.Point(11, 25);
-            this.PrevButton.Name = "PrevButton";
-            this.PrevButton.Size = new System.Drawing.Size(51, 24);
-            this.PrevButton.TabIndex = 2;
-            this.PrevButton.Text = "Prev";
-            this.PrevButton.UseVisualStyleBackColor = true;
-            this.PrevButton.Click += new System.EventHandler(this.PrevButton_Click);
-            // 
-            // NextButton
-            // 
-            this.NextButton.Location = new System.Drawing.Point(68, 25);
-            this.NextButton.Name = "NextButton";
-            this.NextButton.Size = new System.Drawing.Size(51, 24);
-            this.NextButton.TabIndex = 1;
-            this.NextButton.Text = "Next";
-            this.NextButton.UseVisualStyleBackColor = true;
-            this.NextButton.Click += new System.EventHandler(this.NextButton_Click);
-            // 
-            // CurMaskLabel
-            // 
-            this.CurMaskLabel.AutoSize = true;
-            this.CurMaskLabel.Location = new System.Drawing.Point(8, 4);
-            this.CurMaskLabel.Name = "CurMaskLabel";
-            this.CurMaskLabel.Size = new System.Drawing.Size(104, 13);
-            this.CurMaskLabel.TabIndex = 0;
-            this.CurMaskLabel.Text = "Collision Mask 0 of 0";
-            // 
-            // CollisionVIEW
-            // 
-            this.CollisionVIEW.Controls.Add(this.RGBoxF);
-            this.CollisionVIEW.Controls.Add(this.Viewer16);
-            this.CollisionVIEW.Controls.Add(this.RGBox0);
-            this.CollisionVIEW.Controls.Add(this.RGBoxE);
-            this.CollisionVIEW.Controls.Add(this.Viewer15);
-            this.CollisionVIEW.Controls.Add(this.Viewer14);
-            this.CollisionVIEW.Controls.Add(this.RGBoxD);
-            this.CollisionVIEW.Controls.Add(this.Viewer13);
-            this.CollisionVIEW.Controls.Add(this.Viewer12);
-            this.CollisionVIEW.Controls.Add(this.RGBoxC);
-            this.CollisionVIEW.Controls.Add(this.Viewer11);
-            this.CollisionVIEW.Controls.Add(this.Viewer10);
-            this.CollisionVIEW.Controls.Add(this.RGBoxB);
-            this.CollisionVIEW.Controls.Add(this.Viewer9);
-            this.CollisionVIEW.Controls.Add(this.Viewer8);
-            this.CollisionVIEW.Controls.Add(this.RGBoxA);
-            this.CollisionVIEW.Controls.Add(this.Viewer7);
-            this.CollisionVIEW.Controls.Add(this.Viewer6);
-            this.CollisionVIEW.Controls.Add(this.RGBox9);
-            this.CollisionVIEW.Controls.Add(this.Viewer5);
-            this.CollisionVIEW.Controls.Add(this.Viewer4);
-            this.CollisionVIEW.Controls.Add(this.RGBox8);
-            this.CollisionVIEW.Controls.Add(this.Viewer3);
-            this.CollisionVIEW.Controls.Add(this.Viewer2);
-            this.CollisionVIEW.Controls.Add(this.RGBox7);
-            this.CollisionVIEW.Controls.Add(this.Viewer1);
-            this.CollisionVIEW.Controls.Add(this.PlaceHolderTXT1);
-            this.CollisionVIEW.Controls.Add(this.RGBox6);
-            this.CollisionVIEW.Controls.Add(this.RGBox1);
-            this.CollisionVIEW.Controls.Add(this.RGBox2);
-            this.CollisionVIEW.Controls.Add(this.RGBox5);
-            this.CollisionVIEW.Controls.Add(this.RGBox3);
-            this.CollisionVIEW.Controls.Add(this.RGBox4);
-            this.CollisionVIEW.Location = new System.Drawing.Point(3, 3);
-            this.CollisionVIEW.Name = "CollisionVIEW";
-            this.CollisionVIEW.Size = new System.Drawing.Size(261, 216);
-            this.CollisionVIEW.TabIndex = 35;
-            this.CollisionVIEW.TabStop = false;
-            this.CollisionVIEW.Text = "Collision View";
-            // 
-            // PlaceHolderTXT1
-            // 
-            this.PlaceHolderTXT1.AutoSize = true;
-            this.PlaceHolderTXT1.Location = new System.Drawing.Point(3, 203);
-            this.PlaceHolderTXT1.Name = "PlaceHolderTXT1";
-            this.PlaceHolderTXT1.Size = new System.Drawing.Size(0, 13);
-            this.PlaceHolderTXT1.TabIndex = 35;
-            // 
-            // CMaskLabel
-            // 
-            this.CMaskLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CMaskLabel.AutoSize = true;
-            this.CMaskLabel.Location = new System.Drawing.Point(9, 222);
-            this.CMaskLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.CMaskLabel.Name = "CMaskLabel";
-            this.CMaskLabel.Size = new System.Drawing.Size(111, 13);
-            this.CMaskLabel.TabIndex = 3;
-            this.CMaskLabel.Text = "Current Collision Mask";
-            // 
-            // CTileLabel
-            // 
-            this.CTileLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.CTileLabel.AutoSize = true;
-            this.CTileLabel.Location = new System.Drawing.Point(129, 222);
-            this.CTileLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.CTileLabel.Name = "CTileLabel";
-            this.CTileLabel.Size = new System.Drawing.Size(61, 13);
-            this.CTileLabel.TabIndex = 2;
-            this.CTileLabel.Text = "Current Tile";
-            // 
-            // RGBoxF
-            // 
-            this.RGBoxF.Location = new System.Drawing.Point(246, 184);
-            this.RGBoxF.Name = "RGBoxF";
-            this.RGBoxF.Size = new System.Drawing.Size(10, 10);
-            this.RGBoxF.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.RGBoxF.TabIndex = 68;
-            this.RGBoxF.TabStop = false;
-            // 
-            // Viewer16
-            // 
-            this.Viewer16.Location = new System.Drawing.Point(246, 18);
-            this.Viewer16.Name = "Viewer16";
-            this.Viewer16.Size = new System.Drawing.Size(10, 160);
-            this.Viewer16.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Viewer16.TabIndex = 53;
-            this.Viewer16.TabStop = false;
-            // 
-            // RGBox0
-            // 
-            this.RGBox0.Location = new System.Drawing.Point(6, 184);
-            this.RGBox0.Name = "RGBox0";
-            this.RGBox0.Size = new System.Drawing.Size(10, 10);
-            this.RGBox0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.RGBox0.TabIndex = 69;
-            this.RGBox0.TabStop = false;
-            // 
-            // RGBoxE
-            // 
-            this.RGBoxE.Location = new System.Drawing.Point(230, 184);
-            this.RGBoxE.Name = "RGBoxE";
-            this.RGBoxE.Size = new System.Drawing.Size(10, 10);
-            this.RGBoxE.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.RGBoxE.TabIndex = 67;
-            this.RGBoxE.TabStop = false;
-            // 
-            // Viewer15
-            // 
-            this.Viewer15.Location = new System.Drawing.Point(230, 18);
-            this.Viewer15.Name = "Viewer15";
-            this.Viewer15.Size = new System.Drawing.Size(10, 160);
-            this.Viewer15.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Viewer15.TabIndex = 52;
-            this.Viewer15.TabStop = false;
-            // 
-            // Viewer14
-            // 
-            this.Viewer14.Location = new System.Drawing.Point(214, 18);
-            this.Viewer14.Name = "Viewer14";
-            this.Viewer14.Size = new System.Drawing.Size(10, 160);
-            this.Viewer14.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Viewer14.TabIndex = 51;
-            this.Viewer14.TabStop = false;
-            // 
-            // RGBoxD
-            // 
-            this.RGBoxD.Location = new System.Drawing.Point(214, 184);
-            this.RGBoxD.Name = "RGBoxD";
-            this.RGBoxD.Size = new System.Drawing.Size(10, 10);
-            this.RGBoxD.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.RGBoxD.TabIndex = 66;
-            this.RGBoxD.TabStop = false;
-            // 
-            // Viewer13
-            // 
-            this.Viewer13.Location = new System.Drawing.Point(198, 18);
-            this.Viewer13.Name = "Viewer13";
-            this.Viewer13.Size = new System.Drawing.Size(10, 160);
-            this.Viewer13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Viewer13.TabIndex = 50;
-            this.Viewer13.TabStop = false;
-            // 
-            // Viewer12
-            // 
-            this.Viewer12.Location = new System.Drawing.Point(182, 18);
-            this.Viewer12.Name = "Viewer12";
-            this.Viewer12.Size = new System.Drawing.Size(10, 160);
-            this.Viewer12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Viewer12.TabIndex = 49;
-            this.Viewer12.TabStop = false;
-            // 
-            // RGBoxC
-            // 
-            this.RGBoxC.Location = new System.Drawing.Point(198, 184);
-            this.RGBoxC.Name = "RGBoxC";
-            this.RGBoxC.Size = new System.Drawing.Size(10, 10);
-            this.RGBoxC.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.RGBoxC.TabIndex = 65;
-            this.RGBoxC.TabStop = false;
-            // 
-            // Viewer11
-            // 
-            this.Viewer11.Location = new System.Drawing.Point(166, 18);
-            this.Viewer11.Name = "Viewer11";
-            this.Viewer11.Size = new System.Drawing.Size(10, 160);
-            this.Viewer11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Viewer11.TabIndex = 48;
-            this.Viewer11.TabStop = false;
-            // 
-            // Viewer10
-            // 
-            this.Viewer10.Location = new System.Drawing.Point(150, 18);
-            this.Viewer10.Name = "Viewer10";
-            this.Viewer10.Size = new System.Drawing.Size(10, 160);
-            this.Viewer10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Viewer10.TabIndex = 47;
-            this.Viewer10.TabStop = false;
-            // 
-            // RGBoxB
-            // 
-            this.RGBoxB.Location = new System.Drawing.Point(182, 184);
-            this.RGBoxB.Name = "RGBoxB";
-            this.RGBoxB.Size = new System.Drawing.Size(10, 10);
-            this.RGBoxB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.RGBoxB.TabIndex = 64;
-            this.RGBoxB.TabStop = false;
-            // 
-            // Viewer9
-            // 
-            this.Viewer9.Location = new System.Drawing.Point(134, 18);
-            this.Viewer9.Name = "Viewer9";
-            this.Viewer9.Size = new System.Drawing.Size(10, 160);
-            this.Viewer9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Viewer9.TabIndex = 46;
-            this.Viewer9.TabStop = false;
-            // 
-            // Viewer8
-            // 
-            this.Viewer8.Location = new System.Drawing.Point(118, 18);
-            this.Viewer8.Name = "Viewer8";
-            this.Viewer8.Size = new System.Drawing.Size(10, 160);
-            this.Viewer8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Viewer8.TabIndex = 45;
-            this.Viewer8.TabStop = false;
-            // 
-            // RGBoxA
-            // 
-            this.RGBoxA.Location = new System.Drawing.Point(166, 184);
-            this.RGBoxA.Name = "RGBoxA";
-            this.RGBoxA.Size = new System.Drawing.Size(10, 10);
-            this.RGBoxA.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.RGBoxA.TabIndex = 63;
-            this.RGBoxA.TabStop = false;
-            // 
-            // Viewer7
-            // 
-            this.Viewer7.Location = new System.Drawing.Point(102, 18);
-            this.Viewer7.Name = "Viewer7";
-            this.Viewer7.Size = new System.Drawing.Size(10, 160);
-            this.Viewer7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Viewer7.TabIndex = 44;
-            this.Viewer7.TabStop = false;
-            // 
-            // Viewer6
-            // 
-            this.Viewer6.Location = new System.Drawing.Point(86, 18);
-            this.Viewer6.Name = "Viewer6";
-            this.Viewer6.Size = new System.Drawing.Size(10, 160);
-            this.Viewer6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Viewer6.TabIndex = 43;
-            this.Viewer6.TabStop = false;
-            // 
-            // RGBox9
-            // 
-            this.RGBox9.Location = new System.Drawing.Point(150, 184);
-            this.RGBox9.Name = "RGBox9";
-            this.RGBox9.Size = new System.Drawing.Size(10, 10);
-            this.RGBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.RGBox9.TabIndex = 62;
-            this.RGBox9.TabStop = false;
-            // 
-            // Viewer5
-            // 
-            this.Viewer5.Location = new System.Drawing.Point(70, 18);
-            this.Viewer5.Name = "Viewer5";
-            this.Viewer5.Size = new System.Drawing.Size(10, 160);
-            this.Viewer5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Viewer5.TabIndex = 42;
-            this.Viewer5.TabStop = false;
-            // 
-            // Viewer4
-            // 
-            this.Viewer4.Location = new System.Drawing.Point(54, 18);
-            this.Viewer4.Name = "Viewer4";
-            this.Viewer4.Size = new System.Drawing.Size(10, 160);
-            this.Viewer4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Viewer4.TabIndex = 41;
-            this.Viewer4.TabStop = false;
-            // 
-            // RGBox8
-            // 
-            this.RGBox8.Location = new System.Drawing.Point(134, 184);
-            this.RGBox8.Name = "RGBox8";
-            this.RGBox8.Size = new System.Drawing.Size(10, 10);
-            this.RGBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.RGBox8.TabIndex = 61;
-            this.RGBox8.TabStop = false;
-            // 
-            // Viewer3
-            // 
-            this.Viewer3.Location = new System.Drawing.Point(38, 18);
-            this.Viewer3.Name = "Viewer3";
-            this.Viewer3.Size = new System.Drawing.Size(10, 160);
-            this.Viewer3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Viewer3.TabIndex = 40;
-            this.Viewer3.TabStop = false;
-            // 
-            // Viewer2
-            // 
-            this.Viewer2.Location = new System.Drawing.Point(22, 18);
-            this.Viewer2.Name = "Viewer2";
-            this.Viewer2.Size = new System.Drawing.Size(10, 160);
-            this.Viewer2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Viewer2.TabIndex = 39;
-            this.Viewer2.TabStop = false;
-            // 
-            // RGBox7
-            // 
-            this.RGBox7.Location = new System.Drawing.Point(118, 184);
-            this.RGBox7.Name = "RGBox7";
-            this.RGBox7.Size = new System.Drawing.Size(10, 10);
-            this.RGBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.RGBox7.TabIndex = 60;
-            this.RGBox7.TabStop = false;
-            // 
-            // Viewer1
-            // 
-            this.Viewer1.Location = new System.Drawing.Point(6, 18);
-            this.Viewer1.Name = "Viewer1";
-            this.Viewer1.Size = new System.Drawing.Size(10, 160);
-            this.Viewer1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Viewer1.TabIndex = 38;
-            this.Viewer1.TabStop = false;
-            // 
-            // RGBox6
-            // 
-            this.RGBox6.Location = new System.Drawing.Point(102, 184);
-            this.RGBox6.Name = "RGBox6";
-            this.RGBox6.Size = new System.Drawing.Size(10, 10);
-            this.RGBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.RGBox6.TabIndex = 59;
-            this.RGBox6.TabStop = false;
-            // 
-            // RGBox1
-            // 
-            this.RGBox1.Location = new System.Drawing.Point(22, 184);
-            this.RGBox1.Name = "RGBox1";
-            this.RGBox1.Size = new System.Drawing.Size(10, 10);
-            this.RGBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.RGBox1.TabIndex = 54;
-            this.RGBox1.TabStop = false;
-            // 
-            // RGBox2
-            // 
-            this.RGBox2.Location = new System.Drawing.Point(38, 184);
-            this.RGBox2.Name = "RGBox2";
-            this.RGBox2.Size = new System.Drawing.Size(10, 10);
-            this.RGBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.RGBox2.TabIndex = 55;
-            this.RGBox2.TabStop = false;
-            // 
-            // RGBox5
-            // 
-            this.RGBox5.Location = new System.Drawing.Point(86, 184);
-            this.RGBox5.Name = "RGBox5";
-            this.RGBox5.Size = new System.Drawing.Size(10, 10);
-            this.RGBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.RGBox5.TabIndex = 58;
-            this.RGBox5.TabStop = false;
-            // 
-            // RGBox3
-            // 
-            this.RGBox3.Location = new System.Drawing.Point(54, 184);
-            this.RGBox3.Name = "RGBox3";
-            this.RGBox3.Size = new System.Drawing.Size(10, 10);
-            this.RGBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.RGBox3.TabIndex = 56;
-            this.RGBox3.TabStop = false;
-            // 
-            // RGBox4
-            // 
-            this.RGBox4.Location = new System.Drawing.Point(70, 184);
-            this.RGBox4.Name = "RGBox4";
-            this.RGBox4.Size = new System.Drawing.Size(10, 10);
-            this.RGBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.RGBox4.TabIndex = 57;
-            this.RGBox4.TabStop = false;
-            // 
-            // TilePicBox
-            // 
-            this.TilePicBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.TilePicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.TilePicBox.Location = new System.Drawing.Point(129, 241);
-            this.TilePicBox.Margin = new System.Windows.Forms.Padding(2);
-            this.TilePicBox.Name = "TilePicBox";
-            this.TilePicBox.Size = new System.Drawing.Size(96, 104);
-            this.TilePicBox.TabIndex = 1;
-            this.TilePicBox.TabStop = false;
-            // 
-            // CollisionPicBox
-            // 
-            this.CollisionPicBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CollisionPicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.CollisionPicBox.Location = new System.Drawing.Point(12, 240);
-            this.CollisionPicBox.Margin = new System.Windows.Forms.Padding(2);
-            this.CollisionPicBox.Name = "CollisionPicBox";
-            this.CollisionPicBox.Size = new System.Drawing.Size(96, 104);
-            this.CollisionPicBox.TabIndex = 0;
-            this.CollisionPicBox.TabStop = false;
-            // 
-            // VPLabel
-            // 
-            this.VPLabel.AutoSize = true;
-            this.VPLabel.Location = new System.Drawing.Point(187, 4);
-            this.VPLabel.Name = "VPLabel";
-            this.VPLabel.Size = new System.Drawing.Size(126, 13);
-            this.VPLabel.TabIndex = 6;
-            this.VPLabel.Text = "Currently Viewing: Path A";
             // 
             // groupBox1
             // 
@@ -1059,7 +583,7 @@
             // 
             this.IsCeilingButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.IsCeilingButton.AutoSize = true;
-            this.IsCeilingButton.Location = new System.Drawing.Point(253, 282);
+            this.IsCeilingButton.Location = new System.Drawing.Point(266, 284);
             this.IsCeilingButton.Margin = new System.Windows.Forms.Padding(2);
             this.IsCeilingButton.Name = "IsCeilingButton";
             this.IsCeilingButton.Size = new System.Drawing.Size(15, 14);
@@ -1123,7 +647,7 @@
             // 
             this.IsCeilingLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.IsCeilingLabel.AutoSize = true;
-            this.IsCeilingLabel.Location = new System.Drawing.Point(251, 265);
+            this.IsCeilingLabel.Location = new System.Drawing.Point(263, 265);
             this.IsCeilingLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.IsCeilingLabel.Name = "IsCeilingLabel";
             this.IsCeilingLabel.Size = new System.Drawing.Size(74, 13);
@@ -1160,7 +684,7 @@
             // 
             this.SpecialNUD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.SpecialNUD.Hexadecimal = true;
-            this.SpecialNUD.Location = new System.Drawing.Point(207, 282);
+            this.SpecialNUD.Location = new System.Drawing.Point(223, 282);
             this.SpecialNUD.Margin = new System.Windows.Forms.Padding(2);
             this.SpecialNUD.Maximum = new decimal(new int[] {
             255,
@@ -1202,7 +726,7 @@
             // 
             this.SpecialLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.SpecialLabel.AutoSize = true;
-            this.SpecialLabel.Location = new System.Drawing.Point(206, 265);
+            this.SpecialLabel.Location = new System.Drawing.Point(222, 265);
             this.SpecialLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.SpecialLabel.Name = "SpecialLabel";
             this.SpecialLabel.Size = new System.Drawing.Size(42, 13);
@@ -1239,7 +763,7 @@
             // 
             this.UnknownNUD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.UnknownNUD.Hexadecimal = true;
-            this.UnknownNUD.Location = new System.Drawing.Point(153, 282);
+            this.UnknownNUD.Location = new System.Drawing.Point(169, 282);
             this.UnknownNUD.Margin = new System.Windows.Forms.Padding(2);
             this.UnknownNUD.Maximum = new decimal(new int[] {
             255,
@@ -1281,7 +805,7 @@
             // 
             this.UnknownLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.UnknownLabel.AutoSize = true;
-            this.UnknownLabel.Location = new System.Drawing.Point(152, 265);
+            this.UnknownLabel.Location = new System.Drawing.Point(168, 265);
             this.UnknownLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.UnknownLabel.Name = "UnknownLabel";
             this.UnknownLabel.Size = new System.Drawing.Size(53, 13);
@@ -1318,7 +842,7 @@
             // 
             this.MomentumNUD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.MomentumNUD.Hexadecimal = true;
-            this.MomentumNUD.Location = new System.Drawing.Point(91, 283);
+            this.MomentumNUD.Location = new System.Drawing.Point(107, 282);
             this.MomentumNUD.Margin = new System.Windows.Forms.Padding(2);
             this.MomentumNUD.Maximum = new decimal(new int[] {
             255,
@@ -1360,7 +884,7 @@
             // 
             this.MomentumLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.MomentumLabel.AutoSize = true;
-            this.MomentumLabel.Location = new System.Drawing.Point(90, 265);
+            this.MomentumLabel.Location = new System.Drawing.Point(106, 265);
             this.MomentumLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.MomentumLabel.Name = "MomentumLabel";
             this.MomentumLabel.Size = new System.Drawing.Size(59, 13);
@@ -1397,7 +921,7 @@
             // 
             this.PhysicsNUD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.PhysicsNUD.Hexadecimal = true;
-            this.PhysicsNUD.Location = new System.Drawing.Point(44, 282);
+            this.PhysicsNUD.Location = new System.Drawing.Point(60, 282);
             this.PhysicsNUD.Margin = new System.Windows.Forms.Padding(2);
             this.PhysicsNUD.Maximum = new decimal(new int[] {
             255,
@@ -1439,7 +963,7 @@
             // 
             this.PhysicsLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.PhysicsLabel.AutoSize = true;
-            this.PhysicsLabel.Location = new System.Drawing.Point(43, 265);
+            this.PhysicsLabel.Location = new System.Drawing.Point(59, 265);
             this.PhysicsLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.PhysicsLabel.Name = "PhysicsLabel";
             this.PhysicsLabel.Size = new System.Drawing.Size(43, 13);
@@ -1475,16 +999,15 @@
             // SlopeNUD
             // 
             this.SlopeNUD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.SlopeNUD.Hexadecimal = true;
             this.SlopeNUD.Location = new System.Drawing.Point(7, 282);
             this.SlopeNUD.Margin = new System.Windows.Forms.Padding(2);
             this.SlopeNUD.Maximum = new decimal(new int[] {
-            255,
+            360,
             0,
             0,
             0});
             this.SlopeNUD.Name = "SlopeNUD";
-            this.SlopeNUD.Size = new System.Drawing.Size(32, 20);
+            this.SlopeNUD.Size = new System.Drawing.Size(49, 20);
             this.SlopeNUD.TabIndex = 67;
             this.SlopeNUD.ValueChanged += new System.EventHandler(this.SlopeNUD_ValueChanged);
             // 
@@ -1521,9 +1044,9 @@
             this.SlopeLabel.Location = new System.Drawing.Point(6, 265);
             this.SlopeLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.SlopeLabel.Name = "SlopeLabel";
-            this.SlopeLabel.Size = new System.Drawing.Size(34, 13);
+            this.SlopeLabel.Size = new System.Drawing.Size(55, 13);
             this.SlopeLabel.TabIndex = 66;
-            this.SlopeLabel.Text = "Slope";
+            this.SlopeLabel.Text = "Slope (°D)";
             // 
             // lb02
             // 
@@ -1577,6 +1100,482 @@
             this.lb01.TabIndex = 78;
             this.lb01.SelectedIndexChanged += new System.EventHandler(this.lb01_SelectedIndexChanged);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.VPLabel);
+            this.panel1.Controls.Add(this.GotoButton);
+            this.panel1.Controls.Add(this.GotoLabel);
+            this.panel1.Controls.Add(this.GotoNUD);
+            this.panel1.Controls.Add(this.PrevButton);
+            this.panel1.Controls.Add(this.NextButton);
+            this.panel1.Controls.Add(this.CurMaskLabel);
+            this.panel1.Location = new System.Drawing.Point(5, 318);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(342, 56);
+            this.panel1.TabIndex = 66;
+            // 
+            // VPLabel
+            // 
+            this.VPLabel.AutoSize = true;
+            this.VPLabel.Location = new System.Drawing.Point(187, 4);
+            this.VPLabel.Name = "VPLabel";
+            this.VPLabel.Size = new System.Drawing.Size(126, 13);
+            this.VPLabel.TabIndex = 6;
+            this.VPLabel.Text = "Currently Viewing: Path A";
+            // 
+            // GotoButton
+            // 
+            this.GotoButton.Location = new System.Drawing.Point(247, 27);
+            this.GotoButton.Name = "GotoButton";
+            this.GotoButton.Size = new System.Drawing.Size(34, 20);
+            this.GotoButton.TabIndex = 5;
+            this.GotoButton.Text = "GO!";
+            this.GotoButton.UseVisualStyleBackColor = true;
+            this.GotoButton.Click += new System.EventHandler(this.GotoButton_Click);
+            // 
+            // GotoLabel
+            // 
+            this.GotoLabel.AutoSize = true;
+            this.GotoLabel.Location = new System.Drawing.Point(125, 29);
+            this.GotoLabel.Name = "GotoLabel";
+            this.GotoLabel.Size = new System.Drawing.Size(62, 13);
+            this.GotoLabel.TabIndex = 4;
+            this.GotoLabel.Text = "Goto Mask:";
+            // 
+            // GotoNUD
+            // 
+            this.GotoNUD.Location = new System.Drawing.Point(190, 27);
+            this.GotoNUD.Maximum = new decimal(new int[] {
+            1024,
+            0,
+            0,
+            0});
+            this.GotoNUD.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.GotoNUD.Name = "GotoNUD";
+            this.GotoNUD.Size = new System.Drawing.Size(51, 20);
+            this.GotoNUD.TabIndex = 3;
+            this.GotoNUD.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.GotoNUD.ValueChanged += new System.EventHandler(this.GotoNUD_ValueChanged);
+            // 
+            // PrevButton
+            // 
+            this.PrevButton.Location = new System.Drawing.Point(11, 25);
+            this.PrevButton.Name = "PrevButton";
+            this.PrevButton.Size = new System.Drawing.Size(51, 24);
+            this.PrevButton.TabIndex = 2;
+            this.PrevButton.Text = "Prev";
+            this.PrevButton.UseVisualStyleBackColor = true;
+            this.PrevButton.Click += new System.EventHandler(this.PrevButton_Click);
+            // 
+            // NextButton
+            // 
+            this.NextButton.Location = new System.Drawing.Point(68, 25);
+            this.NextButton.Name = "NextButton";
+            this.NextButton.Size = new System.Drawing.Size(51, 24);
+            this.NextButton.TabIndex = 1;
+            this.NextButton.Text = "Next";
+            this.NextButton.UseVisualStyleBackColor = true;
+            this.NextButton.Click += new System.EventHandler(this.NextButton_Click);
+            // 
+            // CurMaskLabel
+            // 
+            this.CurMaskLabel.AutoSize = true;
+            this.CurMaskLabel.Location = new System.Drawing.Point(8, 4);
+            this.CurMaskLabel.Name = "CurMaskLabel";
+            this.CurMaskLabel.Size = new System.Drawing.Size(104, 13);
+            this.CurMaskLabel.TabIndex = 0;
+            this.CurMaskLabel.Text = "Collision Mask 0 of 0";
+            // 
+            // CollisionVIEW
+            // 
+            this.CollisionVIEW.Controls.Add(this.RGBoxF);
+            this.CollisionVIEW.Controls.Add(this.Viewer16);
+            this.CollisionVIEW.Controls.Add(this.RGBox0);
+            this.CollisionVIEW.Controls.Add(this.RGBoxE);
+            this.CollisionVIEW.Controls.Add(this.Viewer15);
+            this.CollisionVIEW.Controls.Add(this.Viewer14);
+            this.CollisionVIEW.Controls.Add(this.RGBoxD);
+            this.CollisionVIEW.Controls.Add(this.Viewer13);
+            this.CollisionVIEW.Controls.Add(this.Viewer12);
+            this.CollisionVIEW.Controls.Add(this.RGBoxC);
+            this.CollisionVIEW.Controls.Add(this.Viewer11);
+            this.CollisionVIEW.Controls.Add(this.Viewer10);
+            this.CollisionVIEW.Controls.Add(this.RGBoxB);
+            this.CollisionVIEW.Controls.Add(this.Viewer9);
+            this.CollisionVIEW.Controls.Add(this.Viewer8);
+            this.CollisionVIEW.Controls.Add(this.RGBoxA);
+            this.CollisionVIEW.Controls.Add(this.Viewer7);
+            this.CollisionVIEW.Controls.Add(this.Viewer6);
+            this.CollisionVIEW.Controls.Add(this.RGBox9);
+            this.CollisionVIEW.Controls.Add(this.Viewer5);
+            this.CollisionVIEW.Controls.Add(this.Viewer4);
+            this.CollisionVIEW.Controls.Add(this.RGBox8);
+            this.CollisionVIEW.Controls.Add(this.Viewer3);
+            this.CollisionVIEW.Controls.Add(this.Viewer2);
+            this.CollisionVIEW.Controls.Add(this.RGBox7);
+            this.CollisionVIEW.Controls.Add(this.Viewer1);
+            this.CollisionVIEW.Controls.Add(this.PlaceHolderTXT1);
+            this.CollisionVIEW.Controls.Add(this.RGBox6);
+            this.CollisionVIEW.Controls.Add(this.RGBox1);
+            this.CollisionVIEW.Controls.Add(this.RGBox2);
+            this.CollisionVIEW.Controls.Add(this.RGBox5);
+            this.CollisionVIEW.Controls.Add(this.RGBox3);
+            this.CollisionVIEW.Controls.Add(this.RGBox4);
+            this.CollisionVIEW.Location = new System.Drawing.Point(3, 3);
+            this.CollisionVIEW.Name = "CollisionVIEW";
+            this.CollisionVIEW.Size = new System.Drawing.Size(261, 216);
+            this.CollisionVIEW.TabIndex = 35;
+            this.CollisionVIEW.TabStop = false;
+            this.CollisionVIEW.Text = "Collision View";
+            // 
+            // RGBoxF
+            // 
+            this.RGBoxF.Location = new System.Drawing.Point(246, 184);
+            this.RGBoxF.Name = "RGBoxF";
+            this.RGBoxF.Size = new System.Drawing.Size(10, 10);
+            this.RGBoxF.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.RGBoxF.TabIndex = 68;
+            this.RGBoxF.TabStop = false;
+            // 
+            // Viewer16
+            // 
+            this.Viewer16.Location = new System.Drawing.Point(246, 18);
+            this.Viewer16.Name = "Viewer16";
+            this.Viewer16.Size = new System.Drawing.Size(10, 160);
+            this.Viewer16.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Viewer16.TabIndex = 53;
+            this.Viewer16.TabStop = false;
+            // 
+            // RGBox0
+            // 
+            this.RGBox0.Location = new System.Drawing.Point(6, 184);
+            this.RGBox0.Name = "RGBox0";
+            this.RGBox0.Size = new System.Drawing.Size(10, 10);
+            this.RGBox0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.RGBox0.TabIndex = 69;
+            this.RGBox0.TabStop = false;
+            // 
+            // RGBoxE
+            // 
+            this.RGBoxE.Location = new System.Drawing.Point(230, 184);
+            this.RGBoxE.Name = "RGBoxE";
+            this.RGBoxE.Size = new System.Drawing.Size(10, 10);
+            this.RGBoxE.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.RGBoxE.TabIndex = 67;
+            this.RGBoxE.TabStop = false;
+            // 
+            // Viewer15
+            // 
+            this.Viewer15.Location = new System.Drawing.Point(230, 18);
+            this.Viewer15.Name = "Viewer15";
+            this.Viewer15.Size = new System.Drawing.Size(10, 160);
+            this.Viewer15.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Viewer15.TabIndex = 52;
+            this.Viewer15.TabStop = false;
+            // 
+            // Viewer14
+            // 
+            this.Viewer14.Location = new System.Drawing.Point(214, 18);
+            this.Viewer14.Name = "Viewer14";
+            this.Viewer14.Size = new System.Drawing.Size(10, 160);
+            this.Viewer14.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Viewer14.TabIndex = 51;
+            this.Viewer14.TabStop = false;
+            // 
+            // RGBoxD
+            // 
+            this.RGBoxD.Location = new System.Drawing.Point(214, 184);
+            this.RGBoxD.Name = "RGBoxD";
+            this.RGBoxD.Size = new System.Drawing.Size(10, 10);
+            this.RGBoxD.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.RGBoxD.TabIndex = 66;
+            this.RGBoxD.TabStop = false;
+            // 
+            // Viewer13
+            // 
+            this.Viewer13.Location = new System.Drawing.Point(198, 18);
+            this.Viewer13.Name = "Viewer13";
+            this.Viewer13.Size = new System.Drawing.Size(10, 160);
+            this.Viewer13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Viewer13.TabIndex = 50;
+            this.Viewer13.TabStop = false;
+            // 
+            // Viewer12
+            // 
+            this.Viewer12.Location = new System.Drawing.Point(182, 18);
+            this.Viewer12.Name = "Viewer12";
+            this.Viewer12.Size = new System.Drawing.Size(10, 160);
+            this.Viewer12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Viewer12.TabIndex = 49;
+            this.Viewer12.TabStop = false;
+            // 
+            // RGBoxC
+            // 
+            this.RGBoxC.Location = new System.Drawing.Point(198, 184);
+            this.RGBoxC.Name = "RGBoxC";
+            this.RGBoxC.Size = new System.Drawing.Size(10, 10);
+            this.RGBoxC.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.RGBoxC.TabIndex = 65;
+            this.RGBoxC.TabStop = false;
+            // 
+            // Viewer11
+            // 
+            this.Viewer11.Location = new System.Drawing.Point(166, 18);
+            this.Viewer11.Name = "Viewer11";
+            this.Viewer11.Size = new System.Drawing.Size(10, 160);
+            this.Viewer11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Viewer11.TabIndex = 48;
+            this.Viewer11.TabStop = false;
+            // 
+            // Viewer10
+            // 
+            this.Viewer10.Location = new System.Drawing.Point(150, 18);
+            this.Viewer10.Name = "Viewer10";
+            this.Viewer10.Size = new System.Drawing.Size(10, 160);
+            this.Viewer10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Viewer10.TabIndex = 47;
+            this.Viewer10.TabStop = false;
+            // 
+            // RGBoxB
+            // 
+            this.RGBoxB.Location = new System.Drawing.Point(182, 184);
+            this.RGBoxB.Name = "RGBoxB";
+            this.RGBoxB.Size = new System.Drawing.Size(10, 10);
+            this.RGBoxB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.RGBoxB.TabIndex = 64;
+            this.RGBoxB.TabStop = false;
+            // 
+            // Viewer9
+            // 
+            this.Viewer9.Location = new System.Drawing.Point(134, 18);
+            this.Viewer9.Name = "Viewer9";
+            this.Viewer9.Size = new System.Drawing.Size(10, 160);
+            this.Viewer9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Viewer9.TabIndex = 46;
+            this.Viewer9.TabStop = false;
+            // 
+            // Viewer8
+            // 
+            this.Viewer8.Location = new System.Drawing.Point(118, 18);
+            this.Viewer8.Name = "Viewer8";
+            this.Viewer8.Size = new System.Drawing.Size(10, 160);
+            this.Viewer8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Viewer8.TabIndex = 45;
+            this.Viewer8.TabStop = false;
+            // 
+            // RGBoxA
+            // 
+            this.RGBoxA.Location = new System.Drawing.Point(166, 184);
+            this.RGBoxA.Name = "RGBoxA";
+            this.RGBoxA.Size = new System.Drawing.Size(10, 10);
+            this.RGBoxA.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.RGBoxA.TabIndex = 63;
+            this.RGBoxA.TabStop = false;
+            // 
+            // Viewer7
+            // 
+            this.Viewer7.Location = new System.Drawing.Point(102, 18);
+            this.Viewer7.Name = "Viewer7";
+            this.Viewer7.Size = new System.Drawing.Size(10, 160);
+            this.Viewer7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Viewer7.TabIndex = 44;
+            this.Viewer7.TabStop = false;
+            // 
+            // Viewer6
+            // 
+            this.Viewer6.Location = new System.Drawing.Point(86, 18);
+            this.Viewer6.Name = "Viewer6";
+            this.Viewer6.Size = new System.Drawing.Size(10, 160);
+            this.Viewer6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Viewer6.TabIndex = 43;
+            this.Viewer6.TabStop = false;
+            // 
+            // RGBox9
+            // 
+            this.RGBox9.Location = new System.Drawing.Point(150, 184);
+            this.RGBox9.Name = "RGBox9";
+            this.RGBox9.Size = new System.Drawing.Size(10, 10);
+            this.RGBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.RGBox9.TabIndex = 62;
+            this.RGBox9.TabStop = false;
+            // 
+            // Viewer5
+            // 
+            this.Viewer5.Location = new System.Drawing.Point(70, 18);
+            this.Viewer5.Name = "Viewer5";
+            this.Viewer5.Size = new System.Drawing.Size(10, 160);
+            this.Viewer5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Viewer5.TabIndex = 42;
+            this.Viewer5.TabStop = false;
+            // 
+            // Viewer4
+            // 
+            this.Viewer4.Location = new System.Drawing.Point(54, 18);
+            this.Viewer4.Name = "Viewer4";
+            this.Viewer4.Size = new System.Drawing.Size(10, 160);
+            this.Viewer4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Viewer4.TabIndex = 41;
+            this.Viewer4.TabStop = false;
+            // 
+            // RGBox8
+            // 
+            this.RGBox8.Location = new System.Drawing.Point(134, 184);
+            this.RGBox8.Name = "RGBox8";
+            this.RGBox8.Size = new System.Drawing.Size(10, 10);
+            this.RGBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.RGBox8.TabIndex = 61;
+            this.RGBox8.TabStop = false;
+            // 
+            // Viewer3
+            // 
+            this.Viewer3.Location = new System.Drawing.Point(38, 18);
+            this.Viewer3.Name = "Viewer3";
+            this.Viewer3.Size = new System.Drawing.Size(10, 160);
+            this.Viewer3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Viewer3.TabIndex = 40;
+            this.Viewer3.TabStop = false;
+            // 
+            // Viewer2
+            // 
+            this.Viewer2.Location = new System.Drawing.Point(22, 18);
+            this.Viewer2.Name = "Viewer2";
+            this.Viewer2.Size = new System.Drawing.Size(10, 160);
+            this.Viewer2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Viewer2.TabIndex = 39;
+            this.Viewer2.TabStop = false;
+            // 
+            // RGBox7
+            // 
+            this.RGBox7.Location = new System.Drawing.Point(118, 184);
+            this.RGBox7.Name = "RGBox7";
+            this.RGBox7.Size = new System.Drawing.Size(10, 10);
+            this.RGBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.RGBox7.TabIndex = 60;
+            this.RGBox7.TabStop = false;
+            // 
+            // Viewer1
+            // 
+            this.Viewer1.Location = new System.Drawing.Point(6, 18);
+            this.Viewer1.Name = "Viewer1";
+            this.Viewer1.Size = new System.Drawing.Size(10, 160);
+            this.Viewer1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Viewer1.TabIndex = 38;
+            this.Viewer1.TabStop = false;
+            // 
+            // PlaceHolderTXT1
+            // 
+            this.PlaceHolderTXT1.AutoSize = true;
+            this.PlaceHolderTXT1.Location = new System.Drawing.Point(3, 203);
+            this.PlaceHolderTXT1.Name = "PlaceHolderTXT1";
+            this.PlaceHolderTXT1.Size = new System.Drawing.Size(0, 13);
+            this.PlaceHolderTXT1.TabIndex = 35;
+            // 
+            // RGBox6
+            // 
+            this.RGBox6.Location = new System.Drawing.Point(102, 184);
+            this.RGBox6.Name = "RGBox6";
+            this.RGBox6.Size = new System.Drawing.Size(10, 10);
+            this.RGBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.RGBox6.TabIndex = 59;
+            this.RGBox6.TabStop = false;
+            // 
+            // RGBox1
+            // 
+            this.RGBox1.Location = new System.Drawing.Point(22, 184);
+            this.RGBox1.Name = "RGBox1";
+            this.RGBox1.Size = new System.Drawing.Size(10, 10);
+            this.RGBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.RGBox1.TabIndex = 54;
+            this.RGBox1.TabStop = false;
+            // 
+            // RGBox2
+            // 
+            this.RGBox2.Location = new System.Drawing.Point(38, 184);
+            this.RGBox2.Name = "RGBox2";
+            this.RGBox2.Size = new System.Drawing.Size(10, 10);
+            this.RGBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.RGBox2.TabIndex = 55;
+            this.RGBox2.TabStop = false;
+            // 
+            // RGBox5
+            // 
+            this.RGBox5.Location = new System.Drawing.Point(86, 184);
+            this.RGBox5.Name = "RGBox5";
+            this.RGBox5.Size = new System.Drawing.Size(10, 10);
+            this.RGBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.RGBox5.TabIndex = 58;
+            this.RGBox5.TabStop = false;
+            // 
+            // RGBox3
+            // 
+            this.RGBox3.Location = new System.Drawing.Point(54, 184);
+            this.RGBox3.Name = "RGBox3";
+            this.RGBox3.Size = new System.Drawing.Size(10, 10);
+            this.RGBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.RGBox3.TabIndex = 56;
+            this.RGBox3.TabStop = false;
+            // 
+            // RGBox4
+            // 
+            this.RGBox4.Location = new System.Drawing.Point(70, 184);
+            this.RGBox4.Name = "RGBox4";
+            this.RGBox4.Size = new System.Drawing.Size(10, 10);
+            this.RGBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.RGBox4.TabIndex = 57;
+            this.RGBox4.TabStop = false;
+            // 
+            // CMaskLabel
+            // 
+            this.CMaskLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CMaskLabel.AutoSize = true;
+            this.CMaskLabel.Location = new System.Drawing.Point(10, 222);
+            this.CMaskLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.CMaskLabel.Name = "CMaskLabel";
+            this.CMaskLabel.Size = new System.Drawing.Size(111, 13);
+            this.CMaskLabel.TabIndex = 3;
+            this.CMaskLabel.Text = "Current Collision Mask";
+            // 
+            // CTileLabel
+            // 
+            this.CTileLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.CTileLabel.AutoSize = true;
+            this.CTileLabel.Location = new System.Drawing.Point(130, 222);
+            this.CTileLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.CTileLabel.Name = "CTileLabel";
+            this.CTileLabel.Size = new System.Drawing.Size(61, 13);
+            this.CTileLabel.TabIndex = 2;
+            this.CTileLabel.Text = "Current Tile";
+            // 
+            // TilePicBox
+            // 
+            this.TilePicBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.TilePicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.TilePicBox.Location = new System.Drawing.Point(130, 241);
+            this.TilePicBox.Margin = new System.Windows.Forms.Padding(2);
+            this.TilePicBox.Name = "TilePicBox";
+            this.TilePicBox.Size = new System.Drawing.Size(96, 104);
+            this.TilePicBox.TabIndex = 1;
+            this.TilePicBox.TabStop = false;
+            // 
+            // CollisionPicBox
+            // 
+            this.CollisionPicBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CollisionPicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.CollisionPicBox.Location = new System.Drawing.Point(13, 240);
+            this.CollisionPicBox.Margin = new System.Windows.Forms.Padding(2);
+            this.CollisionPicBox.Name = "CollisionPicBox";
+            this.CollisionPicBox.Size = new System.Drawing.Size(96, 104);
+            this.CollisionPicBox.TabIndex = 0;
+            this.CollisionPicBox.TabStop = false;
+            // 
             // Mainform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1596,6 +1595,13 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.SpecialNUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.UnknownNUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MomentumNUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PhysicsNUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SlopeNUD)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GotoNUD)).EndInit();
@@ -1635,13 +1641,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.RGBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TilePicBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CollisionPicBox)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.SpecialNUD)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.UnknownNUD)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.MomentumNUD)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PhysicsNUD)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SlopeNUD)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
