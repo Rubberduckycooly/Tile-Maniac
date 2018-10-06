@@ -167,19 +167,9 @@ namespace RSDKv5
 
         }
 
-        private TilesConfig(Reader reader)
+        private TilesConfig(Reader reader) : this(reader, false)
         {
-            if (!reader.ReadBytes(4).SequenceEqual(MAGIC))
-                throw new Exception("Invalid tiles config file header magic");
 
-            using (Reader creader = reader.GetCompressedStream())
-            {
-                for (int i = 0; i < TILES_COUNT; ++i)
-                    CollisionPath1[i] = new TileConfig(creader);
-                for (int i = 0; i < TILES_COUNT; ++i)
-                    CollisionPath2[i] = new TileConfig(creader);
-            }
-            reader.Close();
         }
 
         public TilesConfig(string filename, bool unc) : this(new Reader(filename), unc)
@@ -192,11 +182,13 @@ namespace RSDKv5
 
         }
 
-        private TilesConfig(Reader reader, bool unc)
+        private TilesConfig(Reader reader, bool compressed)
         {
-            if (!reader.ReadBytes(4).SequenceEqual(MAGIC))
-                throw new Exception("Invalid tiles config file header magic");
-            if (!unc)
+            if (reader.ReadBytes(4).SequenceEqual(MAGIC))
+                compressed = true;
+            else
+                reader.Seek(-4, SeekOrigin.Current);
+            if (compressed)
             {
                 using (Reader creader = reader.GetCompressedStream())
                 {
