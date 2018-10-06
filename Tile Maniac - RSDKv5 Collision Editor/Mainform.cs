@@ -181,7 +181,7 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor
                 if (!showPathB) //if we are showing Path A then refresh the values accordingly
                 {
                     CollisionPicBox.Image = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    SlopeNUD.Value = (decimal)(tcf.CollisionPath1[curColisionMask].slopeAngle / (0xFF / 360f));
+                    SlopeNUD.Value = (decimal)((256 - tcf.CollisionPath1[curColisionMask].slopeAngle) * (360f / 0x100));
                     PhysicsNUD.Value = tcf.CollisionPath1[curColisionMask].physics;
                     MomentumNUD.Value = tcf.CollisionPath1[curColisionMask].momentum;
                     UnknownNUD.Value = tcf.CollisionPath1[curColisionMask].unknown;
@@ -342,7 +342,7 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor
                 if (showPathB) //if we are showing Path B then refresh the values accordingly
                 {
                     CollisionPicBox.Image = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(0, 255, 0));
-                    SlopeNUD.Value = (decimal)(tcf.CollisionPath2[curColisionMask].slopeAngle / (0xFF / 360f));
+                    SlopeNUD.Value = (decimal)((256 - tcf.CollisionPath2[curColisionMask].slopeAngle) * (360f / 0xFF));
                     PhysicsNUD.Value = tcf.CollisionPath2[curColisionMask].physics;
                     MomentumNUD.Value = tcf.CollisionPath2[curColisionMask].momentum;
                     UnknownNUD.Value = tcf.CollisionPath2[curColisionMask].unknown;
@@ -599,11 +599,11 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor
             {
                 if (!showPathB)
                 {
-                    tcf.CollisionPath1[curColisionMask].slopeAngle = (byte)((float)SlopeNUD.Value * (0xFF / 360f)); //Set Slope angle for Path A
+                    tcf.CollisionPath1[curColisionMask].slopeAngle = (byte)(256 - ((float)SlopeNUD.Value / (360f / 0x100))); //Set Slope angle for Path A
                 }
                 if (showPathB)
                 {
-                    tcf.CollisionPath2[curColisionMask].slopeAngle = (byte)((float)SlopeNUD.Value * (0xFF / 360f)); //Set Slope angle for Path B
+                    tcf.CollisionPath2[curColisionMask].slopeAngle = (byte)(256 - ((float)SlopeNUD.Value / (360f / 0x100))); //Set Slope angle for Path B
                 }
                 RefreshUI();
             }
