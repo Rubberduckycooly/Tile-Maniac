@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Tile_Maniac___RSDKv5_Collision_Editor.Properties {
+namespace TileManiac.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

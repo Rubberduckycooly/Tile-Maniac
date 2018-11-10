@@ -1,4 +1,4 @@
-﻿namespace Tile_Maniac___RSDKv5_Collision_Editor
+﻿namespace TileManiac
 {
     partial class Mainform_old
     {
@@ -130,8 +130,8 @@
             this.RGBox4 = new System.Windows.Forms.PictureBox();
             this.CMaskLabel = new System.Windows.Forms.Label();
             this.CTileLabel = new System.Windows.Forms.Label();
-            this.TilePicBox = new Tile_Maniac___RSDKv5_Collision_Editor.Mainform_old.PictureBoxNearestNeighbor();
-            this.CollisionPicBox = new Tile_Maniac___RSDKv5_Collision_Editor.Mainform_old.PictureBoxNearestNeighbor();
+            this.TilePicBox = new TileManiac.Mainform_old.PictureBoxNearestNeighbor();
+            this.CollisionPicBox = new TileManiac.Mainform_old.PictureBoxNearestNeighbor();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();

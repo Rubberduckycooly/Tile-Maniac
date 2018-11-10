@@ -15,11 +15,16 @@ namespace RSDKv5
 
         const int TILES_COUNT = 0x400;
 
-        public TileConfig[] CollisionPath1 = new TileConfig[TILES_COUNT];
-        public TileConfig[] CollisionPath2 = new TileConfig[TILES_COUNT];
+        public ColllisionMask[] CollisionPath1 = new ColllisionMask[TILES_COUNT];
+        public ColllisionMask[] CollisionPath2 = new ColllisionMask[TILES_COUNT];
 
-        public class TileConfig
+        public class ColllisionMask : ICloneable
         {
+            public object Clone()
+            {
+                return this.MemberwiseClone();
+            }
+
             // Collision position for each pixel
             public byte[] Collision;
 
@@ -41,9 +46,21 @@ namespace RSDKv5
             // If is ceiling, the collision is from below
             public bool IsCeiling;
 
-            public TileConfig(Stream stream) : this(new Reader(stream)) { }
+            public ColllisionMask()
+            {
+                Collision = new byte[16];
+                HasCollision = new bool[16];
+                IsCeiling = false;
+                slopeAngle = 0;
+                physics = 0;
+                momentum = 0;
+                unknown = 0;
+                special = 0;
+            }
 
-            internal TileConfig(Reader reader)
+            public ColllisionMask(Stream stream) : this(new Reader(stream)) { }
+
+            public ColllisionMask(Reader reader)
             {
                 Collision = reader.ReadBytes(16);
                 HasCollision = reader.ReadBytes(16).Select(x => x != 0).ToArray();
@@ -81,8 +98,9 @@ namespace RSDKv5
                 { b = new Bitmap(16, 16); }
                 else
                 {
-                    b = tile.Clone(new Rectangle(0, 0, tile.Width, tile.Height), System.Drawing.Imaging.PixelFormat.DontCare);
+                 b = tile.Clone(new Rectangle(0, 0, tile.Width, tile.Height), System.Drawing.Imaging.PixelFormat.DontCare);
                     HasTile = true;
+
                 }
 
                 if (!HasTile)
@@ -96,79 +114,165 @@ namespace RSDKv5
                     }
                 }
 
-                //if (!IsCeiling)
-                //{
-                for (int w = 0; w < 16; w++) //Set the Active/Main (FG) colour
+                if (!IsCeiling)
                 {
-                    if (Collision[w] <= 15 && HasCollision[w])
+                    for (int w = 0; w < 16; w++) //Set the Active/Main (FG) colour
                     {
-                        b.SetPixel(w, 15, fg);
+                        if (Collision[w] <= 15 && HasCollision[w])
+                        {
+                            b.SetPixel(w, 15, fg);
+                        }
+                        if (Collision[w] <= 14 && HasCollision[w])
+                        {
+                            b.SetPixel(w, 14, fg);
+                        }
+                        if (Collision[w] <= 13 && HasCollision[w])
+                        {
+                            b.SetPixel(w, 13, fg);
+                        }
+                        if (Collision[w] <= 12 && HasCollision[w])
+                        {
+                            b.SetPixel(w, 12, fg);
+                        }
+                        if (Collision[w] <= 11 && HasCollision[w])
+                        {
+                            b.SetPixel(w, 11, fg);
+                        }
+                        if (Collision[w] <= 10 && HasCollision[w])
+                        {
+                            b.SetPixel(w, 10, fg);
+                        }
+                        if (Collision[w] <= 9 && HasCollision[w])
+                        {
+                            b.SetPixel(w, 9, fg);
+                        }
+                        if (Collision[w] <= 8 && HasCollision[w])
+                        {
+                            b.SetPixel(w, 8, fg);
+                        }
+                        if (Collision[w] <= 7 && HasCollision[w])
+                        {
+                            b.SetPixel(w, 7, fg);
+                        }
+                        if (Collision[w] <= 6 && HasCollision[w])
+                        {
+                            b.SetPixel(w, 6, fg);
+                        }
+                        if (Collision[w] <= 5 && HasCollision[w])
+                        {
+                            b.SetPixel(w, 5, fg);
+                        }
+                        if (Collision[w] <= 4 && HasCollision[w])
+                        {
+                            b.SetPixel(w, 4, fg);
+                        }
+                        if (Collision[w] <= 3 && HasCollision[w])
+                        {
+                            b.SetPixel(w, 3, fg);
+                        }
+                        if (Collision[w] <= 2 && HasCollision[w])
+                        {
+                            b.SetPixel(w, 2, fg);
+                        }
+                        if (Collision[w] <= 1 && HasCollision[w])
+                        {
+                            b.SetPixel(w, 1, fg);
+                        }
+                        if (Collision[w] <= 0 && HasCollision[w])
+                        {
+                            b.SetPixel(w, 0, fg);
+                        }
                     }
-                    if (Collision[w] <= 14 && HasCollision[w])
-                    {
-                        b.SetPixel(w, 14, fg);
-                    }
-                    if (Collision[w] <= 13 && HasCollision[w])
-                    {
-                        b.SetPixel(w, 13, fg);
-                    }
-                    if (Collision[w] <= 12 && HasCollision[w])
-                    {
-                        b.SetPixel(w, 12, fg);
-                    }
-                    if (Collision[w] <= 11 && HasCollision[w])
-                    {
-                        b.SetPixel(w, 11, fg);
-                    }
-                    if (Collision[w] <= 10 && HasCollision[w])
-                    {
-                        b.SetPixel(w, 10, fg);
-                    }
-                    if (Collision[w] <= 9 && HasCollision[w])
-                    {
-                        b.SetPixel(w, 9, fg);
-                    }
-                    if (Collision[w] <= 8 && HasCollision[w])
-                    {
-                        b.SetPixel(w, 8, fg);
-                    }
-                    if (Collision[w] <= 7 && HasCollision[w])
-                    {
-                        b.SetPixel(w, 7, fg);
-                    }
-                    if (Collision[w] <= 6 && HasCollision[w])
-                    {
-                        b.SetPixel(w, 6, fg);
-                    }
-                    if (Collision[w] <= 5 && HasCollision[w])
-                    {
-                        b.SetPixel(w, 5, fg);
-                    }
-                    if (Collision[w] <= 4 && HasCollision[w])
-                    {
-                        b.SetPixel(w, 4, fg);
-                    }
-                    if (Collision[w] <= 3 && HasCollision[w])
-                    {
-                        b.SetPixel(w, 3, fg);
-                    }
-                    if (Collision[w] <= 2 && HasCollision[w])
-                    {
-                        b.SetPixel(w, 2, fg);
-                    }
-                    if (Collision[w] <= 1 && HasCollision[w])
-                    {
-                        b.SetPixel(w, 1, fg);
-                    }
-                    if (Collision[w] <= 0 && HasCollision[w])
-                    {
-                        b.SetPixel(w, 0, fg);
-                    }
-                    //}
                 }
 
+                if (IsCeiling)
+                {
+                    for (int y = 0; y < 16; y++) //Set the Active/Main (FG) colour
+                    {
+                        for (int x = 0; x < 16; x++) //Set the Active/Main (FG) colour
+                        {
+                            b.SetPixel(x, y, fg);
+                        }
+                    }
+
+                    for (int w = 0; w < 16; w++) //Set the Active/Main (FG) colour
+                    {
+                        if (Collision[w] <= 15)//&& HasCollision[w])
+                        {
+                            b.SetPixel(w, 15, bg);
+                        }
+                        if (Collision[w] <= 14)//&& HasCollision[w])
+                        {
+                            b.SetPixel(w, 14, bg);
+                        }
+                        if (Collision[w] <= 13)//&& HasCollision[w])
+                        {
+                            b.SetPixel(w, 13, bg);
+                        }
+                        if (Collision[w] <= 12)//&& HasCollision[w])
+                        {
+                            b.SetPixel(w, 12, bg);
+                        }
+                        if (Collision[w] <= 11)//&& HasCollision[w])
+                        {
+                            b.SetPixel(w, 11, bg);
+                        }
+                        if (Collision[w] <= 10)//&& HasCollision[w])
+                        {
+                            b.SetPixel(w, 10, bg);
+                        }
+                        if (Collision[w] <= 9)//&& HasCollision[w])
+                        {
+                            b.SetPixel(w, 9, bg);
+                        }
+                        if (Collision[w] <= 8)//&& HasCollision[w])
+                        {
+                            b.SetPixel(w, 8, bg);
+                        }
+                        if (Collision[w] <= 7)//&& HasCollision[w])
+                        {
+                            b.SetPixel(w, 7, bg);
+                        }
+                        if (Collision[w] <= 6)//&& HasCollision[w])
+                        {
+                            b.SetPixel(w, 6, bg);
+                        }
+                        if (Collision[w] <= 5)//&& HasCollision[w])
+                        {
+                            b.SetPixel(w, 5, bg);
+                        }
+                        if (Collision[w] <= 4)//&& HasCollision[w])
+                        {
+                            b.SetPixel(w, 4, bg);
+                        }
+                        if (Collision[w] <= 3)//&& HasCollision[w])
+                        {
+                            b.SetPixel(w, 3, bg);
+                        }
+                        if (Collision[w] <= 2)//&& HasCollision[w])
+                        {
+                            b.SetPixel(w, 2, bg);
+                        }
+                        if (Collision[w] <= 1)//&& HasCollision[w])
+                        {
+                            b.SetPixel(w, 1, bg);
+                        }
+                        if (Collision[w] <= 0)//&& HasCollision[w])
+                        {
+                            b.SetPixel(w, 0, fg);
+                        }
+                    }
+                }
                 return b;
             }
+        }
+
+        public TilesConfig()
+        {
+            for (int i = 0; i < TILES_COUNT; ++i)
+                CollisionPath1[i] = new ColllisionMask();
+            for (int i = 0; i < TILES_COUNT; ++i)
+                CollisionPath2[i] = new ColllisionMask();
         }
 
         public TilesConfig(string filename) : this(new Reader(filename))
@@ -181,9 +285,19 @@ namespace RSDKv5
 
         }
 
-        private TilesConfig(Reader reader) : this(reader, false)
+        private TilesConfig(Reader reader)
         {
+            if (!reader.ReadBytes(4).SequenceEqual(MAGIC))
+                throw new Exception("Invalid tiles config file header magic");
 
+            using (Reader creader = reader.GetCompressedStream())
+            {
+                for (int i = 0; i < TILES_COUNT; ++i)
+                    CollisionPath1[i] = new ColllisionMask(creader);
+                for (int i = 0; i < TILES_COUNT; ++i)
+                    CollisionPath2[i] = new ColllisionMask(creader);
+            }
+            reader.Close();
         }
 
         public TilesConfig(string filename, bool unc) : this(new Reader(filename), unc)
@@ -196,28 +310,26 @@ namespace RSDKv5
 
         }
 
-        private TilesConfig(Reader reader, bool compressed)
+        private TilesConfig(Reader reader, bool unc)
         {
-            if (reader.ReadBytes(4).SequenceEqual(MAGIC))
-                compressed = true;
-            else
-                reader.Seek(-4, SeekOrigin.Current);
-            if (compressed)
+            if (!reader.ReadBytes(4).SequenceEqual(MAGIC))
+                throw new Exception("Invalid tiles config file header magic");
+            if (!unc)
             {
                 using (Reader creader = reader.GetCompressedStream())
                 {
                     for (int i = 0; i < TILES_COUNT; ++i)
-                        CollisionPath1[i] = new TileConfig(creader);
+                        CollisionPath1[i] = new ColllisionMask(creader);
                     for (int i = 0; i < TILES_COUNT; ++i)
-                        CollisionPath2[i] = new TileConfig(creader);
+                        CollisionPath2[i] = new ColllisionMask(creader);
                 }
             }
             else
             {
                 for (int i = 0; i < TILES_COUNT; ++i)
-                    CollisionPath1[i] = new TileConfig(reader);
+                    CollisionPath1[i] = new ColllisionMask(reader);
                 for (int i = 0; i < TILES_COUNT; ++i)
-                    CollisionPath2[i] = new TileConfig(reader);
+                    CollisionPath2[i] = new ColllisionMask(reader);
             }
             reader.Close();
         }

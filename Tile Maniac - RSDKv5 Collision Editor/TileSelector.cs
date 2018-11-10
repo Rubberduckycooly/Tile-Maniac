@@ -4,7 +4,7 @@ using System.Drawing.Design;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 
-namespace Tile_Maniac___RSDKv5_Collision_Editor
+namespace TileManiac
 {
     public class TileControl : UserControl
     {

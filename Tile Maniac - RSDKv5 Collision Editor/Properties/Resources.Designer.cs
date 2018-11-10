@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Tile_Maniac___RSDKv5_Collision_Editor.Properties {
+namespace TileManiac.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Tile_Maniac___RSDKv5_Collision_Editor.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TileManiac.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

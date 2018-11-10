@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Globalization;
 
-namespace Tile_Maniac___RSDKv5_Collision_Editor
+namespace TileManiac
 {
     public static class Extensions
     {

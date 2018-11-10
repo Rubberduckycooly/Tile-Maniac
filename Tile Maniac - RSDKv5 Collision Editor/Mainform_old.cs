@@ -9,7 +9,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 
-namespace Tile_Maniac___RSDKv5_Collision_Editor
+namespace TileManiac
 {
     public partial class Mainform_old : Form
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Tile_Maniac___RSDKv5_Collision_Editor
+namespace TileManiac
 {
     static class Program
     {

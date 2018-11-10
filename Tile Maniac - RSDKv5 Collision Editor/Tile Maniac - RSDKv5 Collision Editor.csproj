@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3D9F597D-8D90-44D3-A0B9-A0CB2292D0E1}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Tile_Maniac___RSDKv5_Collision_Editor</RootNamespace>
+    <RootNamespace>TileManiac</RootNamespace>
     <AssemblyName>Tile Maniac - RSDKv5 Collision Editor</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -48,7 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Maniac.ico</ApplicationIcon>
+    <ApplicationIcon>TileManiac.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -128,6 +128,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RSDKv4\RSDKv4.csproj">
+      <Project>{1a58ba31-c9e1-4d18-876e-ec73799e7a9f}</Project>
+      <Name>RSDKv4</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RSDKv5\RSDKv5.csproj">
       <Project>{cf5496f8-002b-408f-9b3d-67c88f610283}</Project>
       <Name>RSDKv5</Name>
@@ -138,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Maniac.ico" />
+    <Content Include="TileManiac.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">

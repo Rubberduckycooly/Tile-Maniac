@@ -12,7 +12,7 @@ namespace RSDKv5
         public Color BackgroundColor1;
         public Color BackgroundColor2;
         byte[] UnknownBytes; // Const: 01010400010400
-        public string BinName;
+        string BinName;
         byte UnknownByte2;
 
         public SceneEditorMetadata()
@@ -21,8 +21,6 @@ namespace RSDKv5
             BackgroundColor1 = Color.EMPTY;
             BackgroundColor2 = Color.EMPTY;
             UnknownBytes = new byte[] { 0x1, 0x1, 0x4, 0x0, 0x1, 0x4, 0x0 };
-            UnknownByte2 = new byte();
-            BinName = "Scene1.bin";
         }
 
         internal SceneEditorMetadata(Reader reader)

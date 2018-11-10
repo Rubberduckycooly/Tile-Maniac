@@ -1,4 +1,4 @@
-﻿namespace Tile_Maniac___RSDKv5_Collision_Editor
+﻿namespace TileManiac
 {
     partial class TileList
     {
