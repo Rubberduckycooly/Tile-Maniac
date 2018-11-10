@@ -70,19 +70,39 @@
     <Compile Include="AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Extensions.cs" />
     <Compile Include="Mainform.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Mainform.Designer.cs">
       <DependentUpon>Mainform.cs</DependentUpon>
     </Compile>
+    <Compile Include="Mainform_old.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mainform_old.Designer.cs">
+      <DependentUpon>Mainform_old.cs</DependentUpon>
+    </Compile>
+    <None Include="MergeMainForm.text">
+      <SubType>Form</SubType>
+    </None>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TileList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TileList.Designer.cs" />
+    <Compile Include="TileSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Mainform.resx">
       <DependentUpon>Mainform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mainform_old.resx">
+      <DependentUpon>Mainform_old.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -16,6 +16,7 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new Mainform_old());
             Application.Run(new Mainform());
         }
     }

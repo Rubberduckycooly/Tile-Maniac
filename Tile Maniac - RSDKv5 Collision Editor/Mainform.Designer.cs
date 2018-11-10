@@ -34,15 +34,26 @@
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveUncompressedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsUncompressedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.importRSDKv5TileConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToRSDKv5TileConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyToOtherPathToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.mirrorPathsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showPathBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.splitFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ICBox = new System.Windows.Forms.CheckBox();
             this.cb15 = new System.Windows.Forms.CheckBox();
+            this.ICLabel = new System.Windows.Forms.Label();
             this.cb10 = new System.Windows.Forms.CheckBox();
             this.cb00 = new System.Windows.Forms.CheckBox();
             this.cb01 = new System.Windows.Forms.CheckBox();
@@ -63,7 +74,6 @@
             this.IsCeilingButton = new System.Windows.Forms.CheckBox();
             this.lb14 = new System.Windows.Forms.ListBox();
             this.lb13 = new System.Windows.Forms.ListBox();
-            this.IsCeilingLabel = new System.Windows.Forms.Label();
             this.lb12 = new System.Windows.Forms.ListBox();
             this.SpecialNUD = new System.Windows.Forms.NumericUpDown();
             this.lb11 = new System.Windows.Forms.ListBox();
@@ -89,11 +99,26 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.VPLabel = new System.Windows.Forms.Label();
             this.GotoButton = new System.Windows.Forms.Button();
+            this.CurMaskLabel = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.GotoLabel = new System.Windows.Forms.Label();
             this.GotoNUD = new System.Windows.Forms.NumericUpDown();
             this.PrevButton = new System.Windows.Forms.Button();
             this.NextButton = new System.Windows.Forms.Button();
-            this.CurMaskLabel = new System.Windows.Forms.Label();
+            this.degreeLabel = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.tileViewRadioButton = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.collisionViewRadioButton = new System.Windows.Forms.RadioButton();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.overlayPicBox = new Tile_Maniac___RSDKv5_Collision_Editor.Mainform.PictureBoxNearestNeighbor();
+            this.TilePicBox = new Tile_Maniac___RSDKv5_Collision_Editor.Mainform.PictureBoxNearestNeighbor();
+            this.CollisionPicBox = new Tile_Maniac___RSDKv5_Collision_Editor.Mainform.PictureBoxNearestNeighbor();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.CollisionList = new Tile_Maniac___RSDKv5_Collision_Editor.TileList();
             this.CollisionVIEW = new System.Windows.Forms.GroupBox();
             this.RGBoxF = new System.Windows.Forms.PictureBox();
             this.Viewer16 = new System.Windows.Forms.PictureBox();
@@ -128,10 +153,6 @@
             this.RGBox5 = new System.Windows.Forms.PictureBox();
             this.RGBox3 = new System.Windows.Forms.PictureBox();
             this.RGBox4 = new System.Windows.Forms.PictureBox();
-            this.CMaskLabel = new System.Windows.Forms.Label();
-            this.CTileLabel = new System.Windows.Forms.Label();
-            this.TilePicBox = new Tile_Maniac___RSDKv5_Collision_Editor.Mainform.PictureBoxNearestNeighbor();
-            this.CollisionPicBox = new Tile_Maniac___RSDKv5_Collision_Editor.Mainform.PictureBoxNearestNeighbor();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -145,6 +166,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.SlopeNUD)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GotoNUD)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.overlayPicBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TilePicBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CollisionPicBox)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.CollisionVIEW.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RGBoxF)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Viewer16)).BeginInit();
@@ -178,8 +205,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.RGBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RGBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RGBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TilePicBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CollisionPicBox)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -187,12 +212,14 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.editToolStripMenuItem,
             this.viewToolStripMenuItem,
+            this.toolsToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(638, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(858, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -202,8 +229,9 @@
             this.openToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
-            this.saveUncompressedToolStripMenuItem,
-            this.saveAsUncompressedToolStripMenuItem});
+            this.toolStripSeparator2,
+            this.importRSDKv5TileConfigToolStripMenuItem,
+            this.exportToRSDKv5TileConfigToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -212,7 +240,7 @@
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(311, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(308, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -220,7 +248,7 @@
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(311, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(308, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -229,28 +257,85 @@
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             this.saveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(311, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(308, 22);
             this.saveAsToolStripMenuItem.Text = "Save As...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
-            // saveUncompressedToolStripMenuItem
+            // toolStripSeparator2
             // 
-            this.saveUncompressedToolStripMenuItem.Name = "saveUncompressedToolStripMenuItem";
-            this.saveUncompressedToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(305, 6);
+            // 
+            // importRSDKv5TileConfigToolStripMenuItem
+            // 
+            this.importRSDKv5TileConfigToolStripMenuItem.Name = "importRSDKv5TileConfigToolStripMenuItem";
+            this.importRSDKv5TileConfigToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.S)));
-            this.saveUncompressedToolStripMenuItem.Size = new System.Drawing.Size(311, 22);
-            this.saveUncompressedToolStripMenuItem.Text = "Save (Uncompressed) ";
-            this.saveUncompressedToolStripMenuItem.Click += new System.EventHandler(this.saveUncompressedToolStripMenuItem_Click);
+            this.importRSDKv5TileConfigToolStripMenuItem.Size = new System.Drawing.Size(308, 22);
+            this.importRSDKv5TileConfigToolStripMenuItem.Text = "Save (Uncompressed)";
+            this.importRSDKv5TileConfigToolStripMenuItem.Click += new System.EventHandler(this.saveUncompressedToolStripMenuItem_Click);
             // 
-            // saveAsUncompressedToolStripMenuItem
+            // exportToRSDKv5TileConfigToolStripMenuItem
             // 
-            this.saveAsUncompressedToolStripMenuItem.Name = "saveAsUncompressedToolStripMenuItem";
-            this.saveAsUncompressedToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            this.exportToRSDKv5TileConfigToolStripMenuItem.Name = "exportToRSDKv5TileConfigToolStripMenuItem";
+            this.exportToRSDKv5TileConfigToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.saveAsUncompressedToolStripMenuItem.Size = new System.Drawing.Size(311, 22);
-            this.saveAsUncompressedToolStripMenuItem.Text = "Save As... (Uncompressed) ";
-            this.saveAsUncompressedToolStripMenuItem.Click += new System.EventHandler(this.saveAsUncompressedToolStripMenuItem_Click);
+            this.exportToRSDKv5TileConfigToolStripMenuItem.Size = new System.Drawing.Size(308, 22);
+            this.exportToRSDKv5TileConfigToolStripMenuItem.Text = "Save As... (Uncompressed)";
+            this.exportToRSDKv5TileConfigToolStripMenuItem.Click += new System.EventHandler(this.saveAsUncompressedToolStripMenuItem_Click);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyToolStripMenuItem,
+            this.copyToOtherPathToolStripMenuItem1,
+            this.pasteToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.mirrorPathsToolStripMenuItem1});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+C";
+            this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.copyToolStripMenuItem.Text = "Copy";
+            this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
+            // 
+            // copyToOtherPathToolStripMenuItem1
+            // 
+            this.copyToOtherPathToolStripMenuItem1.Name = "copyToOtherPathToolStripMenuItem1";
+            this.copyToOtherPathToolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.C)));
+            this.copyToOtherPathToolStripMenuItem1.Size = new System.Drawing.Size(248, 22);
+            this.copyToOtherPathToolStripMenuItem1.Text = "Copy to other Path";
+            this.copyToOtherPathToolStripMenuItem1.Click += new System.EventHandler(this.copyToOtherPathToolStripMenuItem_Click);
+            // 
+            // pasteToolStripMenuItem
+            // 
+            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
+            this.pasteToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+V";
+            this.pasteToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.pasteToolStripMenuItem.Text = "Paste";
+            this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(245, 6);
+            // 
+            // mirrorPathsToolStripMenuItem1
+            // 
+            this.mirrorPathsToolStripMenuItem1.Enabled = false;
+            this.mirrorPathsToolStripMenuItem1.Name = "mirrorPathsToolStripMenuItem1";
+            this.mirrorPathsToolStripMenuItem1.Size = new System.Drawing.Size(248, 22);
+            this.mirrorPathsToolStripMenuItem1.Text = "Mirror Paths";
+            this.mirrorPathsToolStripMenuItem1.Click += new System.EventHandler(this.mirrorPathsToolStripMenuItem_Click);
             // 
             // viewToolStripMenuItem
             // 
@@ -267,6 +352,23 @@
             this.showPathBToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.showPathBToolStripMenuItem.Text = "Show Path B";
             this.showPathBToolStripMenuItem.Click += new System.EventHandler(this.showPathBToolStripMenuItem_Click);
+            // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.splitFileToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
+            this.toolsToolStripMenuItem.Click += new System.EventHandler(this.toolsToolStripMenuItem_Click);
+            // 
+            // splitFileToolStripMenuItem
+            // 
+            this.splitFileToolStripMenuItem.Enabled = false;
+            this.splitFileToolStripMenuItem.Name = "splitFileToolStripMenuItem";
+            this.splitFileToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.splitFileToolStripMenuItem.Text = "Split File";
+            this.splitFileToolStripMenuItem.Click += new System.EventHandler(this.splitFileToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -286,8 +388,8 @@
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 24);
+            this.splitContainer1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 26);
             this.splitContainer1.Margin = new System.Windows.Forms.Padding(2);
             this.splitContainer1.Name = "splitContainer1";
             // 
@@ -298,19 +400,22 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.degreeLabel);
+            this.splitContainer1.Panel2.Controls.Add(this.panel2);
+            this.splitContainer1.Panel2.Controls.Add(this.groupBox3);
+            this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
+            this.splitContainer1.Panel2.Controls.Add(this.CollisionList);
             this.splitContainer1.Panel2.Controls.Add(this.CollisionVIEW);
-            this.splitContainer1.Panel2.Controls.Add(this.CMaskLabel);
-            this.splitContainer1.Panel2.Controls.Add(this.CTileLabel);
-            this.splitContainer1.Panel2.Controls.Add(this.TilePicBox);
-            this.splitContainer1.Panel2.Controls.Add(this.CollisionPicBox);
-            this.splitContainer1.Size = new System.Drawing.Size(638, 377);
-            this.splitContainer1.SplitterDistance = 350;
+            this.splitContainer1.Size = new System.Drawing.Size(858, 416);
+            this.splitContainer1.SplitterDistance = 361;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 1;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.ICBox);
             this.groupBox1.Controls.Add(this.cb15);
+            this.groupBox1.Controls.Add(this.ICLabel);
             this.groupBox1.Controls.Add(this.cb10);
             this.groupBox1.Controls.Add(this.cb00);
             this.groupBox1.Controls.Add(this.cb01);
@@ -331,7 +436,6 @@
             this.groupBox1.Controls.Add(this.IsCeilingButton);
             this.groupBox1.Controls.Add(this.lb14);
             this.groupBox1.Controls.Add(this.lb13);
-            this.groupBox1.Controls.Add(this.IsCeilingLabel);
             this.groupBox1.Controls.Add(this.lb12);
             this.groupBox1.Controls.Add(this.SpecialNUD);
             this.groupBox1.Controls.Add(this.lb11);
@@ -356,10 +460,22 @@
             this.groupBox1.Controls.Add(this.lb01);
             this.groupBox1.Location = new System.Drawing.Point(5, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(342, 309);
+            this.groupBox1.Size = new System.Drawing.Size(342, 298);
             this.groupBox1.TabIndex = 67;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tile Collision Data";
+            // 
+            // ICBox
+            // 
+            this.ICBox.AutoSize = true;
+            this.ICBox.Location = new System.Drawing.Point(290, 321);
+            this.ICBox.Margin = new System.Windows.Forms.Padding(2);
+            this.ICBox.Name = "ICBox";
+            this.ICBox.Size = new System.Drawing.Size(15, 14);
+            this.ICBox.TabIndex = 111;
+            this.ICBox.UseVisualStyleBackColor = true;
+            this.ICBox.Visible = false;
+            this.ICBox.CheckedChanged += new System.EventHandler(this.ICBox_CheckedChanged);
             // 
             // cb15
             // 
@@ -370,6 +486,17 @@
             this.cb15.TabIndex = 109;
             this.cb15.UseVisualStyleBackColor = true;
             this.cb15.CheckedChanged += new System.EventHandler(this.cb15_CheckedChanged);
+            // 
+            // ICLabel
+            // 
+            this.ICLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ICLabel.AutoSize = true;
+            this.ICLabel.Location = new System.Drawing.Point(268, 254);
+            this.ICLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.ICLabel.Name = "ICLabel";
+            this.ICLabel.Size = new System.Drawing.Size(46, 13);
+            this.ICLabel.TabIndex = 110;
+            this.ICLabel.Text = "IsCeiling";
             // 
             // cb10
             // 
@@ -546,6 +673,7 @@
             this.lb00.Size = new System.Drawing.Size(15, 212);
             this.lb00.TabIndex = 93;
             this.lb00.SelectedIndexChanged += new System.EventHandler(this.lb00_SelectedIndexChanged);
+            this.lb00.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb00_scrolling);
             // 
             // lb15
             // 
@@ -572,12 +700,13 @@
             this.lb15.Size = new System.Drawing.Size(15, 212);
             this.lb15.TabIndex = 92;
             this.lb15.SelectedIndexChanged += new System.EventHandler(this.lb15_SelectedIndexChanged);
+            this.lb15.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb15_scrolling);
             // 
             // IsCeilingButton
             // 
             this.IsCeilingButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.IsCeilingButton.AutoSize = true;
-            this.IsCeilingButton.Location = new System.Drawing.Point(266, 284);
+            this.IsCeilingButton.Location = new System.Drawing.Point(271, 273);
             this.IsCeilingButton.Margin = new System.Windows.Forms.Padding(2);
             this.IsCeilingButton.Name = "IsCeilingButton";
             this.IsCeilingButton.Size = new System.Drawing.Size(15, 14);
@@ -610,6 +739,7 @@
             this.lb14.Size = new System.Drawing.Size(15, 212);
             this.lb14.TabIndex = 91;
             this.lb14.SelectedIndexChanged += new System.EventHandler(this.lb14_SelectedIndexChanged);
+            this.lb14.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb14_scrolling);
             // 
             // lb13
             // 
@@ -636,17 +766,7 @@
             this.lb13.Size = new System.Drawing.Size(15, 212);
             this.lb13.TabIndex = 90;
             this.lb13.SelectedIndexChanged += new System.EventHandler(this.lb13_SelectedIndexChanged);
-            // 
-            // IsCeilingLabel
-            // 
-            this.IsCeilingLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.IsCeilingLabel.AutoSize = true;
-            this.IsCeilingLabel.Location = new System.Drawing.Point(263, 265);
-            this.IsCeilingLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.IsCeilingLabel.Name = "IsCeilingLabel";
-            this.IsCeilingLabel.Size = new System.Drawing.Size(74, 13);
-            this.IsCeilingLabel.TabIndex = 76;
-            this.IsCeilingLabel.Text = "Ceiling Mode?";
+            this.lb13.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb13_scrolling);
             // 
             // lb12
             // 
@@ -673,12 +793,13 @@
             this.lb12.Size = new System.Drawing.Size(15, 212);
             this.lb12.TabIndex = 89;
             this.lb12.SelectedIndexChanged += new System.EventHandler(this.lb12_SelectedIndexChanged);
+            this.lb12.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb12_scrolling);
             // 
             // SpecialNUD
             // 
             this.SpecialNUD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.SpecialNUD.Hexadecimal = true;
-            this.SpecialNUD.Location = new System.Drawing.Point(223, 282);
+            this.SpecialNUD.Location = new System.Drawing.Point(223, 271);
             this.SpecialNUD.Margin = new System.Windows.Forms.Padding(2);
             this.SpecialNUD.Maximum = new decimal(new int[] {
             255,
@@ -715,12 +836,13 @@
             this.lb11.Size = new System.Drawing.Size(15, 212);
             this.lb11.TabIndex = 88;
             this.lb11.SelectedIndexChanged += new System.EventHandler(this.lb11_SelectedIndexChanged);
+            this.lb11.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb11_scrolling);
             // 
             // SpecialLabel
             // 
             this.SpecialLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.SpecialLabel.AutoSize = true;
-            this.SpecialLabel.Location = new System.Drawing.Point(222, 265);
+            this.SpecialLabel.Location = new System.Drawing.Point(222, 254);
             this.SpecialLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.SpecialLabel.Name = "SpecialLabel";
             this.SpecialLabel.Size = new System.Drawing.Size(42, 13);
@@ -752,12 +874,13 @@
             this.lb10.Size = new System.Drawing.Size(15, 212);
             this.lb10.TabIndex = 87;
             this.lb10.SelectedIndexChanged += new System.EventHandler(this.lb10_SelectedIndexChanged);
+            this.lb10.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb10_scrolling);
             // 
             // UnknownNUD
             // 
             this.UnknownNUD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.UnknownNUD.Hexadecimal = true;
-            this.UnknownNUD.Location = new System.Drawing.Point(169, 282);
+            this.UnknownNUD.Location = new System.Drawing.Point(169, 271);
             this.UnknownNUD.Margin = new System.Windows.Forms.Padding(2);
             this.UnknownNUD.Maximum = new decimal(new int[] {
             255,
@@ -794,12 +917,13 @@
             this.lb09.Size = new System.Drawing.Size(15, 212);
             this.lb09.TabIndex = 86;
             this.lb09.SelectedIndexChanged += new System.EventHandler(this.lb09_SelectedIndexChanged);
+            this.lb09.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb09_scrolling);
             // 
             // UnknownLabel
             // 
             this.UnknownLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.UnknownLabel.AutoSize = true;
-            this.UnknownLabel.Location = new System.Drawing.Point(168, 265);
+            this.UnknownLabel.Location = new System.Drawing.Point(168, 254);
             this.UnknownLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.UnknownLabel.Name = "UnknownLabel";
             this.UnknownLabel.Size = new System.Drawing.Size(53, 13);
@@ -831,12 +955,13 @@
             this.lb08.Size = new System.Drawing.Size(15, 212);
             this.lb08.TabIndex = 85;
             this.lb08.SelectedIndexChanged += new System.EventHandler(this.lb08_SelectedIndexChanged);
+            this.lb08.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb08_scrolling);
             // 
             // MomentumNUD
             // 
             this.MomentumNUD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.MomentumNUD.Hexadecimal = true;
-            this.MomentumNUD.Location = new System.Drawing.Point(107, 282);
+            this.MomentumNUD.Location = new System.Drawing.Point(107, 271);
             this.MomentumNUD.Margin = new System.Windows.Forms.Padding(2);
             this.MomentumNUD.Maximum = new decimal(new int[] {
             255,
@@ -873,12 +998,13 @@
             this.lb07.Size = new System.Drawing.Size(15, 212);
             this.lb07.TabIndex = 84;
             this.lb07.SelectedIndexChanged += new System.EventHandler(this.lb07_SelectedIndexChanged);
+            this.lb07.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb07_scrolling);
             // 
             // MomentumLabel
             // 
             this.MomentumLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.MomentumLabel.AutoSize = true;
-            this.MomentumLabel.Location = new System.Drawing.Point(106, 265);
+            this.MomentumLabel.Location = new System.Drawing.Point(106, 254);
             this.MomentumLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.MomentumLabel.Name = "MomentumLabel";
             this.MomentumLabel.Size = new System.Drawing.Size(59, 13);
@@ -910,12 +1036,13 @@
             this.lb06.Size = new System.Drawing.Size(15, 212);
             this.lb06.TabIndex = 83;
             this.lb06.SelectedIndexChanged += new System.EventHandler(this.lb06_SelectedIndexChanged);
+            this.lb06.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb06_scrolling);
             // 
             // PhysicsNUD
             // 
             this.PhysicsNUD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.PhysicsNUD.Hexadecimal = true;
-            this.PhysicsNUD.Location = new System.Drawing.Point(60, 282);
+            this.PhysicsNUD.Location = new System.Drawing.Point(60, 271);
             this.PhysicsNUD.Margin = new System.Windows.Forms.Padding(2);
             this.PhysicsNUD.Maximum = new decimal(new int[] {
             255,
@@ -952,12 +1079,13 @@
             this.lb05.Size = new System.Drawing.Size(15, 212);
             this.lb05.TabIndex = 82;
             this.lb05.SelectedIndexChanged += new System.EventHandler(this.lb05_SelectedIndexChanged);
+            this.lb05.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb05_scrolling);
             // 
             // PhysicsLabel
             // 
             this.PhysicsLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.PhysicsLabel.AutoSize = true;
-            this.PhysicsLabel.Location = new System.Drawing.Point(59, 265);
+            this.PhysicsLabel.Location = new System.Drawing.Point(59, 254);
             this.PhysicsLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.PhysicsLabel.Name = "PhysicsLabel";
             this.PhysicsLabel.Size = new System.Drawing.Size(43, 13);
@@ -989,11 +1117,13 @@
             this.lb04.Size = new System.Drawing.Size(15, 212);
             this.lb04.TabIndex = 81;
             this.lb04.SelectedIndexChanged += new System.EventHandler(this.lb04_SelectedIndexChanged);
+            this.lb04.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb04_scrolling);
             // 
             // SlopeNUD
             // 
             this.SlopeNUD.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.SlopeNUD.Location = new System.Drawing.Point(7, 282);
+            this.SlopeNUD.Hexadecimal = true;
+            this.SlopeNUD.Location = new System.Drawing.Point(7, 271);
             this.SlopeNUD.Margin = new System.Windows.Forms.Padding(2);
             this.SlopeNUD.Maximum = new decimal(new int[] {
             360,
@@ -1030,17 +1160,18 @@
             this.lb03.Size = new System.Drawing.Size(15, 212);
             this.lb03.TabIndex = 80;
             this.lb03.SelectedIndexChanged += new System.EventHandler(this.lb03_SelectedIndexChanged);
+            this.lb03.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb03_scrolling);
             // 
             // SlopeLabel
             // 
             this.SlopeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.SlopeLabel.AutoSize = true;
-            this.SlopeLabel.Location = new System.Drawing.Point(6, 265);
+            this.SlopeLabel.Location = new System.Drawing.Point(6, 254);
             this.SlopeLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.SlopeLabel.Name = "SlopeLabel";
-            this.SlopeLabel.Size = new System.Drawing.Size(55, 13);
+            this.SlopeLabel.Size = new System.Drawing.Size(34, 13);
             this.SlopeLabel.TabIndex = 66;
-            this.SlopeLabel.Text = "Slope (°D)";
+            this.SlopeLabel.Text = "Slope";
             // 
             // lb02
             // 
@@ -1067,6 +1198,7 @@
             this.lb02.Size = new System.Drawing.Size(15, 212);
             this.lb02.TabIndex = 79;
             this.lb02.SelectedIndexChanged += new System.EventHandler(this.lb02_SelectedIndexChanged);
+            this.lb02.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb02_scrolling);
             // 
             // lb01
             // 
@@ -1093,44 +1225,65 @@
             this.lb01.Size = new System.Drawing.Size(15, 212);
             this.lb01.TabIndex = 78;
             this.lb01.SelectedIndexChanged += new System.EventHandler(this.lb01_SelectedIndexChanged);
+            this.lb01.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb01_scrolling);
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.VPLabel);
             this.panel1.Controls.Add(this.GotoButton);
+            this.panel1.Controls.Add(this.CurMaskLabel);
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.GotoLabel);
             this.panel1.Controls.Add(this.GotoNUD);
             this.panel1.Controls.Add(this.PrevButton);
             this.panel1.Controls.Add(this.NextButton);
-            this.panel1.Controls.Add(this.CurMaskLabel);
-            this.panel1.Location = new System.Drawing.Point(5, 318);
+            this.panel1.Location = new System.Drawing.Point(5, 307);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(342, 56);
+            this.panel1.Size = new System.Drawing.Size(342, 106);
             this.panel1.TabIndex = 66;
             // 
             // VPLabel
             // 
-            this.VPLabel.AutoSize = true;
-            this.VPLabel.Location = new System.Drawing.Point(187, 4);
+            this.VPLabel.Location = new System.Drawing.Point(186, 13);
             this.VPLabel.Name = "VPLabel";
-            this.VPLabel.Size = new System.Drawing.Size(126, 13);
+            this.VPLabel.Size = new System.Drawing.Size(151, 13);
             this.VPLabel.TabIndex = 6;
             this.VPLabel.Text = "Currently Viewing: Path A";
+            this.VPLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // GotoButton
             // 
-            this.GotoButton.Location = new System.Drawing.Point(247, 27);
+            this.GotoButton.Location = new System.Drawing.Point(121, 59);
             this.GotoButton.Name = "GotoButton";
-            this.GotoButton.Size = new System.Drawing.Size(34, 20);
+            this.GotoButton.Size = new System.Drawing.Size(59, 21);
             this.GotoButton.TabIndex = 5;
             this.GotoButton.Text = "GO!";
             this.GotoButton.UseVisualStyleBackColor = true;
             this.GotoButton.Click += new System.EventHandler(this.GotoButton_Click);
             // 
+            // CurMaskLabel
+            // 
+            this.CurMaskLabel.AutoSize = true;
+            this.CurMaskLabel.Location = new System.Drawing.Point(8, 83);
+            this.CurMaskLabel.Name = "CurMaskLabel";
+            this.CurMaskLabel.Size = new System.Drawing.Size(104, 13);
+            this.CurMaskLabel.TabIndex = 0;
+            this.CurMaskLabel.Text = "Collision Mask 0 of 0";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(186, 29);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(151, 51);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "Swap Path";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.showPathBToolStripMenuItem_Click);
+            // 
             // GotoLabel
             // 
             this.GotoLabel.AutoSize = true;
-            this.GotoLabel.Location = new System.Drawing.Point(125, 29);
+            this.GotoLabel.Location = new System.Drawing.Point(118, 13);
             this.GotoLabel.Name = "GotoLabel";
             this.GotoLabel.Size = new System.Drawing.Size(62, 13);
             this.GotoLabel.TabIndex = 4;
@@ -1138,7 +1291,7 @@
             // 
             // GotoNUD
             // 
-            this.GotoNUD.Location = new System.Drawing.Point(190, 27);
+            this.GotoNUD.Location = new System.Drawing.Point(121, 33);
             this.GotoNUD.Maximum = new decimal(new int[] {
             1024,
             0,
@@ -1150,7 +1303,7 @@
             0,
             0});
             this.GotoNUD.Name = "GotoNUD";
-            this.GotoNUD.Size = new System.Drawing.Size(51, 20);
+            this.GotoNUD.Size = new System.Drawing.Size(59, 20);
             this.GotoNUD.TabIndex = 3;
             this.GotoNUD.Value = new decimal(new int[] {
             1,
@@ -1161,9 +1314,9 @@
             // 
             // PrevButton
             // 
-            this.PrevButton.Location = new System.Drawing.Point(11, 25);
+            this.PrevButton.Location = new System.Drawing.Point(7, 13);
             this.PrevButton.Name = "PrevButton";
-            this.PrevButton.Size = new System.Drawing.Size(51, 24);
+            this.PrevButton.Size = new System.Drawing.Size(51, 67);
             this.PrevButton.TabIndex = 2;
             this.PrevButton.Text = "Prev";
             this.PrevButton.UseVisualStyleBackColor = true;
@@ -1171,22 +1324,176 @@
             // 
             // NextButton
             // 
-            this.NextButton.Location = new System.Drawing.Point(68, 25);
+            this.NextButton.Location = new System.Drawing.Point(61, 13);
             this.NextButton.Name = "NextButton";
-            this.NextButton.Size = new System.Drawing.Size(51, 24);
+            this.NextButton.Size = new System.Drawing.Size(51, 67);
             this.NextButton.TabIndex = 1;
             this.NextButton.Text = "Next";
             this.NextButton.UseVisualStyleBackColor = true;
             this.NextButton.Click += new System.EventHandler(this.NextButton_Click);
             // 
-            // CurMaskLabel
+            // degreeLabel
             // 
-            this.CurMaskLabel.AutoSize = true;
-            this.CurMaskLabel.Location = new System.Drawing.Point(8, 4);
-            this.CurMaskLabel.Name = "CurMaskLabel";
-            this.CurMaskLabel.Size = new System.Drawing.Size(104, 13);
-            this.CurMaskLabel.TabIndex = 0;
-            this.CurMaskLabel.Text = "Collision Mask 0 of 0";
+            this.degreeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.degreeLabel.AutoSize = true;
+            this.degreeLabel.Location = new System.Drawing.Point(6, 397);
+            this.degreeLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.degreeLabel.Name = "degreeLabel";
+            this.degreeLabel.Size = new System.Drawing.Size(165, 13);
+            this.degreeLabel.TabIndex = 112;
+            this.degreeLabel.Text = "Degree of Slope (Experimental): 0";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.tileViewRadioButton);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.collisionViewRadioButton);
+            this.panel2.Location = new System.Drawing.Point(330, 387);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(157, 26);
+            this.panel2.TabIndex = 75;
+            // 
+            // tileViewRadioButton
+            // 
+            this.tileViewRadioButton.AutoSize = true;
+            this.tileViewRadioButton.Location = new System.Drawing.Point(42, 6);
+            this.tileViewRadioButton.Name = "tileViewRadioButton";
+            this.tileViewRadioButton.Size = new System.Drawing.Size(47, 17);
+            this.tileViewRadioButton.TabIndex = 73;
+            this.tileViewRadioButton.Text = "Tiles";
+            this.tileViewRadioButton.UseVisualStyleBackColor = true;
+            this.tileViewRadioButton.CheckedChanged += new System.EventHandler(this.tileViewRadioButton_CheckedChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(33, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "View:";
+            // 
+            // collisionViewRadioButton
+            // 
+            this.collisionViewRadioButton.AutoSize = true;
+            this.collisionViewRadioButton.Location = new System.Drawing.Point(91, 6);
+            this.collisionViewRadioButton.Name = "collisionViewRadioButton";
+            this.collisionViewRadioButton.Size = new System.Drawing.Size(63, 17);
+            this.collisionViewRadioButton.TabIndex = 74;
+            this.collisionViewRadioButton.Text = "Collision";
+            this.collisionViewRadioButton.UseVisualStyleBackColor = true;
+            this.collisionViewRadioButton.CheckedChanged += new System.EventHandler(this.collisionViewRadioButton_CheckedChanged);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.overlayPicBox);
+            this.groupBox3.Controls.Add(this.TilePicBox);
+            this.groupBox3.Controls.Add(this.CollisionPicBox);
+            this.groupBox3.Location = new System.Drawing.Point(9, 241);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(125, 125);
+            this.groupBox3.TabIndex = 72;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Current Tile:";
+            // 
+            // overlayPicBox
+            // 
+            this.overlayPicBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.overlayPicBox.BackColor = System.Drawing.Color.Transparent;
+            this.overlayPicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.overlayPicBox.InitialImage = null;
+            this.overlayPicBox.Location = new System.Drawing.Point(15, 16);
+            this.overlayPicBox.Margin = new System.Windows.Forms.Padding(2);
+            this.overlayPicBox.Name = "overlayPicBox";
+            this.overlayPicBox.Size = new System.Drawing.Size(96, 104);
+            this.overlayPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.overlayPicBox.TabIndex = 71;
+            this.overlayPicBox.TabStop = false;
+            // 
+            // TilePicBox
+            // 
+            this.TilePicBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.TilePicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.TilePicBox.Location = new System.Drawing.Point(15, 16);
+            this.TilePicBox.Margin = new System.Windows.Forms.Padding(2);
+            this.TilePicBox.Name = "TilePicBox";
+            this.TilePicBox.Size = new System.Drawing.Size(96, 104);
+            this.TilePicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.TilePicBox.TabIndex = 1;
+            this.TilePicBox.TabStop = false;
+            // 
+            // CollisionPicBox
+            // 
+            this.CollisionPicBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.CollisionPicBox.BackColor = System.Drawing.Color.Transparent;
+            this.CollisionPicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.CollisionPicBox.InitialImage = null;
+            this.CollisionPicBox.Location = new System.Drawing.Point(15, 16);
+            this.CollisionPicBox.Margin = new System.Windows.Forms.Padding(2);
+            this.CollisionPicBox.Name = "CollisionPicBox";
+            this.CollisionPicBox.Size = new System.Drawing.Size(96, 104);
+            this.CollisionPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.CollisionPicBox.TabIndex = 0;
+            this.CollisionPicBox.TabStop = false;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.radioButton3);
+            this.groupBox2.Controls.Add(this.radioButton1);
+            this.groupBox2.Controls.Add(this.radioButton2);
+            this.groupBox2.Location = new System.Drawing.Point(143, 241);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(143, 92);
+            this.groupBox2.TabIndex = 70;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Viewer Mode:";
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(6, 62);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(61, 17);
+            this.radioButton3.TabIndex = 2;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "Overlay";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(6, 19);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(63, 17);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Collision";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(6, 39);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(42, 17);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Tile";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            // 
+            // CollisionList
+            // 
+            this.CollisionList.BackColor = System.Drawing.SystemColors.Window;
+            this.CollisionList.Location = new System.Drawing.Point(330, 0);
+            this.CollisionList.Name = "CollisionList";
+            this.CollisionList.ScrollValue = 0;
+            this.CollisionList.SelectedIndex = -1;
+            this.CollisionList.Size = new System.Drawing.Size(157, 387);
+            this.CollisionList.TabIndex = 36;
+            this.CollisionList.SelectedIndexChanged += new System.EventHandler(this.CollisionList_SelectedIndexChanged);
             // 
             // CollisionVIEW
             // 
@@ -1223,16 +1530,16 @@
             this.CollisionVIEW.Controls.Add(this.RGBox5);
             this.CollisionVIEW.Controls.Add(this.RGBox3);
             this.CollisionVIEW.Controls.Add(this.RGBox4);
-            this.CollisionVIEW.Location = new System.Drawing.Point(3, 3);
+            this.CollisionVIEW.Location = new System.Drawing.Point(9, 19);
             this.CollisionVIEW.Name = "CollisionVIEW";
-            this.CollisionVIEW.Size = new System.Drawing.Size(261, 216);
+            this.CollisionVIEW.Size = new System.Drawing.Size(277, 216);
             this.CollisionVIEW.TabIndex = 35;
             this.CollisionVIEW.TabStop = false;
             this.CollisionVIEW.Text = "Collision View";
             // 
             // RGBoxF
             // 
-            this.RGBoxF.Location = new System.Drawing.Point(246, 184);
+            this.RGBoxF.Location = new System.Drawing.Point(255, 185);
             this.RGBoxF.Name = "RGBoxF";
             this.RGBoxF.Size = new System.Drawing.Size(10, 10);
             this.RGBoxF.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1241,7 +1548,7 @@
             // 
             // Viewer16
             // 
-            this.Viewer16.Location = new System.Drawing.Point(246, 18);
+            this.Viewer16.Location = new System.Drawing.Point(255, 19);
             this.Viewer16.Name = "Viewer16";
             this.Viewer16.Size = new System.Drawing.Size(10, 160);
             this.Viewer16.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1250,7 +1557,7 @@
             // 
             // RGBox0
             // 
-            this.RGBox0.Location = new System.Drawing.Point(6, 184);
+            this.RGBox0.Location = new System.Drawing.Point(15, 185);
             this.RGBox0.Name = "RGBox0";
             this.RGBox0.Size = new System.Drawing.Size(10, 10);
             this.RGBox0.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1259,7 +1566,7 @@
             // 
             // RGBoxE
             // 
-            this.RGBoxE.Location = new System.Drawing.Point(230, 184);
+            this.RGBoxE.Location = new System.Drawing.Point(239, 185);
             this.RGBoxE.Name = "RGBoxE";
             this.RGBoxE.Size = new System.Drawing.Size(10, 10);
             this.RGBoxE.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1268,7 +1575,7 @@
             // 
             // Viewer15
             // 
-            this.Viewer15.Location = new System.Drawing.Point(230, 18);
+            this.Viewer15.Location = new System.Drawing.Point(239, 19);
             this.Viewer15.Name = "Viewer15";
             this.Viewer15.Size = new System.Drawing.Size(10, 160);
             this.Viewer15.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1277,7 +1584,7 @@
             // 
             // Viewer14
             // 
-            this.Viewer14.Location = new System.Drawing.Point(214, 18);
+            this.Viewer14.Location = new System.Drawing.Point(223, 19);
             this.Viewer14.Name = "Viewer14";
             this.Viewer14.Size = new System.Drawing.Size(10, 160);
             this.Viewer14.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1286,7 +1593,7 @@
             // 
             // RGBoxD
             // 
-            this.RGBoxD.Location = new System.Drawing.Point(214, 184);
+            this.RGBoxD.Location = new System.Drawing.Point(223, 185);
             this.RGBoxD.Name = "RGBoxD";
             this.RGBoxD.Size = new System.Drawing.Size(10, 10);
             this.RGBoxD.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1295,7 +1602,7 @@
             // 
             // Viewer13
             // 
-            this.Viewer13.Location = new System.Drawing.Point(198, 18);
+            this.Viewer13.Location = new System.Drawing.Point(207, 19);
             this.Viewer13.Name = "Viewer13";
             this.Viewer13.Size = new System.Drawing.Size(10, 160);
             this.Viewer13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1304,7 +1611,7 @@
             // 
             // Viewer12
             // 
-            this.Viewer12.Location = new System.Drawing.Point(182, 18);
+            this.Viewer12.Location = new System.Drawing.Point(191, 19);
             this.Viewer12.Name = "Viewer12";
             this.Viewer12.Size = new System.Drawing.Size(10, 160);
             this.Viewer12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1313,7 +1620,7 @@
             // 
             // RGBoxC
             // 
-            this.RGBoxC.Location = new System.Drawing.Point(198, 184);
+            this.RGBoxC.Location = new System.Drawing.Point(207, 185);
             this.RGBoxC.Name = "RGBoxC";
             this.RGBoxC.Size = new System.Drawing.Size(10, 10);
             this.RGBoxC.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1322,7 +1629,7 @@
             // 
             // Viewer11
             // 
-            this.Viewer11.Location = new System.Drawing.Point(166, 18);
+            this.Viewer11.Location = new System.Drawing.Point(175, 19);
             this.Viewer11.Name = "Viewer11";
             this.Viewer11.Size = new System.Drawing.Size(10, 160);
             this.Viewer11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1331,7 +1638,7 @@
             // 
             // Viewer10
             // 
-            this.Viewer10.Location = new System.Drawing.Point(150, 18);
+            this.Viewer10.Location = new System.Drawing.Point(159, 19);
             this.Viewer10.Name = "Viewer10";
             this.Viewer10.Size = new System.Drawing.Size(10, 160);
             this.Viewer10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1340,7 +1647,7 @@
             // 
             // RGBoxB
             // 
-            this.RGBoxB.Location = new System.Drawing.Point(182, 184);
+            this.RGBoxB.Location = new System.Drawing.Point(191, 185);
             this.RGBoxB.Name = "RGBoxB";
             this.RGBoxB.Size = new System.Drawing.Size(10, 10);
             this.RGBoxB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1349,7 +1656,7 @@
             // 
             // Viewer9
             // 
-            this.Viewer9.Location = new System.Drawing.Point(134, 18);
+            this.Viewer9.Location = new System.Drawing.Point(143, 19);
             this.Viewer9.Name = "Viewer9";
             this.Viewer9.Size = new System.Drawing.Size(10, 160);
             this.Viewer9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1358,7 +1665,7 @@
             // 
             // Viewer8
             // 
-            this.Viewer8.Location = new System.Drawing.Point(118, 18);
+            this.Viewer8.Location = new System.Drawing.Point(127, 19);
             this.Viewer8.Name = "Viewer8";
             this.Viewer8.Size = new System.Drawing.Size(10, 160);
             this.Viewer8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1367,7 +1674,7 @@
             // 
             // RGBoxA
             // 
-            this.RGBoxA.Location = new System.Drawing.Point(166, 184);
+            this.RGBoxA.Location = new System.Drawing.Point(175, 185);
             this.RGBoxA.Name = "RGBoxA";
             this.RGBoxA.Size = new System.Drawing.Size(10, 10);
             this.RGBoxA.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1376,7 +1683,7 @@
             // 
             // Viewer7
             // 
-            this.Viewer7.Location = new System.Drawing.Point(102, 18);
+            this.Viewer7.Location = new System.Drawing.Point(111, 19);
             this.Viewer7.Name = "Viewer7";
             this.Viewer7.Size = new System.Drawing.Size(10, 160);
             this.Viewer7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1385,7 +1692,7 @@
             // 
             // Viewer6
             // 
-            this.Viewer6.Location = new System.Drawing.Point(86, 18);
+            this.Viewer6.Location = new System.Drawing.Point(95, 19);
             this.Viewer6.Name = "Viewer6";
             this.Viewer6.Size = new System.Drawing.Size(10, 160);
             this.Viewer6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1394,7 +1701,7 @@
             // 
             // RGBox9
             // 
-            this.RGBox9.Location = new System.Drawing.Point(150, 184);
+            this.RGBox9.Location = new System.Drawing.Point(159, 185);
             this.RGBox9.Name = "RGBox9";
             this.RGBox9.Size = new System.Drawing.Size(10, 10);
             this.RGBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1403,7 +1710,7 @@
             // 
             // Viewer5
             // 
-            this.Viewer5.Location = new System.Drawing.Point(70, 18);
+            this.Viewer5.Location = new System.Drawing.Point(79, 19);
             this.Viewer5.Name = "Viewer5";
             this.Viewer5.Size = new System.Drawing.Size(10, 160);
             this.Viewer5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1412,7 +1719,7 @@
             // 
             // Viewer4
             // 
-            this.Viewer4.Location = new System.Drawing.Point(54, 18);
+            this.Viewer4.Location = new System.Drawing.Point(63, 19);
             this.Viewer4.Name = "Viewer4";
             this.Viewer4.Size = new System.Drawing.Size(10, 160);
             this.Viewer4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1421,7 +1728,7 @@
             // 
             // RGBox8
             // 
-            this.RGBox8.Location = new System.Drawing.Point(134, 184);
+            this.RGBox8.Location = new System.Drawing.Point(143, 185);
             this.RGBox8.Name = "RGBox8";
             this.RGBox8.Size = new System.Drawing.Size(10, 10);
             this.RGBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1430,7 +1737,7 @@
             // 
             // Viewer3
             // 
-            this.Viewer3.Location = new System.Drawing.Point(38, 18);
+            this.Viewer3.Location = new System.Drawing.Point(47, 19);
             this.Viewer3.Name = "Viewer3";
             this.Viewer3.Size = new System.Drawing.Size(10, 160);
             this.Viewer3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1439,7 +1746,7 @@
             // 
             // Viewer2
             // 
-            this.Viewer2.Location = new System.Drawing.Point(22, 18);
+            this.Viewer2.Location = new System.Drawing.Point(31, 19);
             this.Viewer2.Name = "Viewer2";
             this.Viewer2.Size = new System.Drawing.Size(10, 160);
             this.Viewer2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1448,7 +1755,7 @@
             // 
             // RGBox7
             // 
-            this.RGBox7.Location = new System.Drawing.Point(118, 184);
+            this.RGBox7.Location = new System.Drawing.Point(127, 185);
             this.RGBox7.Name = "RGBox7";
             this.RGBox7.Size = new System.Drawing.Size(10, 10);
             this.RGBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1457,7 +1764,7 @@
             // 
             // Viewer1
             // 
-            this.Viewer1.Location = new System.Drawing.Point(6, 18);
+            this.Viewer1.Location = new System.Drawing.Point(15, 19);
             this.Viewer1.Name = "Viewer1";
             this.Viewer1.Size = new System.Drawing.Size(10, 160);
             this.Viewer1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1474,7 +1781,7 @@
             // 
             // RGBox6
             // 
-            this.RGBox6.Location = new System.Drawing.Point(102, 184);
+            this.RGBox6.Location = new System.Drawing.Point(111, 185);
             this.RGBox6.Name = "RGBox6";
             this.RGBox6.Size = new System.Drawing.Size(10, 10);
             this.RGBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1483,7 +1790,7 @@
             // 
             // RGBox1
             // 
-            this.RGBox1.Location = new System.Drawing.Point(22, 184);
+            this.RGBox1.Location = new System.Drawing.Point(31, 185);
             this.RGBox1.Name = "RGBox1";
             this.RGBox1.Size = new System.Drawing.Size(10, 10);
             this.RGBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1492,7 +1799,7 @@
             // 
             // RGBox2
             // 
-            this.RGBox2.Location = new System.Drawing.Point(38, 184);
+            this.RGBox2.Location = new System.Drawing.Point(47, 185);
             this.RGBox2.Name = "RGBox2";
             this.RGBox2.Size = new System.Drawing.Size(10, 10);
             this.RGBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1501,7 +1808,7 @@
             // 
             // RGBox5
             // 
-            this.RGBox5.Location = new System.Drawing.Point(86, 184);
+            this.RGBox5.Location = new System.Drawing.Point(95, 185);
             this.RGBox5.Name = "RGBox5";
             this.RGBox5.Size = new System.Drawing.Size(10, 10);
             this.RGBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1510,7 +1817,7 @@
             // 
             // RGBox3
             // 
-            this.RGBox3.Location = new System.Drawing.Point(54, 184);
+            this.RGBox3.Location = new System.Drawing.Point(63, 185);
             this.RGBox3.Name = "RGBox3";
             this.RGBox3.Size = new System.Drawing.Size(10, 10);
             this.RGBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1519,69 +1826,25 @@
             // 
             // RGBox4
             // 
-            this.RGBox4.Location = new System.Drawing.Point(70, 184);
+            this.RGBox4.Location = new System.Drawing.Point(79, 185);
             this.RGBox4.Name = "RGBox4";
             this.RGBox4.Size = new System.Drawing.Size(10, 10);
             this.RGBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.RGBox4.TabIndex = 57;
             this.RGBox4.TabStop = false;
             // 
-            // CMaskLabel
-            // 
-            this.CMaskLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CMaskLabel.AutoSize = true;
-            this.CMaskLabel.Location = new System.Drawing.Point(12, 222);
-            this.CMaskLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.CMaskLabel.Name = "CMaskLabel";
-            this.CMaskLabel.Size = new System.Drawing.Size(111, 13);
-            this.CMaskLabel.TabIndex = 3;
-            this.CMaskLabel.Text = "Current Collision Mask";
-            // 
-            // CTileLabel
-            // 
-            this.CTileLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.CTileLabel.AutoSize = true;
-            this.CTileLabel.Location = new System.Drawing.Point(132, 222);
-            this.CTileLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.CTileLabel.Name = "CTileLabel";
-            this.CTileLabel.Size = new System.Drawing.Size(61, 13);
-            this.CTileLabel.TabIndex = 2;
-            this.CTileLabel.Text = "Current Tile";
-            // 
-            // TilePicBox
-            // 
-            this.TilePicBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.TilePicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.TilePicBox.Location = new System.Drawing.Point(132, 241);
-            this.TilePicBox.Margin = new System.Windows.Forms.Padding(2);
-            this.TilePicBox.Name = "TilePicBox";
-            this.TilePicBox.Size = new System.Drawing.Size(96, 104);
-            this.TilePicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.TilePicBox.TabIndex = 1;
-            this.TilePicBox.TabStop = false;
-            // 
-            // CollisionPicBox
-            // 
-            this.CollisionPicBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CollisionPicBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.CollisionPicBox.Location = new System.Drawing.Point(15, 240);
-            this.CollisionPicBox.Margin = new System.Windows.Forms.Padding(2);
-            this.CollisionPicBox.Name = "CollisionPicBox";
-            this.CollisionPicBox.Size = new System.Drawing.Size(96, 104);
-            this.CollisionPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.CollisionPicBox.TabIndex = 0;
-            this.CollisionPicBox.TabStop = false;
-            // 
             // Mainform
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(638, 401);
+            this.ClientSize = new System.Drawing.Size(858, 453);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
+            this.MaximizeBox = false;
             this.Name = "Mainform";
             this.Text = "Tile Maniac - RSDKv5 Collision Editor";
             this.menuStrip1.ResumeLayout(false);
@@ -1601,6 +1864,14 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GotoNUD)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.overlayPicBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.TilePicBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CollisionPicBox)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.CollisionVIEW.ResumeLayout(false);
             this.CollisionVIEW.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RGBoxF)).EndInit();
@@ -1635,8 +1906,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.RGBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RGBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RGBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TilePicBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CollisionPicBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1650,10 +1919,6 @@
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private Mainform.PictureBoxNearestNeighbor TilePicBox;
-        private Mainform.PictureBoxNearestNeighbor CollisionPicBox;
-        private System.Windows.Forms.Label CMaskLabel;
-        private System.Windows.Forms.Label CTileLabel;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showPathBToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
@@ -1698,6 +1963,8 @@
         private System.Windows.Forms.PictureBox RGBox5;
         private System.Windows.Forms.PictureBox RGBox3;
         private System.Windows.Forms.PictureBox RGBox4;
+        private System.Windows.Forms.ToolStripMenuItem openUncompressedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveUncompressedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsUncompressedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem1;
         private System.Windows.Forms.Label VPLabel;
@@ -1723,7 +1990,6 @@
         private System.Windows.Forms.CheckBox IsCeilingButton;
         internal System.Windows.Forms.ListBox lb14;
         internal System.Windows.Forms.ListBox lb13;
-        private System.Windows.Forms.Label IsCeilingLabel;
         internal System.Windows.Forms.ListBox lb12;
         private System.Windows.Forms.NumericUpDown SpecialNUD;
         internal System.Windows.Forms.ListBox lb11;
@@ -1746,7 +2012,34 @@
         private System.Windows.Forms.Label SlopeLabel;
         internal System.Windows.Forms.ListBox lb02;
         internal System.Windows.Forms.ListBox lb01;
-        private System.Windows.Forms.ToolStripMenuItem saveUncompressedToolStripMenuItem;
+        private TileList CollisionList;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem splitFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem importRSDKv5TileConfigToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportToRSDKv5TileConfigToolStripMenuItem;
+        private System.Windows.Forms.CheckBox ICBox;
+        private System.Windows.Forms.Label ICLabel;
+        private PictureBoxNearestNeighbor TilePicBox;
+        private PictureBoxNearestNeighbor CollisionPicBox;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private PictureBoxNearestNeighbor overlayPicBox;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyToOtherPathToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem mirrorPathsToolStripMenuItem1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.RadioButton tileViewRadioButton;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RadioButton collisionViewRadioButton;
+        private System.Windows.Forms.Label degreeLabel;
     }
 }
 

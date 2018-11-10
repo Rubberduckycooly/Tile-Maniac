@@ -1,0 +1,10 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+configuration: Release
+platform: Any CPU
+build:
+  verbosity: minimal
+artifacts:
+- path: Tile Maniac - RSDKv5 Collision Editor\bin\Release
+  name: TileManiac-Dev-$(appveyor_build_version)
+  type: Zip

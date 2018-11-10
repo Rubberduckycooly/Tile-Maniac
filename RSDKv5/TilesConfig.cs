@@ -73,84 +73,98 @@ namespace RSDKv5
                 writer.Write(special);
             }
 
-            public Bitmap DrawCMask(System.Drawing.Color bg, System.Drawing.Color fg)
+            public Bitmap DrawCMask(System.Drawing.Color bg, System.Drawing.Color fg, Bitmap tile = null)
             {
-                Bitmap b = new Bitmap(16, 16);
-                
-                for (int h = 0; h < 16; h++) //Set the BG colour
+                Bitmap b;
+                bool HasTile = false;
+                if (tile == null)
+                { b = new Bitmap(16, 16); }
+                else
                 {
-                    for (int w = 0; w < 16; w++)
+                    b = tile.Clone(new Rectangle(0, 0, tile.Width, tile.Height), System.Drawing.Imaging.PixelFormat.DontCare);
+                    HasTile = true;
+                }
+
+                if (!HasTile)
+                {
+                    for (int h = 0; h < 16; h++) //Set the BG colour
                     {
-                        b.SetPixel(w, h, bg);
+                        for (int w = 0; w < 16; w++)
+                        {
+                            b.SetPixel(w, h, bg);
+                        }
                     }
                 }
 
+                //if (!IsCeiling)
+                //{
                 for (int w = 0; w < 16; w++) //Set the Active/Main (FG) colour
                 {
-                        if (Collision[w] <= 15 && HasCollision[w])
-                        {
-                            b.SetPixel(w, 15, fg);
-                        }
-                        if (Collision[w] <= 14 && HasCollision[w])
-                        {
-                            b.SetPixel(w, 14, fg);
-                        }
-                        if (Collision[w] <= 13 && HasCollision[w])
-                        {
-                            b.SetPixel(w, 13, fg);
-                        }
-                        if (Collision[w] <= 12 && HasCollision[w])
-                        {
-                            b.SetPixel(w, 12, fg);
-                        }
-                        if (Collision[w] <= 11 && HasCollision[w])
-                        {
-                            b.SetPixel(w, 11, fg);
-                        }
-                        if (Collision[w] <= 10 && HasCollision[w])
-                        {
-                            b.SetPixel(w, 10, fg);
-                        }
-                        if (Collision[w] <= 9 && HasCollision[w])
-                        {
-                            b.SetPixel(w, 9, fg);
-                        }
-                        if (Collision[w] <= 8 && HasCollision[w])
-                        {
-                            b.SetPixel(w, 8, fg);
-                        }
-                        if (Collision[w] <= 7 && HasCollision[w])
-                        {
-                            b.SetPixel(w, 7, fg);
-                        }
-                        if (Collision[w] <= 6 && HasCollision[w])
-                        {
-                            b.SetPixel(w, 6, fg);
-                        }
-                        if (Collision[w] <= 5 && HasCollision[w])
-                        {
-                            b.SetPixel(w, 5, fg);
-                        }
-                        if (Collision[w] <= 4 && HasCollision[w])
-                        {
-                            b.SetPixel(w, 4, fg);
-                        }
-                        if (Collision[w] <= 3 && HasCollision[w])
-                        {
-                            b.SetPixel(w, 3, fg);
-                        }
-                        if (Collision[w] <= 2 && HasCollision[w])
-                        {
-                            b.SetPixel(w, 2, fg);
-                        }
-                        if (Collision[w] <= 1 && HasCollision[w])
-                        {
-                            b.SetPixel(w, 1, fg);
-                        }
-                        if (Collision[w] <= 0 && HasCollision[w])
-                        {
-                            b.SetPixel(w, 0, fg);
-                        }
+                    if (Collision[w] <= 15 && HasCollision[w])
+                    {
+                        b.SetPixel(w, 15, fg);
+                    }
+                    if (Collision[w] <= 14 && HasCollision[w])
+                    {
+                        b.SetPixel(w, 14, fg);
+                    }
+                    if (Collision[w] <= 13 && HasCollision[w])
+                    {
+                        b.SetPixel(w, 13, fg);
+                    }
+                    if (Collision[w] <= 12 && HasCollision[w])
+                    {
+                        b.SetPixel(w, 12, fg);
+                    }
+                    if (Collision[w] <= 11 && HasCollision[w])
+                    {
+                        b.SetPixel(w, 11, fg);
+                    }
+                    if (Collision[w] <= 10 && HasCollision[w])
+                    {
+                        b.SetPixel(w, 10, fg);
+                    }
+                    if (Collision[w] <= 9 && HasCollision[w])
+                    {
+                        b.SetPixel(w, 9, fg);
+                    }
+                    if (Collision[w] <= 8 && HasCollision[w])
+                    {
+                        b.SetPixel(w, 8, fg);
+                    }
+                    if (Collision[w] <= 7 && HasCollision[w])
+                    {
+                        b.SetPixel(w, 7, fg);
+                    }
+                    if (Collision[w] <= 6 && HasCollision[w])
+                    {
+                        b.SetPixel(w, 6, fg);
+                    }
+                    if (Collision[w] <= 5 && HasCollision[w])
+                    {
+                        b.SetPixel(w, 5, fg);
+                    }
+                    if (Collision[w] <= 4 && HasCollision[w])
+                    {
+                        b.SetPixel(w, 4, fg);
+                    }
+                    if (Collision[w] <= 3 && HasCollision[w])
+                    {
+                        b.SetPixel(w, 3, fg);
+                    }
+                    if (Collision[w] <= 2 && HasCollision[w])
+                    {
+                        b.SetPixel(w, 2, fg);
+                    }
+                    if (Collision[w] <= 1 && HasCollision[w])
+                    {
+                        b.SetPixel(w, 1, fg);
+                    }
+                    if (Collision[w] <= 0 && HasCollision[w])
+                    {
+                        b.SetPixel(w, 0, fg);
+                    }
+                    //}
                 }
 
                 return b;

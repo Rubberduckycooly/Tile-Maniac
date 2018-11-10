@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tile Maniac - RSDKv5 Collis
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RSDKv5", "RSDKv5\RSDKv5.csproj", "{CF5496F8-002B-408F-9B3D-67C88F610283}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9F6BC833-6F9A-4419-9402-861F89F55AA6}"
+	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

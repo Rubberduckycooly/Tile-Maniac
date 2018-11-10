@@ -8,14 +8,22 @@ using System.Text;
 using System.IO;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using System.Linq.Expressions;
+using System.Diagnostics;
 
 namespace Tile_Maniac___RSDKv5_Collision_Editor
 {
     public partial class Mainform : Form
     {
+        bool lockRadioButtons = false; //for locking radio button updates when switching single select options
+
+        RSDKv5.TilesConfig.TileConfig TileClipboard;
 
         List<Bitmap> ColImges = new List<Bitmap>(); //List of images, saves memory
         List<Bitmap> ColActivatedImges = new List<Bitmap>(); //List of images, saves memory
+
+        List<Bitmap> CollisionListImgA = new List<Bitmap>();
+        List<Bitmap> CollisionListImgB = new List<Bitmap>();
 
         public int curColisionMask; //What Collision Mask are we editing?
 
@@ -23,10 +31,13 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor
 
         bool showPathB = false; //should we show Path A or Path B?
 
+        bool MirrorPaths = false; //Do we want to activate "Mirror Paths" Mode?
+
+        bool changingModes = false; //To prevent updating the radio buttons until after we change the viewer mode
+
         public RSDKv5.TilesConfig tcf; //The Tileconfig Data
 
         List<Bitmap> Tiles = new List<Bitmap>(); //List of all the 16x16 Stage Tiles
-
         int gotoVal; //What collision mask we goto when "GO!" is pressed
 
         public Mainform()
@@ -97,23 +108,96 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor
             ToolTip.SetToolTip(MomentumNUD, "Controls the momentum the player gets from the tile");
             ToolTip.SetToolTip(UnknownNUD, "Controls the Unknown Value of the tile");
             ToolTip.SetToolTip(SpecialNUD, "Controls the the tile's 'Special' Properties, like whether it's a conveyor belt or not");
-            ToolTip.SetToolTip(IsCeilingButton, "Is the tile a ceiling tile?");
+
+            LoadSettings();
+        }
+
+        void LoadSettings()
+        {
+            if (Properties.Settings.Default.ListSetting == 0)
+            {
+                uncheckListViews();
+                collisionViewRadioButton.Checked = true;
+                lockRadioButtons = false;
+            }
+            else if (Properties.Settings.Default.ListSetting == 1)
+            {
+                uncheckListViews();
+                tileViewRadioButton.Checked = true;
+                lockRadioButtons = false;
+            }
+
+            if (Properties.Settings.Default.ViewerSetting == 0)
+            {
+                unCheckModes();
+                radioButton1.Checked = true;
+                TilePicBox.Visible = true;
+                changingModes = false;
+            }
+            else if (Properties.Settings.Default.ViewerSetting == 1)
+            {
+                unCheckModes();
+                radioButton2.Checked = true;
+                CollisionPicBox.Visible = true;
+                changingModes = false;
+            }
+            else if (Properties.Settings.Default.ViewerSetting == 2)
+            {
+                unCheckModes();
+                radioButton3.Checked = true;
+                overlayPicBox.Visible = true;
+                changingModes = false;
+            }
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Title = "Open Compressed";
+            dlg.Title = "Open RSDKv5 TileConfig";
             dlg.DefaultExt = ".bin";
-            dlg.Filter = "RSDKv5 Tileconfig Files (TileConfig.bin)|TileConfig.bin";
+            dlg.Filter = "RSDKv5 TileConfig Files |*TileConfig*.bin|All Files|*";
 
             if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
-                curColisionMask = 0; //Set the current collision mask to zero (avoids rare errors)
+                curColisionMask = 0; // Set the current collision mask to zero (avoids rare errors)
                 filepath = dlg.FileName;
                 tcf = new RSDKv5.TilesConfig(dlg.FileName);
-                string t = filepath.Replace("TileConfig.bin", "16x16tiles.gif"); //get the path to the stage's tileset
-                LoadTileSet(new Bitmap(t)); //load each 16x16 tile into the list
+                string tileBitmapPath = Path.Combine(Path.GetDirectoryName(filepath), "16x16tiles.gif"); // get the path to the stage's tileset
+                LoadTileSet(new Bitmap(tileBitmapPath)); // load each 16x16 tile into the list
+
+                CollisionList.Images.Clear();
+
+                for (int i = 0; i < 1024; i++)
+                {
+                    if (Properties.Settings.Default.ListSetting == 0)
+                    {
+                        CollisionListImgA.Add(tcf.CollisionPath1[i].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0)));
+                        CollisionList.Images.Add(CollisionListImgA[i]);
+                    }
+                    else
+                    {
+                        CollisionListImgA.Add(Tiles[i]);
+                        CollisionList.Images.Add(Tiles[i]);
+                    }
+
+                }
+
+                for (int i = 0; i < 1024; i++)
+                {
+                    if (Properties.Settings.Default.ListSetting == 0)
+                    {
+                        CollisionListImgB.Add(tcf.CollisionPath2[i].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0)));
+                        CollisionList.Images.Add(CollisionListImgB[i]);
+                    }
+                    else
+                    {
+                        CollisionListImgB.Add(Tiles[i]);
+                        CollisionList.Images.Add(Tiles[i]);
+                    }
+                }
+                CollisionList.SelectedIndex = curColisionMask - 1;
+                CollisionList.Refresh();
+
                 RefreshUI(); //update the UI
             }
         }
@@ -133,14 +217,52 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.Title = "Save Compressed As...";
+            dlg.Title = "Save RSDKv5 TileConfig As...";
             dlg.DefaultExt = ".bin";
-            dlg.Filter = "RSDKv5 Tileconfig Files (*.bin)|*.bin";
+            dlg.Filter = "RSDKv5 Tileconfig Files (TileConfig.bin)|TileConfig.bin";
 
             if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
             {
                 tcf.Write(dlg.FileName); //Write the data to a file
             }
+        }
+
+        private void openSingleCollisionMaskToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Title = "Import CollisionMask...";
+            dlg.DefaultExt = ".rcm";
+            dlg.Filter = "Singular RSDK CollisionMask (*.rcm)|*.rcm";
+
+            if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+            {
+
+            }
+        }
+
+        private void exportCollisionMaskAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.Title = "Export As...";
+            dlg.DefaultExt = ".rcm";
+            dlg.Filter = "Singular RSDK CollisionMask (*.rcm)|*.rcm";
+
+            if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+            {
+
+            }
+        }
+
+        private void splitFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog dlg = new FolderBrowserDialog();
+            dlg.Description = "Select Folder to Export to...";
+
+            if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+            {
+
+            }
+
         }
 
         public void LoadTileSet(Bitmap TileSet)
@@ -150,7 +272,7 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor
             for (int i = 0; i < (tsize / 16); i++) //We divide by 16 to get the "height" in blocks
             {
                 Rectangle CropArea = new Rectangle(0, (i * 16), 16, 16); //we then get tile at Y: i * 16, 
-                //we have to multiply i by 16 to get the "true Tile value" (1* 16 = 16, 2 * 16 = 32, etc.)
+                                                                         //we have to multiply i by 16 to get the "true Tile value" (1* 16 = 16, 2 * 16 = 32, etc.)
 
                 Bitmap CroppedImage = CropImage(TileSet, CropArea); // crop that image
                 Tiles.Add(CroppedImage); // add it to the tile list
@@ -175,13 +297,15 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor
         {
             if (tcf != null)
             {
-                CurMaskLabel.Text = "Collision Mask "+ (curColisionMask+1) +" of "+ 1024; //what collision mask are we on?
-                TilePicBox.Image = Tiles[curColisionMask]; //update the tile preview
-                
+                CurMaskLabel.Text = "Collision Mask " + (curColisionMask + 1) + " of " + 1024; //what collision mask are we on?
+                TilePicBox.Image = Tiles[curColisionMask]; //update the tile preview 
+                Bitmap Overlaypic = new Bitmap(16, 16);
                 if (!showPathB) //if we are showing Path A then refresh the values accordingly
                 {
-                    CollisionPicBox.Image = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    SlopeNUD.Value = (decimal)((256 - tcf.CollisionPath1[curColisionMask].slopeAngle) * (360f / 0x100));
+                    CollisionPicBox.Image = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(0, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
+                    Overlaypic = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0), Tiles[curColisionMask]);
+                    degreeLabel.Text = "Degree of Slope (Experimental): " + ((int)((256 - tcf.CollisionPath1[curColisionMask].slopeAngle) * (360f / 0x100))).ToString();
+                    SlopeNUD.Value = tcf.CollisionPath1[curColisionMask].slopeAngle;
                     PhysicsNUD.Value = tcf.CollisionPath1[curColisionMask].physics;
                     MomentumNUD.Value = tcf.CollisionPath1[curColisionMask].momentum;
                     UnknownNUD.Value = tcf.CollisionPath1[curColisionMask].unknown;
@@ -341,8 +465,9 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor
 
                 if (showPathB) //if we are showing Path B then refresh the values accordingly
                 {
-                    CollisionPicBox.Image = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(0, 255, 0));
-                    SlopeNUD.Value = (decimal)((256 - tcf.CollisionPath2[curColisionMask].slopeAngle) * (360f / 0xFF));
+                    CollisionPicBox.Image = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(0, 0, 0, 0), Color.FromArgb(0, 255, 0)); Overlaypic = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0), Tiles[curColisionMask]);
+                    SlopeNUD.Value = tcf.CollisionPath1[curColisionMask].slopeAngle;
+                    degreeLabel.Text = "Degree of Slope (Experimental): " + ((int)((256 - tcf.CollisionPath2[curColisionMask].slopeAngle) * (360f / 0xFF))).ToString();
                     PhysicsNUD.Value = tcf.CollisionPath2[curColisionMask].physics;
                     MomentumNUD.Value = tcf.CollisionPath2[curColisionMask].momentum;
                     UnknownNUD.Value = tcf.CollisionPath2[curColisionMask].unknown;
@@ -499,7 +624,32 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor
                     if (cb15.Checked) { RGBoxF.Image = ColActivatedImges[1]; }
                     else { RGBoxF.Image = ColActivatedImges[0]; }
                 }
+
+                overlayPicBox.Image = Overlaypic;
+                RefreshCollisionList();
             }
+        }
+
+        public void RefreshCollisionList()
+        {
+            CollisionList.Images.Clear();
+
+            if (!showPathB)
+            {
+                for (int i = 0; i < 1024; i++)
+                {
+                    CollisionList.Images.Add(CollisionListImgA[i]);
+                }
+            }
+            else if (showPathB)
+            {
+                for (int i = 0; i < 1024; i++)
+                {
+                    CollisionList.Images.Add(CollisionListImgB[i]);
+                }
+            }
+            CollisionList.SelectedIndex = curColisionMask;
+            CollisionList.Refresh();
         }
 
         private void showPathBToolStripMenuItem_Click(object sender, EventArgs e)
@@ -519,31 +669,6 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor
             }
         }
 
-        private void saveUncompressedToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (filepath != null) //Did we open a file?
-            {
-                tcf.WriteUnc(filepath);
-            }
-            else //if not then use Save As instead
-            {
-                saveAsUncompressedToolStripMenuItem_Click(this, e);
-            }
-        }
-
-        private void saveAsUncompressedToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog dlg = new SaveFileDialog();
-            dlg.Title = "Save Uncompressed As...";
-            dlg.DefaultExt = ".bin";
-            dlg.Filter = "RSDKv5 Tileconfig Files (*.bin)|*.bin";
-
-            if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
-            {
-                tcf.WriteUnc(dlg.FileName); //Write Uncompressed
-            }
-        }
-
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             About_Form frm = new About_Form();
@@ -555,7 +680,7 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor
             if (tcf != null)
             {
                 curColisionMask++;
-                if (curColisionMask > 1023) //Don't go above 1024, 1023 + 1 (because it starts at zero) = 1024
+                if (curColisionMask > 1023) //Don't go above 1024... 1023 + 1 (because it starts at zero) = 1024
                 {
                     curColisionMask = 1023;
                 }
@@ -570,7 +695,7 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor
                 curColisionMask--;
                 if (curColisionMask < 0) //Don't go below zero
                 {
-                    curColisionMask = 0; 
+                    curColisionMask = 0;
                 }
                 RefreshUI();
             }
@@ -599,11 +724,29 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor
             {
                 if (!showPathB)
                 {
-                    tcf.CollisionPath1[curColisionMask].slopeAngle = (byte)(256 - ((float)SlopeNUD.Value / (360f / 0x100))); //Set Slope angle for Path A
+                    if (SlopeNUD.Value <= 255)
+                    {
+                        //tcf.CollisionPath1[curColisionMask].slopeAngle = (byte)(256 - ((float)SlopeNUD.Value / (360f / 0x100))); //Set Slope angle for Path A
+                        tcf.CollisionPath1[curColisionMask].slopeAngle = (byte)SlopeNUD.Value; //Set Slope angle for Path A
+                    }
+                    else
+                    {
+                        SlopeNUD.Value = 255;
+                    }
+ 
+
                 }
                 if (showPathB)
                 {
-                    tcf.CollisionPath2[curColisionMask].slopeAngle = (byte)(256 - ((float)SlopeNUD.Value / (360f / 0x100))); //Set Slope angle for Path B
+                    if (SlopeNUD.Value <= 255)
+                    {
+                        //tcf.CollisionPath2[curColisionMask].slopeAngle = (byte)(256 - ((float)SlopeNUD.Value / (360f / 0x100))); //Set Slope angle for Path B
+                        tcf.CollisionPath2[curColisionMask].slopeAngle = (byte)SlopeNUD.Value; //Set Slope angle for Path B
+                    }
+                    else
+                    {
+                        SlopeNUD.Value = 255;
+                    }
                 }
                 RefreshUI();
             }
@@ -673,19 +816,60 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor
             }
         }
 
-        private void IsCeilingButton_CheckedChanged(object sender, EventArgs e)
+        private void ICBox_CheckedChanged(object sender, EventArgs e)
         {
             if (tcf != null)
             {
                 if (!showPathB)
                 {
-                    tcf.CollisionPath1[curColisionMask].IsCeiling = IsCeilingButton.Checked; //Set the "IsCeiling" Value for Path A
+                    tcf.CollisionPath1[curColisionMask].IsCeiling = ICBox.Checked; //Set the "IsCeiling" value for Path A
                 }
                 if (showPathB)
                 {
-                    tcf.CollisionPath2[curColisionMask].IsCeiling = IsCeilingButton.Checked; //Set the "IsCeiling" Value for Path B
+                    tcf.CollisionPath2[curColisionMask].IsCeiling = ICBox.Checked; //Set the "IsCeiling" value for Path B
                 }
                 RefreshUI();
+            }
+        }
+
+        private void CollisionList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (CollisionList.SelectedIndex >= 0)
+            {
+                curColisionMask = CollisionList.SelectedIndex;
+            }
+            RefreshUI();
+        }
+
+        private void copyToOtherPathToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!showPathB)
+            {
+                RSDKv5.TilesConfig.TileConfig tc = tcf.CollisionPath1[curColisionMask];
+                tcf.CollisionPath2[curColisionMask] = tc;
+                CollisionListImgB[curColisionMask] = CollisionListImgA[curColisionMask];
+                RefreshUI();
+            }
+            else if (showPathB)
+            {
+                tcf.CollisionPath1[curColisionMask] = tcf.CollisionPath2[curColisionMask];
+                CollisionListImgA[curColisionMask] = CollisionListImgB[curColisionMask];
+                RefreshUI();
+            }
+        }
+
+
+
+
+        private void mirrorPathsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (mirrorPathsToolStripMenuItem1.Checked)
+            {
+                mirrorPathsToolStripMenuItem1.Checked = MirrorPaths = false;
+            }
+            else if (!mirrorPathsToolStripMenuItem1.Checked)
+            {
+                mirrorPathsToolStripMenuItem1.Checked = MirrorPaths = true;
             }
         }
 
@@ -1203,12 +1387,535 @@ namespace Tile_Maniac___RSDKv5_Collision_Editor
         }
         #endregion
 
+        private void saveUncompressedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (filepath != null) //Did we open a file?
+            {
+                tcf.WriteUnc(filepath);
+            }
+            else //if not then use Save As instead
+            {
+                saveAsUncompressedToolStripMenuItem_Click(this, e);
+            }
+        }
+
+        private void saveAsUncompressedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.Title = "Save Uncompressed As...";
+            dlg.DefaultExt = ".bin";
+            dlg.Filter = "RSDKv5 Tileconfig Files (*.bin)|*.bin";
+
+            if (dlg.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+            {
+                tcf.WriteUnc(dlg.FileName); //Write Uncompressed
+            }
+        }
+        private void toolsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void InitializeComponents()
+        {
+            this.SuspendLayout();
+            // 
+            // Mainform
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "Mainform";
+            this.ResumeLayout(false);
+
+        }
+
         public class PictureBoxNearestNeighbor : PictureBox
         {
             protected override void OnPaint(PaintEventArgs paintEventArgs)
             {
                 paintEventArgs.Graphics.InterpolationMode = InterpolationMode.NearestNeighbor;
                 base.OnPaint(paintEventArgs);
+            }
+        }
+
+        private void IsCeilingButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (tcf != null)
+            {
+                if (!showPathB)
+                {
+                    tcf.CollisionPath1[curColisionMask].IsCeiling = IsCeilingButton.Checked; //Set the "IsCeiling" Value for Path A
+                }
+                if (showPathB)
+                {
+                    tcf.CollisionPath2[curColisionMask].IsCeiling = IsCeilingButton.Checked; //Set the "IsCeiling" Value for Path B
+                }
+                RefreshUI();
+            }
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!changingModes)
+            {
+                unCheckModes();
+                Properties.Settings.Default.ViewerSetting = 0;
+                radioButton1.Checked = true;
+                CollisionPicBox.Visible = true;
+                Properties.Settings.Default.Save();
+                changingModes = false;
+                RefreshUI();
+
+            }
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!changingModes)
+            {
+                unCheckModes();
+                radioButton2.Checked = true;
+                Properties.Settings.Default.ViewerSetting = 1;
+                Properties.Settings.Default.Save();
+                TilePicBox.Visible = true;
+                changingModes = false;
+                RefreshUI();
+
+            }
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!changingModes)
+            {
+                unCheckModes();
+                Properties.Settings.Default.ViewerSetting = 2;
+                Properties.Settings.Default.Save();
+                radioButton3.Checked = true;
+                overlayPicBox.Visible = true;
+                changingModes = false;
+                RefreshUI();
+
+            }
+        }
+
+        void unCheckModes()
+        {
+            changingModes = true;
+            radioButton1.Checked = false;
+            radioButton2.Checked = false;
+            radioButton3.Checked = false;
+            TilePicBox.Visible = false;
+            CollisionPicBox.Visible = false;
+            overlayPicBox.Visible = false;
+
+        }
+
+        public void lb00_scrolling(object sender, MouseEventArgs e)
+        {
+            var list = lb00;
+            if (e.Delta <= -1)
+            {
+                if (list.SelectedIndex > 0)
+                {
+                    list.SelectedIndex--;
+                }
+            }
+            else
+            {
+                if (list.SelectedIndex < 15)
+                {
+                    list.SelectedIndex++;
+                }
+            }
+        }
+
+        public void lb01_scrolling(object sender, MouseEventArgs e)
+        {
+            var list = lb01;
+            if (e.Delta <= -1)
+            {
+                if (list.SelectedIndex > 0)
+                {
+                    list.SelectedIndex--;
+                }
+            }
+            else
+            {
+                if (list.SelectedIndex < 15)
+                {
+                    list.SelectedIndex++;
+                }
+            }
+        }
+
+        public void lb02_scrolling(object sender, MouseEventArgs e)
+        {
+            var list = lb02;
+            if (e.Delta <= -1)
+            {
+                if (list.SelectedIndex > 0)
+                {
+                    list.SelectedIndex--;
+                }
+            }
+            else
+            {
+                if (list.SelectedIndex < 15)
+                {
+                    list.SelectedIndex++;
+                }
+            }
+        }
+
+        public void lb03_scrolling(object sender, MouseEventArgs e)
+        {
+            var list = lb03;
+            if (e.Delta <= -1)
+            {
+                if (list.SelectedIndex > 0)
+                {
+                    list.SelectedIndex--;
+                }
+            }
+            else
+            {
+                if (list.SelectedIndex < 15)
+                {
+                    list.SelectedIndex++;
+                }
+            }
+        }
+
+        public void lb04_scrolling(object sender, MouseEventArgs e)
+        {
+            var list = lb04;
+            if (e.Delta <= -1)
+            {
+                if (list.SelectedIndex > 0)
+                {
+                    list.SelectedIndex--;
+                }
+            }
+            else
+            {
+                if (list.SelectedIndex < 15)
+                {
+                    list.SelectedIndex++;
+                }
+            }
+        }
+
+        public void lb05_scrolling(object sender, MouseEventArgs e)
+        {
+            var list = lb05;
+            if (e.Delta <= -1)
+            {
+                if (list.SelectedIndex > 0)
+                {
+                    list.SelectedIndex--;
+                }
+            }
+            else
+            {
+                if (list.SelectedIndex < 15)
+                {
+                    list.SelectedIndex++;
+                }
+            }
+        }
+
+        public void lb06_scrolling(object sender, MouseEventArgs e)
+        {
+            var list = lb06;
+            if (e.Delta <= -1)
+            {
+                if (list.SelectedIndex > 0)
+                {
+                    list.SelectedIndex--;
+                }
+            }
+            else
+            {
+                if (list.SelectedIndex < 15)
+                {
+                    list.SelectedIndex++;
+                }
+            }
+        }
+
+        public void lb07_scrolling(object sender, MouseEventArgs e)
+        {
+            var list = lb07;
+            if (e.Delta <= -1)
+            {
+                if (list.SelectedIndex > 0)
+                {
+                    list.SelectedIndex--;
+                }
+            }
+            else
+            {
+                if (list.SelectedIndex < 15)
+                {
+                    list.SelectedIndex++;
+                }
+            }
+        }
+
+        public void lb08_scrolling(object sender, MouseEventArgs e)
+        {
+            var list = lb08;
+            if (e.Delta <= -1)
+            {
+                if (list.SelectedIndex > 0)
+                {
+                    list.SelectedIndex--;
+                }
+            }
+            else
+            {
+                if (list.SelectedIndex < 15)
+                {
+                    list.SelectedIndex++;
+                }
+            }
+        }
+
+        public void lb09_scrolling(object sender, MouseEventArgs e)
+        {
+            var list = lb09;
+            if (e.Delta <= -1)
+            {
+                if (list.SelectedIndex > 0)
+                {
+                    list.SelectedIndex--;
+                }
+            }
+            else
+            {
+                if (list.SelectedIndex < 15)
+                {
+                    list.SelectedIndex++;
+                }
+            }
+        }
+
+        public void lb10_scrolling(object sender, MouseEventArgs e)
+        {
+            var list = lb10;
+            if (e.Delta <= -1)
+            {
+                if (list.SelectedIndex > 0)
+                {
+                    list.SelectedIndex--;
+                }
+            }
+            else
+            {
+                if (list.SelectedIndex < 15)
+                {
+                    list.SelectedIndex++;
+                }
+            }
+        }
+
+        public void lb11_scrolling(object sender, MouseEventArgs e)
+        {
+            var list = lb11;
+            if (e.Delta <= -1)
+            {
+                if (list.SelectedIndex > 0)
+                {
+                    list.SelectedIndex--;
+                }
+            }
+            else
+            {
+                if (list.SelectedIndex < 15)
+                {
+                    list.SelectedIndex++;
+                }
+            }
+        }
+
+        public void lb12_scrolling(object sender, MouseEventArgs e)
+        {
+            var list = lb12;
+            if (e.Delta <= -1)
+            {
+                if (list.SelectedIndex > 0)
+                {
+                    list.SelectedIndex--;
+                }
+            }
+            else
+            {
+                if (list.SelectedIndex < 15)
+                {
+                    list.SelectedIndex++;
+                }
+            }
+        }
+
+        public void lb13_scrolling(object sender, MouseEventArgs e)
+        {
+            var list = lb13;
+            if (e.Delta <= -1)
+            {
+                if (list.SelectedIndex > 0)
+                {
+                    list.SelectedIndex--;
+                }
+            }
+            else
+            {
+                if (list.SelectedIndex < 15)
+                {
+                    list.SelectedIndex++;
+                }
+            }
+        }
+
+        public void lb14_scrolling(object sender, MouseEventArgs e)
+        {
+            var list = lb14;
+            if (e.Delta <= -1)
+            {
+                if (list.SelectedIndex > 0)
+                {
+                    list.SelectedIndex--;
+                }
+            }
+            else
+            {
+                if (list.SelectedIndex < 15)
+                {
+                    list.SelectedIndex++;
+                }
+            }
+        }
+
+        public void lb15_scrolling(object sender, MouseEventArgs e)
+        {
+            var list = lb15;
+            if (e.Delta <= -1)
+            {
+                if (list.SelectedIndex > 0)
+                {
+                    list.SelectedIndex--;
+                }
+            }
+            else
+            {
+                if (list.SelectedIndex < 15)
+                {
+                    list.SelectedIndex++;
+                }
+            }
+        }
+
+        private void tileViewRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (lockRadioButtons == false)
+            {
+                uncheckListViews();
+                Properties.Settings.Default.ListSetting = 1;
+                Properties.Settings.Default.Save();
+                tileViewRadioButton.Checked = true;
+                lockRadioButtons = false;
+                refreshCollision();
+            }
+        }
+
+        private void collisionViewRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (lockRadioButtons == false)
+            {
+                uncheckListViews();
+                Properties.Settings.Default.ListSetting = 0;
+                Properties.Settings.Default.Save();
+                collisionViewRadioButton.Checked = true;
+                lockRadioButtons = false;
+                refreshCollision();
+            }
+        }
+
+        void uncheckListViews()
+        {
+            lockRadioButtons = true;
+            collisionViewRadioButton.Checked = false;
+            tileViewRadioButton.Checked = false;
+        }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!showPathB)
+            {
+                TileClipboard = tcf.CollisionPath1[curColisionMask];
+                RefreshUI();
+            }
+            else if (showPathB)
+            {
+                TileClipboard = tcf.CollisionPath2[curColisionMask];
+                RefreshUI();
+            }
+        }
+
+        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!showPathB)
+            {
+                tcf.CollisionPath1[curColisionMask] = TileClipboard;
+                RefreshUI();
+            }
+            else if (showPathB)
+            {
+                tcf.CollisionPath2[curColisionMask] = TileClipboard;
+                RefreshUI();
+            }
+        }
+
+        void refreshCollision()
+        {
+
+            if (filepath != null)
+            {
+                CollisionList.Images.Clear();
+                CollisionListImgA.Clear();
+                CollisionListImgB.Clear();
+
+                for (int i = 0; i < 1024; i++)
+                {
+                    if (Properties.Settings.Default.ListSetting == 0)
+                    {
+                        CollisionListImgA.Add(tcf.CollisionPath1[i].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0)));
+                        CollisionList.Images.Add(CollisionListImgA[i]);
+                    }
+                    else
+                    {
+                        CollisionListImgA.Add(Tiles[i]);
+                        CollisionList.Images.Add(Tiles[i]);
+                    }
+
+                }
+
+                for (int i = 0; i < 1024; i++)
+                {
+                    if (Properties.Settings.Default.ListSetting == 0)
+                    {
+                        CollisionListImgB.Add(tcf.CollisionPath2[i].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0)));
+                        CollisionList.Images.Add(CollisionListImgB[i]);
+                    }
+                    else
+                    {
+                        CollisionListImgB.Add(Tiles[i]);
+                        CollisionList.Images.Add(Tiles[i]);
+                    }
+                }
+                CollisionList.Refresh();
+
+                RefreshUI(); //update the UI
+
             }
         }
     }
