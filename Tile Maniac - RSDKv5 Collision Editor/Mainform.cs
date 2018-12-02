@@ -10,6 +10,9 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Linq.Expressions;
 using System.Diagnostics;
+using RSDKv4;
+using RSDKv5;
+using Color = System.Drawing.Color;
 
 namespace TileManiac
 {
@@ -31,6 +34,9 @@ namespace TileManiac
 
         bool showPathB = false; //should we show Path A or Path B?
 
+        bool mouseHeldDown = false;
+        MouseButtons mouseButtonHeld = MouseButtons.None;
+
         bool MirrorPaths = false; //Do we want to activate "Mirror Paths" Mode?
 
         bool changingModes = false; //To prevent updating the radio buttons until after we change the viewer mode
@@ -45,6 +51,21 @@ namespace TileManiac
             InitializeComponent();
 
             ToolTip ToolTip = new ToolTip();
+
+            TableLayoutControlCollection controls = tableLayoutPanel1.Controls;
+
+            for (int i = 0; i < controls.Count; i++)
+            {
+                if (controls[i] is Label)
+                {
+                    controls[i].Click += new System.EventHandler(this.tableLayoutPanel1_Click);
+                    controls[i].MouseDown += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel1_MouseDown);
+                    controls[i].MouseUp += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel1_MouseUp);
+                    controls[i].MouseHover += new System.EventHandler(this.tableLayoutPanel1_MouseHover);
+                    controls[i].MouseMove += new System.Windows.Forms.MouseEventHandler(this.tableLayoutPanel1_MouseMove);
+                }
+            }
+
 
             ColImges.Add(new Bitmap(Properties.Resources._1));
             ColImges.Add(new Bitmap(Properties.Resources._2));
@@ -148,6 +169,60 @@ namespace TileManiac
                 overlayPicBox.Visible = true;
                 changingModes = false;
             }
+            if (Properties.Settings.Default.ShowGrid)
+            {
+                showGridToolStripMenuItem.Checked = true;
+            }
+            if (Properties.Settings.Default.ClassicMode)
+            {
+                tableLayoutPanel1.Enabled = false;
+                tableLayoutPanel1.Visible = false;
+            }
+        }
+
+        public void LoadTileConfigViaIntergration(TilesConfig tilesConfig, string scenePath, int selectedTile = 0)
+        {
+                curColisionMask = 0; // Set the current collision mask to zero (avoids rare errors)
+                filepath = Path.Combine(scenePath, "TileConfig.bin");
+                tcf = tilesConfig;
+                string tileBitmapPath = Path.Combine(Path.GetDirectoryName(filepath), "16x16tiles.gif"); // get the path to the stage's tileset
+                LoadTileSet(new Bitmap(tileBitmapPath)); // load each 16x16 tile into the list
+
+                CollisionList.Images.Clear();
+
+                for (int i = 0; i < 1024; i++)
+                {
+                    if (Properties.Settings.Default.ListSetting == 0)
+                    {
+                        CollisionListImgA.Add(tcf.CollisionPath1[i].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0)));
+                        CollisionList.Images.Add(CollisionListImgA[i]);
+                    }
+                    else
+                    {
+                        CollisionListImgA.Add(Tiles[i]);
+                        CollisionList.Images.Add(Tiles[i]);
+                    }
+
+                }
+
+                for (int i = 0; i < 1024; i++)
+                {
+                    if (Properties.Settings.Default.ListSetting == 0)
+                    {
+                        CollisionListImgB.Add(tcf.CollisionPath2[i].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0)));
+                        CollisionList.Images.Add(CollisionListImgB[i]);
+                    }
+                    else
+                    {
+                        CollisionListImgB.Add(Tiles[i]);
+                        CollisionList.Images.Add(Tiles[i]);
+                    }
+                }
+                CollisionList.SelectedIndex = selectedTile;
+                CollisionList.Refresh();
+
+                RefreshUI(); //update the UI
+            
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -286,12 +361,24 @@ namespace TileManiac
             return bmp;
         }
 
-        void RefreshUI()
+        private Bitmap ResizeBitmap(Bitmap sourceBMP, int width, int height, bool fixOffset = true)
+        {
+            Bitmap result = new Bitmap(width, height);
+            using (Graphics g = Graphics.FromImage(result))
+            {
+                if (fixOffset) g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+                g.DrawImage(sourceBMP, 0, 0, width, height);
+            }
+            return result;
+        }
+
+        public void RefreshUI()
         {
             if (tcf != null)
             {
                 CurMaskLabel.Text = "Collision Mask " + (curColisionMask + 1) + " of " + 1024; //what collision mask are we on?
-                TilePicBox.Image = Tiles[curColisionMask]; //update the tile preview 
+                TilePicBox.Image = ResizeBitmap(Tiles[curColisionMask],96,96); //update the tile preview 
                 Bitmap Overlaypic = new Bitmap(16, 16);
                 if (!showPathB) //if we are showing Path A then refresh the values accordingly
                 {
@@ -459,7 +546,7 @@ namespace TileManiac
 
                 if (showPathB) //if we are showing Path B then refresh the values accordingly
                 {
-                    CollisionPicBox.Image = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(0, 0, 0, 0), Color.FromArgb(0, 255, 0)); Overlaypic = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0), Tiles[curColisionMask]);
+                    CollisionPicBox.Image = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(0, 0, 0, 0), Color.FromArgb(0, 255, 0)); Overlaypic = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(0, 0, 0, 0), Color.FromArgb(255, 0, 255, 0), Tiles[curColisionMask]);
                     SlopeNUD.Value = tcf.CollisionPath2[curColisionMask].slopeAngle;
                     //RawSlopeNUD.Value = tcf.CollisionPath2[curColisionMask].slopeAngle;
                     degreeLabel.Text = "Degree of Slope (Experimental): " + ((int)((256 - tcf.CollisionPath2[curColisionMask].slopeAngle) * (360f / 0xFF))).ToString();
@@ -621,6 +708,21 @@ namespace TileManiac
                 }
 
                 overlayPicBox.Image = Overlaypic;
+                overlayPicBox.Image = ResizeBitmap(Overlaypic, 96, 96);
+
+                if (Properties.Settings.Default.ClassicMode)
+                {
+                    tableLayoutPanel1.Enabled = false;
+                    tableLayoutPanel1.Visible = false;
+                }
+                else
+                {
+                    tableLayoutPanel1.BackgroundImage = ResizeBitmap(Overlaypic, tableLayoutPanel1.Width, tableLayoutPanel1.Height);
+                    tableLayoutPanel1.Enabled = true;
+                    tableLayoutPanel1.Visible = true;
+                }
+
+
                 RefreshCollisionList();
             }
         }
@@ -633,14 +735,28 @@ namespace TileManiac
             {
                 for (int i = 0; i < 1024; i++)
                 {
-                    CollisionList.Images.Add(CollisionListImgA[i]);
+                    if (Properties.Settings.Default.ListSetting == 0)
+                    {
+                        CollisionList.Images.Add(CollisionListImgA[i]);
+                    }
+                    else
+                    {
+                        CollisionList.Images.Add(Tiles[i]);
+                    }
                 }
             }
             else if (showPathB)
             {
                 for (int i = 0; i < 1024; i++)
                 {
-                    CollisionList.Images.Add(CollisionListImgB[i]);
+                    if (Properties.Settings.Default.ListSetting == 0)
+                    {
+                        CollisionList.Images.Add(CollisionListImgB[i]);
+                    }
+                    else
+                    {
+                        CollisionList.Images.Add(Tiles[i]);
+                    }
                 }
             }
             CollisionList.SelectedIndex = curColisionMask;
@@ -872,14 +988,14 @@ namespace TileManiac
         {
             if (!showPathB)
             {
-                tcf.CollisionPath2[curColisionMask] = (RSDKv5.TilesConfig.ColllisionMask)tcf.CollisionPath1[curColisionMask].Clone();
+                tcf.CollisionPath2[curColisionMask] = (RSDKv5.TilesConfig.ColllisionMask)tcf.CollisionPath1[curColisionMask].Collision.Clone();
                 //tcf.CollisionPath2[curColisionMask] = tc;RSDKv5.TilesConfig.ColllisionMask tc
                 CollisionListImgB[curColisionMask] = CollisionListImgA[curColisionMask];
                 RefreshUI();
             }
             else if (showPathB)
             {
-                tcf.CollisionPath1[curColisionMask] = (RSDKv5.TilesConfig.ColllisionMask)tcf.CollisionPath2[curColisionMask].Clone();
+                tcf.CollisionPath1[curColisionMask] = (RSDKv5.TilesConfig.ColllisionMask)tcf.CollisionPath2[curColisionMask].Collision.Clone();
                 CollisionListImgA[curColisionMask] = CollisionListImgB[curColisionMask];
                 RefreshUI();
             }
@@ -2058,6 +2174,7 @@ namespace TileManiac
 
         private void openSingleCollisionMaskToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
+            /*
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Title = "Import CollisionMask...";
             dlg.DefaultExt = ".rcm";
@@ -2067,13 +2184,15 @@ namespace TileManiac
             {
                 RSDKv5.Reader Reader1 = new RSDKv5.Reader(dlg.FileName);
                 RSDKv5.Reader Reader2 = new RSDKv5.Reader(dlg.FileName);
-                tcf.CollisionPath1[curColisionMask] = new RSDKv5.TilesConfig.ColllisionMask(Reader1);
+                tcf.CollisionPath1[curColisionMask] = new RSDKv5.TilesConfig.CollisionMask(Reader1);
                 Reader1.Close();
-                tcf.CollisionPath2[curColisionMask] = new RSDKv5.TilesConfig.ColllisionMask(Reader2);
+                tcf.CollisionPath2[curColisionMask] = new RSDKv5.TilesConfig.CollisionMask(Reader2);
                 Reader2.Close();
             }
             RefreshUI();
             //RefreshCollisionList(true);
+            */
+            
         }
 
         private void exportCurrentCollisionMaskAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2147,6 +2266,293 @@ namespace TileManiac
 
                 RefreshUI(); //update the UI
             }
+        }
+
+        private void gridPicBox_Paint(object sender, PaintEventArgs e)
+        {  
+            if (Properties.Settings.Default.ShowGrid)
+            {
+                Graphics g = e.Graphics;
+                g.PixelOffsetMode = PixelOffsetMode.None;
+                int numOfCells = (int)Properties.Settings.Default.DevInt2;
+                int cellSize = (int)Properties.Settings.Default.DevInt1;
+                Pen p = new Pen(Color.Black);
+                p.DashOffset = (float)Properties.Settings.Default.DevInt3;
+
+                for (int i = 0; i < numOfCells; i++)
+                {
+                    // Vertical
+                    g.DrawLine(p, i * cellSize, 0, i * cellSize, numOfCells * cellSize);
+                    // Horizontal
+                    g.DrawLine(p, 0, i * cellSize, numOfCells * cellSize, i * cellSize);
+                }
+            }
+
+        }
+
+        private void developerInterfaceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DeveloperTerminal developerTerminal = new DeveloperTerminal();
+            developerTerminal.Show();
+        }
+
+        private void showGridToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (showGridToolStripMenuItem.Checked)
+            {
+                Properties.Settings.Default.ShowGrid = true;
+                RefreshUI();
+            }
+            else
+            {
+                Properties.Settings.Default.ShowGrid = false;
+                RefreshUI();
+            }
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Mainform_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tableLayoutPanel1_Click(object sender, EventArgs e)
+        {
+            UpdateCollisionalGrid(sender, e);
+        }
+
+        Point GetRowColIndex(TableLayoutPanel tlp, Point point)
+        {
+            if (point.X > tlp.Width || point.Y > tlp.Height)
+                return new Point(-1, -1);
+
+            int w = tlp.Width;
+            int h = tlp.Height;
+            int[] widths = tlp.GetColumnWidths();
+
+            int i;
+            for (i = widths.Length - 1; i >= 0 && point.X < w; i--)
+                w -= widths[i];
+            int col = i + 1;
+
+            int[] heights = tlp.GetRowHeights();
+            for (i = heights.Length - 1; i >= 0 && point.Y < h; i--)
+                h -= heights[i];
+
+            int row = i + 1;
+
+            return new Point(col, row);
+        }
+
+        private void tableLayoutPanel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseHeldDown = true;
+            UpdateCollisionalGrid(sender,e);
+        }
+
+        private void UpdateCollisionalGrid(object sender, EventArgs e)
+        {
+            var cellPos = GetRowColIndex(tableLayoutPanel1, tableLayoutPanel1.PointToClient(Cursor.Position));
+            if (cellPos.Y >= 16) return;
+            switch (cellPos.X)
+            {
+                case 0:
+                    lb00.SelectedIndex = cellPos.Y;
+                    break;
+                case 1:
+                    lb01.SelectedIndex = cellPos.Y;
+                    break;
+                case 2:
+                    lb02.SelectedIndex = cellPos.Y;
+                    break;
+                case 3:
+                    lb03.SelectedIndex = cellPos.Y;
+                    break;
+                case 4:
+                    lb04.SelectedIndex = cellPos.Y;
+                    break;
+                case 5:
+                    lb05.SelectedIndex = cellPos.Y;
+                    break;
+                case 6:
+                    lb06.SelectedIndex = cellPos.Y;
+                    break;
+                case 7:
+                    lb07.SelectedIndex = cellPos.Y;
+                    break;
+                case 8:
+                    lb08.SelectedIndex = cellPos.Y;
+                    break;
+                case 9:
+                    lb09.SelectedIndex = cellPos.Y;
+                    break;
+                case 10:
+                    lb10.SelectedIndex = cellPos.Y;
+                    break;
+                case 11:
+                    lb11.SelectedIndex = cellPos.Y;
+                    break;
+                case 12:
+                    lb12.SelectedIndex = cellPos.Y;
+                    break;
+                case 13:
+                    lb13.SelectedIndex = cellPos.Y;
+                    break;
+                case 14:
+                    lb14.SelectedIndex = cellPos.Y;
+                    break;
+                case 15:
+                    lb15.SelectedIndex = cellPos.Y;
+                    break;
+            }
+
+            //MessageBox.Show("Cell chosen: (" + cellPos.Value + ")");
+        }
+
+        private void tableLayoutPanel1_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseHeldDown = false;
+        }
+
+        private void tableLayoutPanel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseHeldDown)
+            {
+                UpdateCollisionalGrid(null, null);
+            }
+            if (e.Button != MouseButtons.None)
+            {
+                mouseHeldDown = true;
+            }
+
+        }
+
+        private void tableLayoutPanel1_MouseHover(object sender, EventArgs e)
+        {
+            if (mouseHeldDown)
+            {
+                UpdateCollisionalGrid(null, null);
+            }
+        }
+
+        private void cb02_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseHeldDown = true;
+            mouseButtonHeld = e.Button;
+        }
+
+        private void cb02_MouseHover(object sender, EventArgs e)
+        {
+            if (mouseHeldDown)
+            {
+                if (mouseButtonHeld == MouseButtons.Left)
+                {
+                    checkUncheckBox(true);
+                }
+                else if (mouseButtonHeld == MouseButtons.Right)
+                {
+                    checkUncheckBox(false);
+                }
+
+            }
+        }
+
+        private void cb02_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseHeldDown = false;
+        }
+
+        private void cb02_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseHeldDown)
+            {
+                if (mouseButtonHeld == MouseButtons.Left)
+                {
+                    checkUncheckBox(true);
+                }
+                else if (mouseButtonHeld == MouseButtons.Right)
+                {
+                    checkUncheckBox(false);
+                }
+
+            }
+            if (e.Button != MouseButtons.None)
+            {
+                mouseHeldDown = true;
+            }
+        }
+
+        private void checkUncheckBox(bool state = false)
+        {
+            var cellPos = GetRowColIndex(tableLayoutPanel2, tableLayoutPanel2.PointToClient(Cursor.Position));
+            switch (cellPos.X)
+            {
+                case 0:
+                    cb00.Checked = state;
+                    break;
+                case 1:
+                    cb01.Checked = state;
+                    break;
+                case 2:
+                    cb02.Checked = state;
+                    break;
+                case 3:
+                    cb03.Checked = state;
+                    break;
+                case 4:
+                    cb04.Checked = state;
+                    break;
+                case 5:
+                    cb05.Checked = state;
+                    break;
+                case 6:
+                    cb06.Checked = state;
+                    break;
+                case 7:
+                    cb07.Checked = state;
+                    break;
+                case 8:
+                    cb08.Checked = state;
+                    break;
+                case 9:
+                    cb09.Checked = state;
+                    break;
+                case 10:
+                    cb10.Checked = state;
+                    break;
+                case 11:
+                    cb11.Checked = state;
+                    break;
+                case 12:
+                    cb12.Checked = state;
+                    break;
+                case 13:
+                    cb13.Checked = state;
+                    break;
+                case 14:
+                    cb14.Checked = state;
+                    break;
+                case 15:
+                    cb15.Checked = state;
+                    break;
+            }
+        }
+
+        private void classicViewModeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (classicViewModeToolStripMenuItem.Checked)
+            {
+                Properties.Settings.Default.ClassicMode = true;
+            }
+            else
+            {
+                Properties.Settings.Default.ClassicMode = false;
+            }
+            RefreshUI();
         }
     }
 }

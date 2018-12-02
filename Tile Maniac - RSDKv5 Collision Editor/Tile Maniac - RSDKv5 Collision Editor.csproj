@@ -70,6 +70,12 @@
     <Compile Include="AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DeveloperTool.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeveloperTool.Designer.cs">
+      <DependentUpon>DeveloperTool.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions.cs" />
     <Compile Include="Mainform.cs">
       <SubType>Form</SubType>
@@ -97,6 +103,9 @@
     </Compile>
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeveloperTool.resx">
+      <DependentUpon>DeveloperTool.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Mainform.resx">
       <DependentUpon>Mainform.cs</DependentUpon>
