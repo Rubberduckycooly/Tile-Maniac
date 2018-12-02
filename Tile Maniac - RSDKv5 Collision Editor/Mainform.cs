@@ -20,7 +20,7 @@ namespace TileManiac
     {
         bool lockRadioButtons = false; //for locking radio button updates when switching single select options
 
-        RSDKv5.TilesConfig.ColllisionMask TileClipboard;
+        RSDKv5.TilesConfig.CollisionMask TileClipboard;
 
         List<Bitmap> ColImges = new List<Bitmap>(); //List of images, saves memory
         List<Bitmap> ColActivatedImges = new List<Bitmap>(); //List of images, saves memory
@@ -33,6 +33,8 @@ namespace TileManiac
         public string filepath; //Where is the file located?
 
         bool showPathB = false; //should we show Path A or Path B?
+
+        public bool hasModified = false; //For intergrating tools to know that we have saved/made edits to this config.
 
         bool mouseHeldDown = false;
         MouseButtons mouseButtonHeld = MouseButtons.None;
@@ -177,6 +179,23 @@ namespace TileManiac
             {
                 tableLayoutPanel1.Enabled = false;
                 tableLayoutPanel1.Visible = false;
+                viewSettingsToolStripMenuItem.Enabled = false;
+            }
+            switch (Properties.Settings.Default.ViewAppearanceMode)
+            {
+                case 0:
+                    overlayToolStripMenuItem.Checked = true;
+                    collisionToolStripMenuItem.Checked = false;
+                    break;
+                case 1:
+                    collisionToolStripMenuItem.Checked = true;
+                    overlayToolStripMenuItem.Checked = false;
+                    break;
+            }
+            if (Properties.Settings.Default.MirrorMode)
+            {
+                mirrorPathsToolStripMenuItem1.Checked = true;
+                UpdateMirrorModeStatusLabel();
             }
         }
 
@@ -221,8 +240,17 @@ namespace TileManiac
                 CollisionList.SelectedIndex = selectedTile;
                 CollisionList.Refresh();
 
+                curColisionMask = 0;
                 RefreshUI(); //update the UI
             
+        }
+
+        public void SetCollisionIndex(int index)
+        {
+            CollisionList.SelectedIndex = index;
+            CollisionList.Refresh();
+
+            RefreshUI(); //update the UI
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -282,6 +310,7 @@ namespace TileManiac
             if (filepath != null) //Did we open a file?
             {
                 tcf.Write(filepath);
+                hasModified = true;
             }
             else //if not then use "Save As..."
             {
@@ -393,154 +422,7 @@ namespace TileManiac
                     SpecialNUD.Value = tcf.CollisionPath1[curColisionMask].special;
                     IsCeilingButton.Checked = tcf.CollisionPath1[curColisionMask].IsCeiling;
 
-                    lb00.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[0];
-                    lb01.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[1];
-                    lb02.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[2];
-                    lb03.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[3];
-                    lb04.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[4];
-                    lb05.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[5];
-                    lb06.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[6];
-                    lb07.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[7];
-                    lb08.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[8];
-                    lb09.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[9];
-                    lb10.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[10];
-                    lb11.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[11];
-                    lb12.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[12];
-                    lb13.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[13];
-                    lb14.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[14];
-                    lb15.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[15];
-
-                    cb00.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[0];
-                    cb01.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[1];
-                    cb02.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[2];
-                    cb03.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[3];
-                    cb04.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[4];
-                    cb05.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[5];
-                    cb06.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[6];
-                    cb07.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[7];
-                    cb08.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[8];
-                    cb09.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[9];
-                    cb10.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[10];
-                    cb11.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[11];
-                    cb12.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[12];
-                    cb13.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[13];
-                    cb14.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[14];
-                    cb15.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[15];
-
-                    if (tcf.CollisionPath1[curColisionMask].HasCollision[0])
-                    { Viewer1.Image = ColImges[lb00.SelectedIndex]; }
-                    else { Viewer1.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath1[curColisionMask].HasCollision[1])
-                    { Viewer2.Image = ColImges[lb01.SelectedIndex]; }
-                    else { Viewer2.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath1[curColisionMask].HasCollision[2])
-                    { Viewer3.Image = ColImges[lb02.SelectedIndex]; }
-                    else { Viewer3.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath1[curColisionMask].HasCollision[3])
-                    { Viewer4.Image = ColImges[lb03.SelectedIndex]; }
-                    else { Viewer4.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath1[curColisionMask].HasCollision[4])
-                    { Viewer5.Image = ColImges[lb04.SelectedIndex]; }
-                    else { Viewer5.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath1[curColisionMask].HasCollision[5])
-                    { Viewer6.Image = ColImges[lb05.SelectedIndex]; }
-                    else { Viewer6.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath1[curColisionMask].HasCollision[6])
-                    { Viewer7.Image = ColImges[lb06.SelectedIndex]; }
-                    else { Viewer7.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath1[curColisionMask].HasCollision[7])
-                    { Viewer8.Image = ColImges[lb07.SelectedIndex]; }
-                    else { Viewer8.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath1[curColisionMask].HasCollision[8])
-                    { Viewer9.Image = ColImges[lb08.SelectedIndex]; }
-                    else { Viewer9.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath1[curColisionMask].HasCollision[9])
-                    { Viewer10.Image = ColImges[lb09.SelectedIndex]; }
-                    else { Viewer10.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath1[curColisionMask].HasCollision[10])
-                    { Viewer11.Image = ColImges[lb10.SelectedIndex]; }
-                    else { Viewer11.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath1[curColisionMask].HasCollision[11])
-                    { Viewer12.Image = ColImges[lb11.SelectedIndex]; }
-                    else { Viewer12.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath1[curColisionMask].HasCollision[12])
-                    { Viewer13.Image = ColImges[lb12.SelectedIndex]; }
-                    else { Viewer13.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath1[curColisionMask].HasCollision[13])
-                    { Viewer14.Image = ColImges[lb13.SelectedIndex]; }
-                    else { Viewer14.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath1[curColisionMask].HasCollision[14])
-                    { Viewer15.Image = ColImges[lb14.SelectedIndex]; }
-                    else { Viewer15.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath1[curColisionMask].HasCollision[15])
-                    { Viewer16.Image = ColImges[lb15.SelectedIndex]; }
-                    else { Viewer16.Image = ColImges[16]; }
-
-
-
-
-                    if (cb00.Checked) { RGBox0.Image = ColActivatedImges[1]; }
-                    else { RGBox0.Image = ColActivatedImges[0]; }
-
-                    if (cb01.Checked) { RGBox1.Image = ColActivatedImges[1]; }
-                    else { RGBox1.Image = ColActivatedImges[0]; }
-
-                    if (cb02.Checked) { RGBox2.Image = ColActivatedImges[1]; }
-                    else { RGBox2.Image = ColActivatedImges[0]; }
-
-                    if (cb03.Checked) { RGBox3.Image = ColActivatedImges[1]; }
-                    else { RGBox3.Image = ColActivatedImges[0]; }
-
-                    if (cb04.Checked) { RGBox4.Image = ColActivatedImges[1]; }
-                    else { RGBox4.Image = ColActivatedImges[0]; }
-
-                    if (cb05.Checked) { RGBox5.Image = ColActivatedImges[1]; }
-                    else { RGBox5.Image = ColActivatedImges[0]; }
-
-                    if (cb06.Checked) { RGBox6.Image = ColActivatedImges[1]; }
-                    else { RGBox6.Image = ColActivatedImges[0]; }
-
-                    if (cb07.Checked) { RGBox7.Image = ColActivatedImges[1]; }
-                    else { RGBox7.Image = ColActivatedImges[0]; }
-
-                    if (cb08.Checked) { RGBox8.Image = ColActivatedImges[1]; }
-                    else { RGBox8.Image = ColActivatedImges[0]; }
-
-                    if (cb09.Checked) { RGBox9.Image = ColActivatedImges[1]; }
-                    else { RGBox9.Image = ColActivatedImges[0]; }
-
-                    if (cb10.Checked) { RGBoxA.Image = ColActivatedImges[1]; }
-                    else { RGBoxA.Image = ColActivatedImges[0]; }
-
-                    if (cb11.Checked) { RGBoxB.Image = ColActivatedImges[1]; }
-                    else { RGBoxB.Image = ColActivatedImges[0]; }
-
-                    if (cb12.Checked) { RGBoxC.Image = ColActivatedImges[1]; }
-                    else { RGBoxC.Image = ColActivatedImges[0]; }
-
-                    if (cb13.Checked) { RGBoxD.Image = ColActivatedImges[1]; }
-                    else { RGBoxD.Image = ColActivatedImges[0]; }
-
-                    if (cb14.Checked) { RGBoxE.Image = ColActivatedImges[1]; }
-                    else { RGBoxE.Image = ColActivatedImges[0]; }
-
-                    if (cb15.Checked) { RGBoxF.Image = ColActivatedImges[1]; }
-                    else { RGBoxF.Image = ColActivatedImges[0]; }
+                    RefreshPathA();
 
                 }
 
@@ -556,159 +438,13 @@ namespace TileManiac
                     SpecialNUD.Value = tcf.CollisionPath2[curColisionMask].special;
                     IsCeilingButton.Checked = tcf.CollisionPath2[curColisionMask].IsCeiling;
 
-                    lb00.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[0];
-                    lb01.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[1];
-                    lb02.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[2];
-                    lb03.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[3];
-                    lb04.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[4];
-                    lb05.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[5];
-                    lb06.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[6];
-                    lb07.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[7];
-                    lb08.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[8];
-                    lb09.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[9];
-                    lb10.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[10];
-                    lb11.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[11];
-                    lb12.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[12];
-                    lb13.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[13];
-                    lb14.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[14];
-                    lb15.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[15];
+                    RefreshPathB();
 
-                    cb00.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[0];
-                    cb01.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[1];
-                    cb02.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[2];
-                    cb03.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[3];
-                    cb04.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[4];
-                    cb05.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[5];
-                    cb06.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[6];
-                    cb07.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[7];
-                    cb08.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[8];
-                    cb09.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[9];
-                    cb10.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[10];
-                    cb11.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[11];
-                    cb12.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[12];
-                    cb13.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[13];
-                    cb14.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[14];
-                    cb15.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[15];
-
-
-                    if (tcf.CollisionPath2[curColisionMask].HasCollision[0])
-                    { Viewer1.Image = ColImges[lb00.SelectedIndex]; }
-                    else { Viewer1.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath2[curColisionMask].HasCollision[1])
-                    { Viewer2.Image = ColImges[lb01.SelectedIndex]; }
-                    else { Viewer2.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath2[curColisionMask].HasCollision[2])
-                    { Viewer3.Image = ColImges[lb02.SelectedIndex]; }
-                    else { Viewer3.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath2[curColisionMask].HasCollision[3])
-                    { Viewer4.Image = ColImges[lb03.SelectedIndex]; }
-                    else { Viewer4.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath2[curColisionMask].HasCollision[4])
-                    { Viewer5.Image = ColImges[lb04.SelectedIndex]; }
-                    else { Viewer5.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath2[curColisionMask].HasCollision[5])
-                    { Viewer6.Image = ColImges[lb05.SelectedIndex]; }
-                    else { Viewer6.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath2[curColisionMask].HasCollision[6])
-                    { Viewer7.Image = ColImges[lb06.SelectedIndex]; }
-                    else { Viewer7.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath2[curColisionMask].HasCollision[7])
-                    { Viewer8.Image = ColImges[lb07.SelectedIndex]; }
-                    else { Viewer8.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath2[curColisionMask].HasCollision[8])
-                    { Viewer9.Image = ColImges[lb08.SelectedIndex]; }
-                    else { Viewer9.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath2[curColisionMask].HasCollision[9])
-                    { Viewer10.Image = ColImges[lb09.SelectedIndex]; }
-                    else { Viewer10.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath2[curColisionMask].HasCollision[10])
-                    { Viewer11.Image = ColImges[lb10.SelectedIndex]; }
-                    else { Viewer11.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath2[curColisionMask].HasCollision[11])
-                    { Viewer12.Image = ColImges[lb11.SelectedIndex]; }
-                    else { Viewer12.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath2[curColisionMask].HasCollision[12])
-                    { Viewer13.Image = ColImges[lb12.SelectedIndex]; }
-                    else { Viewer13.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath2[curColisionMask].HasCollision[13])
-                    { Viewer14.Image = ColImges[lb13.SelectedIndex]; }
-                    else { Viewer14.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath2[curColisionMask].HasCollision[14])
-                    { Viewer15.Image = ColImges[lb14.SelectedIndex]; }
-                    else { Viewer15.Image = ColImges[16]; }
-
-                    if (tcf.CollisionPath2[curColisionMask].HasCollision[15])
-                    { Viewer16.Image = ColImges[lb15.SelectedIndex]; }
-                    else { Viewer16.Image = ColImges[16]; }
-
-
-
-
-                    if (cb00.Checked) { RGBox0.Image = ColActivatedImges[1]; }
-                    else { RGBox0.Image = ColActivatedImges[0]; }
-
-                    if (cb01.Checked) { RGBox1.Image = ColActivatedImges[1]; }
-                    else { RGBox1.Image = ColActivatedImges[0]; }
-
-                    if (cb02.Checked) { RGBox2.Image = ColActivatedImges[1]; }
-                    else { RGBox2.Image = ColActivatedImges[0]; }
-
-                    if (cb03.Checked) { RGBox3.Image = ColActivatedImges[1]; }
-                    else { RGBox3.Image = ColActivatedImges[0]; }
-
-                    if (cb04.Checked) { RGBox4.Image = ColActivatedImges[1]; }
-                    else { RGBox4.Image = ColActivatedImges[0]; }
-
-                    if (cb05.Checked) { RGBox5.Image = ColActivatedImges[1]; }
-                    else { RGBox5.Image = ColActivatedImges[0]; }
-
-                    if (cb06.Checked) { RGBox6.Image = ColActivatedImges[1]; }
-                    else { RGBox6.Image = ColActivatedImges[0]; }
-
-                    if (cb07.Checked) { RGBox7.Image = ColActivatedImges[1]; }
-                    else { RGBox7.Image = ColActivatedImges[0]; }
-
-                    if (cb08.Checked) { RGBox8.Image = ColActivatedImges[1]; }
-                    else { RGBox8.Image = ColActivatedImges[0]; }
-
-                    if (cb09.Checked) { RGBox9.Image = ColActivatedImges[1]; }
-                    else { RGBox9.Image = ColActivatedImges[0]; }
-
-                    if (cb10.Checked) { RGBoxA.Image = ColActivatedImges[1]; }
-                    else { RGBoxA.Image = ColActivatedImges[0]; }
-
-                    if (cb11.Checked) { RGBoxB.Image = ColActivatedImges[1]; }
-                    else { RGBoxB.Image = ColActivatedImges[0]; }
-
-                    if (cb12.Checked) { RGBoxC.Image = ColActivatedImges[1]; }
-                    else { RGBoxC.Image = ColActivatedImges[0]; }
-
-                    if (cb13.Checked) { RGBoxD.Image = ColActivatedImges[1]; }
-                    else { RGBoxD.Image = ColActivatedImges[0]; }
-
-                    if (cb14.Checked) { RGBoxE.Image = ColActivatedImges[1]; }
-                    else { RGBoxE.Image = ColActivatedImges[0]; }
-
-                    if (cb15.Checked) { RGBoxF.Image = ColActivatedImges[1]; }
-                    else { RGBoxF.Image = ColActivatedImges[0]; }
                 }
 
                 overlayPicBox.Image = Overlaypic;
                 overlayPicBox.Image = ResizeBitmap(Overlaypic, 96, 96);
+                CollisionPicBox.Image = ResizeBitmap(new Bitmap(CollisionPicBox.Image), 96, 96);
 
                 if (Properties.Settings.Default.ClassicMode)
                 {
@@ -717,14 +453,334 @@ namespace TileManiac
                 }
                 else
                 {
-                    tableLayoutPanel1.BackgroundImage = ResizeBitmap(Overlaypic, tableLayoutPanel1.Width, tableLayoutPanel1.Height);
-                    tableLayoutPanel1.Enabled = true;
-                    tableLayoutPanel1.Visible = true;
+                    if (!mouseHeldDown)
+                    {
+                        if (Properties.Settings.Default.ViewAppearanceMode == 0)
+                        {
+                            tableLayoutPanel1.BackgroundImage = ResizeBitmap(Overlaypic, tableLayoutPanel1.Width, tableLayoutPanel1.Height);
+                            tableLayoutPanel1.Enabled = true;
+                            tableLayoutPanel1.Visible = true;
+                        }
+                        else if (Properties.Settings.Default.ViewAppearanceMode == 1)
+                        {
+                            tableLayoutPanel1.BackgroundImage = ResizeBitmap(new Bitmap(CollisionPicBox.Image), tableLayoutPanel1.Width, tableLayoutPanel1.Height);
+                            tableLayoutPanel1.Enabled = true;
+                            tableLayoutPanel1.Visible = true;
+                        }
+
+                    }
+
                 }
 
 
                 RefreshCollisionList();
             }
+        }
+
+
+        public void RefreshPathA()
+        {
+            lb00.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[0];
+            lb01.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[1];
+            lb02.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[2];
+            lb03.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[3];
+            lb04.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[4];
+            lb05.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[5];
+            lb06.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[6];
+            lb07.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[7];
+            lb08.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[8];
+            lb09.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[9];
+            lb10.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[10];
+            lb11.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[11];
+            lb12.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[12];
+            lb13.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[13];
+            lb14.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[14];
+            lb15.SelectedIndex = tcf.CollisionPath1[curColisionMask].Collision[15];
+
+            cb00.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[0];
+            cb01.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[1];
+            cb02.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[2];
+            cb03.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[3];
+            cb04.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[4];
+            cb05.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[5];
+            cb06.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[6];
+            cb07.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[7];
+            cb08.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[8];
+            cb09.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[9];
+            cb10.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[10];
+            cb11.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[11];
+            cb12.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[12];
+            cb13.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[13];
+            cb14.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[14];
+            cb15.Checked = tcf.CollisionPath1[curColisionMask].HasCollision[15];
+
+            if (tcf.CollisionPath1[curColisionMask].HasCollision[0])
+            { Viewer1.Image = ColImges[lb00.SelectedIndex]; }
+            else { Viewer1.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath1[curColisionMask].HasCollision[1])
+            { Viewer2.Image = ColImges[lb01.SelectedIndex]; }
+            else { Viewer2.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath1[curColisionMask].HasCollision[2])
+            { Viewer3.Image = ColImges[lb02.SelectedIndex]; }
+            else { Viewer3.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath1[curColisionMask].HasCollision[3])
+            { Viewer4.Image = ColImges[lb03.SelectedIndex]; }
+            else { Viewer4.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath1[curColisionMask].HasCollision[4])
+            { Viewer5.Image = ColImges[lb04.SelectedIndex]; }
+            else { Viewer5.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath1[curColisionMask].HasCollision[5])
+            { Viewer6.Image = ColImges[lb05.SelectedIndex]; }
+            else { Viewer6.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath1[curColisionMask].HasCollision[6])
+            { Viewer7.Image = ColImges[lb06.SelectedIndex]; }
+            else { Viewer7.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath1[curColisionMask].HasCollision[7])
+            { Viewer8.Image = ColImges[lb07.SelectedIndex]; }
+            else { Viewer8.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath1[curColisionMask].HasCollision[8])
+            { Viewer9.Image = ColImges[lb08.SelectedIndex]; }
+            else { Viewer9.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath1[curColisionMask].HasCollision[9])
+            { Viewer10.Image = ColImges[lb09.SelectedIndex]; }
+            else { Viewer10.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath1[curColisionMask].HasCollision[10])
+            { Viewer11.Image = ColImges[lb10.SelectedIndex]; }
+            else { Viewer11.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath1[curColisionMask].HasCollision[11])
+            { Viewer12.Image = ColImges[lb11.SelectedIndex]; }
+            else { Viewer12.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath1[curColisionMask].HasCollision[12])
+            { Viewer13.Image = ColImges[lb12.SelectedIndex]; }
+            else { Viewer13.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath1[curColisionMask].HasCollision[13])
+            { Viewer14.Image = ColImges[lb13.SelectedIndex]; }
+            else { Viewer14.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath1[curColisionMask].HasCollision[14])
+            { Viewer15.Image = ColImges[lb14.SelectedIndex]; }
+            else { Viewer15.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath1[curColisionMask].HasCollision[15])
+            { Viewer16.Image = ColImges[lb15.SelectedIndex]; }
+            else { Viewer16.Image = ColImges[16]; }
+
+
+
+
+            if (cb00.Checked) { RGBox0.Image = ColActivatedImges[1]; }
+            else { RGBox0.Image = ColActivatedImges[0]; }
+
+            if (cb01.Checked) { RGBox1.Image = ColActivatedImges[1]; }
+            else { RGBox1.Image = ColActivatedImges[0]; }
+
+            if (cb02.Checked) { RGBox2.Image = ColActivatedImges[1]; }
+            else { RGBox2.Image = ColActivatedImges[0]; }
+
+            if (cb03.Checked) { RGBox3.Image = ColActivatedImges[1]; }
+            else { RGBox3.Image = ColActivatedImges[0]; }
+
+            if (cb04.Checked) { RGBox4.Image = ColActivatedImges[1]; }
+            else { RGBox4.Image = ColActivatedImges[0]; }
+
+            if (cb05.Checked) { RGBox5.Image = ColActivatedImges[1]; }
+            else { RGBox5.Image = ColActivatedImges[0]; }
+
+            if (cb06.Checked) { RGBox6.Image = ColActivatedImges[1]; }
+            else { RGBox6.Image = ColActivatedImges[0]; }
+
+            if (cb07.Checked) { RGBox7.Image = ColActivatedImges[1]; }
+            else { RGBox7.Image = ColActivatedImges[0]; }
+
+            if (cb08.Checked) { RGBox8.Image = ColActivatedImges[1]; }
+            else { RGBox8.Image = ColActivatedImges[0]; }
+
+            if (cb09.Checked) { RGBox9.Image = ColActivatedImges[1]; }
+            else { RGBox9.Image = ColActivatedImges[0]; }
+
+            if (cb10.Checked) { RGBoxA.Image = ColActivatedImges[1]; }
+            else { RGBoxA.Image = ColActivatedImges[0]; }
+
+            if (cb11.Checked) { RGBoxB.Image = ColActivatedImges[1]; }
+            else { RGBoxB.Image = ColActivatedImges[0]; }
+
+            if (cb12.Checked) { RGBoxC.Image = ColActivatedImges[1]; }
+            else { RGBoxC.Image = ColActivatedImges[0]; }
+
+            if (cb13.Checked) { RGBoxD.Image = ColActivatedImges[1]; }
+            else { RGBoxD.Image = ColActivatedImges[0]; }
+
+            if (cb14.Checked) { RGBoxE.Image = ColActivatedImges[1]; }
+            else { RGBoxE.Image = ColActivatedImges[0]; }
+
+            if (cb15.Checked) { RGBoxF.Image = ColActivatedImges[1]; }
+            else { RGBoxF.Image = ColActivatedImges[0]; }
+        }
+
+        public void RefreshPathB()
+        {
+            lb00.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[0];
+            lb01.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[1];
+            lb02.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[2];
+            lb03.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[3];
+            lb04.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[4];
+            lb05.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[5];
+            lb06.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[6];
+            lb07.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[7];
+            lb08.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[8];
+            lb09.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[9];
+            lb10.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[10];
+            lb11.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[11];
+            lb12.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[12];
+            lb13.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[13];
+            lb14.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[14];
+            lb15.SelectedIndex = tcf.CollisionPath2[curColisionMask].Collision[15];
+
+            cb00.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[0];
+            cb01.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[1];
+            cb02.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[2];
+            cb03.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[3];
+            cb04.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[4];
+            cb05.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[5];
+            cb06.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[6];
+            cb07.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[7];
+            cb08.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[8];
+            cb09.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[9];
+            cb10.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[10];
+            cb11.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[11];
+            cb12.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[12];
+            cb13.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[13];
+            cb14.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[14];
+            cb15.Checked = tcf.CollisionPath2[curColisionMask].HasCollision[15];
+
+
+            if (tcf.CollisionPath2[curColisionMask].HasCollision[0])
+            { Viewer1.Image = ColImges[lb00.SelectedIndex]; }
+            else { Viewer1.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath2[curColisionMask].HasCollision[1])
+            { Viewer2.Image = ColImges[lb01.SelectedIndex]; }
+            else { Viewer2.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath2[curColisionMask].HasCollision[2])
+            { Viewer3.Image = ColImges[lb02.SelectedIndex]; }
+            else { Viewer3.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath2[curColisionMask].HasCollision[3])
+            { Viewer4.Image = ColImges[lb03.SelectedIndex]; }
+            else { Viewer4.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath2[curColisionMask].HasCollision[4])
+            { Viewer5.Image = ColImges[lb04.SelectedIndex]; }
+            else { Viewer5.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath2[curColisionMask].HasCollision[5])
+            { Viewer6.Image = ColImges[lb05.SelectedIndex]; }
+            else { Viewer6.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath2[curColisionMask].HasCollision[6])
+            { Viewer7.Image = ColImges[lb06.SelectedIndex]; }
+            else { Viewer7.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath2[curColisionMask].HasCollision[7])
+            { Viewer8.Image = ColImges[lb07.SelectedIndex]; }
+            else { Viewer8.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath2[curColisionMask].HasCollision[8])
+            { Viewer9.Image = ColImges[lb08.SelectedIndex]; }
+            else { Viewer9.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath2[curColisionMask].HasCollision[9])
+            { Viewer10.Image = ColImges[lb09.SelectedIndex]; }
+            else { Viewer10.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath2[curColisionMask].HasCollision[10])
+            { Viewer11.Image = ColImges[lb10.SelectedIndex]; }
+            else { Viewer11.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath2[curColisionMask].HasCollision[11])
+            { Viewer12.Image = ColImges[lb11.SelectedIndex]; }
+            else { Viewer12.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath2[curColisionMask].HasCollision[12])
+            { Viewer13.Image = ColImges[lb12.SelectedIndex]; }
+            else { Viewer13.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath2[curColisionMask].HasCollision[13])
+            { Viewer14.Image = ColImges[lb13.SelectedIndex]; }
+            else { Viewer14.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath2[curColisionMask].HasCollision[14])
+            { Viewer15.Image = ColImges[lb14.SelectedIndex]; }
+            else { Viewer15.Image = ColImges[16]; }
+
+            if (tcf.CollisionPath2[curColisionMask].HasCollision[15])
+            { Viewer16.Image = ColImges[lb15.SelectedIndex]; }
+            else { Viewer16.Image = ColImges[16]; }
+
+
+
+
+            if (cb00.Checked) { RGBox0.Image = ColActivatedImges[1]; }
+            else { RGBox0.Image = ColActivatedImges[0]; }
+
+            if (cb01.Checked) { RGBox1.Image = ColActivatedImges[1]; }
+            else { RGBox1.Image = ColActivatedImges[0]; }
+
+            if (cb02.Checked) { RGBox2.Image = ColActivatedImges[1]; }
+            else { RGBox2.Image = ColActivatedImges[0]; }
+
+            if (cb03.Checked) { RGBox3.Image = ColActivatedImges[1]; }
+            else { RGBox3.Image = ColActivatedImges[0]; }
+
+            if (cb04.Checked) { RGBox4.Image = ColActivatedImges[1]; }
+            else { RGBox4.Image = ColActivatedImges[0]; }
+
+            if (cb05.Checked) { RGBox5.Image = ColActivatedImges[1]; }
+            else { RGBox5.Image = ColActivatedImges[0]; }
+
+            if (cb06.Checked) { RGBox6.Image = ColActivatedImges[1]; }
+            else { RGBox6.Image = ColActivatedImges[0]; }
+
+            if (cb07.Checked) { RGBox7.Image = ColActivatedImges[1]; }
+            else { RGBox7.Image = ColActivatedImges[0]; }
+
+            if (cb08.Checked) { RGBox8.Image = ColActivatedImges[1]; }
+            else { RGBox8.Image = ColActivatedImges[0]; }
+
+            if (cb09.Checked) { RGBox9.Image = ColActivatedImges[1]; }
+            else { RGBox9.Image = ColActivatedImges[0]; }
+
+            if (cb10.Checked) { RGBoxA.Image = ColActivatedImges[1]; }
+            else { RGBoxA.Image = ColActivatedImges[0]; }
+
+            if (cb11.Checked) { RGBoxB.Image = ColActivatedImges[1]; }
+            else { RGBoxB.Image = ColActivatedImges[0]; }
+
+            if (cb12.Checked) { RGBoxC.Image = ColActivatedImges[1]; }
+            else { RGBoxC.Image = ColActivatedImges[0]; }
+
+            if (cb13.Checked) { RGBoxD.Image = ColActivatedImges[1]; }
+            else { RGBoxD.Image = ColActivatedImges[0]; }
+
+            if (cb14.Checked) { RGBoxE.Image = ColActivatedImges[1]; }
+            else { RGBoxE.Image = ColActivatedImges[0]; }
+
+            if (cb15.Checked) { RGBoxF.Image = ColActivatedImges[1]; }
+            else { RGBoxF.Image = ColActivatedImges[0]; }
         }
 
         public void RefreshCollisionList()
@@ -833,32 +889,51 @@ namespace TileManiac
         {
             if (tcf != null)
             {
-                if (!showPathB)
+                if (Properties.Settings.Default.MirrorMode)
                 {
+
                     if (SlopeNUD.Value <= 255)
                     {
-                        //tcf.CollisionPath1[curColisionMask].slopeAngle = (byte)(256 - ((float)SlopeNUD.Value / (360f / 0x100))); //Set Slope angle for Path A
+                        //tcf.CollisionPath2[curColisionMask].slopeAngle = (byte)(256 - ((float)SlopeNUD.Value / (360f / 0x100))); //Set Slope angle for Path B
+                        tcf.CollisionPath2[curColisionMask].slopeAngle = (byte)SlopeNUD.Value; //Set Slope angle for Path B
                         tcf.CollisionPath1[curColisionMask].slopeAngle = (byte)SlopeNUD.Value; //Set Slope angle for Path A
                     }
                     else
                     {
                         SlopeNUD.Value = 255;
                     }
- 
 
                 }
-                if (showPathB)
+                else
                 {
-                    if (SlopeNUD.Value <= 255)
+                    if (!showPathB)
                     {
-                        //tcf.CollisionPath2[curColisionMask].slopeAngle = (byte)(256 - ((float)SlopeNUD.Value / (360f / 0x100))); //Set Slope angle for Path B
-                        tcf.CollisionPath2[curColisionMask].slopeAngle = (byte)SlopeNUD.Value; //Set Slope angle for Path B
+                        if (SlopeNUD.Value <= 255)
+                        {
+                            //tcf.CollisionPath1[curColisionMask].slopeAngle = (byte)(256 - ((float)SlopeNUD.Value / (360f / 0x100))); //Set Slope angle for Path A
+                            tcf.CollisionPath1[curColisionMask].slopeAngle = (byte)SlopeNUD.Value; //Set Slope angle for Path A
+                        }
+                        else
+                        {
+                            SlopeNUD.Value = 255;
+                        }
+
+
                     }
-                    else
+                    if (showPathB)
                     {
-                        SlopeNUD.Value = 255;
+                        if (SlopeNUD.Value <= 255)
+                        {
+                            //tcf.CollisionPath2[curColisionMask].slopeAngle = (byte)(256 - ((float)SlopeNUD.Value / (360f / 0x100))); //Set Slope angle for Path B
+                            tcf.CollisionPath2[curColisionMask].slopeAngle = (byte)SlopeNUD.Value; //Set Slope angle for Path B
+                        }
+                        else
+                        {
+                            SlopeNUD.Value = 255;
+                        }
                     }
                 }
+
                 RefreshUI();
             }
         }
@@ -868,22 +943,11 @@ namespace TileManiac
         {
             if (tcf != null)
             {
-                if (!showPathB)
+                if (Properties.Settings.Default.MirrorMode)
                 {
                     if (RawSlopeNUD.Value <= 255)
                     {
                         tcf.CollisionPath1[curColisionMask].slopeAngle = (byte)(256 - ((float)RawSlopeNUD.Value / (360f / 0x100))); //Set Slope angle for Path A
-                    }
-                    else
-                    {
-                        RawSlopeNUD.Value = 255;
-                    }
-
-                }
-                if (showPathB)
-                {
-                    if (RawSlopeNUD.Value <= 255)
-                    {
                         tcf.CollisionPath2[curColisionMask].slopeAngle = (byte)(256 - ((float)RawSlopeNUD.Value / (360f / 0x100))); //Set Slope angle for Path B
                     }
                     else
@@ -891,6 +955,33 @@ namespace TileManiac
                         RawSlopeNUD.Value = 255;
                     }
                 }
+                else
+                {
+                    if (!showPathB)
+                    {
+                        if (RawSlopeNUD.Value <= 255)
+                        {
+                            tcf.CollisionPath1[curColisionMask].slopeAngle = (byte)(256 - ((float)RawSlopeNUD.Value / (360f / 0x100))); //Set Slope angle for Path A
+                        }
+                        else
+                        {
+                            RawSlopeNUD.Value = 255;
+                        }
+
+                    }
+                    if (showPathB)
+                    {
+                        if (RawSlopeNUD.Value <= 255)
+                        {
+                            tcf.CollisionPath2[curColisionMask].slopeAngle = (byte)(256 - ((float)RawSlopeNUD.Value / (360f / 0x100))); //Set Slope angle for Path B
+                        }
+                        else
+                        {
+                            RawSlopeNUD.Value = 255;
+                        }
+                    }
+                }
+
                 RefreshUI();
             }
         }
@@ -899,14 +990,23 @@ namespace TileManiac
         {
             if (tcf != null)
             {
-                if (!showPathB)
+                if (Properties.Settings.Default.MirrorMode)
                 {
                     tcf.CollisionPath1[curColisionMask].physics = (byte)PhysicsNUD.Value; //Set the Physics for Path A
-                }
-                if (showPathB)
-                {
                     tcf.CollisionPath2[curColisionMask].physics = (byte)PhysicsNUD.Value; //Set the Physics for Path B
                 }
+                else
+                {
+                    if (!showPathB)
+                    {
+                        tcf.CollisionPath1[curColisionMask].physics = (byte)PhysicsNUD.Value; //Set the Physics for Path A
+                    }
+                    if (showPathB)
+                    {
+                        tcf.CollisionPath2[curColisionMask].physics = (byte)PhysicsNUD.Value; //Set the Physics for Path B
+                    }
+                }
+
                 RefreshUI();
             }
         }
@@ -915,14 +1015,23 @@ namespace TileManiac
         {
             if (tcf != null)
             {
-                if (!showPathB)
+                if (Properties.Settings.Default.MirrorMode)
                 {
                     tcf.CollisionPath1[curColisionMask].momentum = (byte)MomentumNUD.Value; //Set the Momentum value for Path A
-                }
-                if (showPathB)
-                {
                     tcf.CollisionPath2[curColisionMask].momentum = (byte)MomentumNUD.Value; //Set the Momentum value for Path B
                 }
+                else
+                {
+                    if (!showPathB)
+                    {
+                        tcf.CollisionPath1[curColisionMask].momentum = (byte)MomentumNUD.Value; //Set the Momentum value for Path A
+                    }
+                    if (showPathB)
+                    {
+                        tcf.CollisionPath2[curColisionMask].momentum = (byte)MomentumNUD.Value; //Set the Momentum value for Path B
+                    }
+                }
+
                 RefreshUI();
             }
         }
@@ -931,14 +1040,23 @@ namespace TileManiac
         {
             if (tcf != null)
             {
-                if (!showPathB)
+                if (Properties.Settings.Default.MirrorMode)
                 {
                     tcf.CollisionPath1[curColisionMask].unknown = (byte)UnknownNUD.Value; //Set the unknown value for Path A
-                }
-                if (showPathB)
-                {
                     tcf.CollisionPath2[curColisionMask].unknown = (byte)UnknownNUD.Value; //Set the unknown value for Path B
                 }
+                else
+                {
+                    if (!showPathB)
+                    {
+                        tcf.CollisionPath1[curColisionMask].unknown = (byte)UnknownNUD.Value; //Set the unknown value for Path A
+                    }
+                    if (showPathB)
+                    {
+                        tcf.CollisionPath2[curColisionMask].unknown = (byte)UnknownNUD.Value; //Set the unknown value for Path B
+                    }
+                }
+
                 RefreshUI();
             }
         }
@@ -947,14 +1065,23 @@ namespace TileManiac
         {
             if (tcf != null)
             {
-                if (!showPathB)
+                if (Properties.Settings.Default.MirrorMode)
                 {
                     tcf.CollisionPath1[curColisionMask].special = (byte)SpecialNUD.Value; //Set the "Special" value for Path A
-                }
-                if (showPathB)
-                {
                     tcf.CollisionPath2[curColisionMask].special = (byte)SpecialNUD.Value; //Set the "Special" value for Path B
                 }
+                else
+                {
+                    if (!showPathB)
+                    {
+                        tcf.CollisionPath1[curColisionMask].special = (byte)SpecialNUD.Value; //Set the "Special" value for Path A
+                    }
+                    if (showPathB)
+                    {
+                        tcf.CollisionPath2[curColisionMask].special = (byte)SpecialNUD.Value; //Set the "Special" value for Path B
+                    }
+                }
+
                 RefreshUI();
             }
         }
@@ -963,14 +1090,23 @@ namespace TileManiac
         {
             if (tcf != null)
             {
-                if (!showPathB)
+                if (Properties.Settings.Default.MirrorMode)
                 {
                     tcf.CollisionPath1[curColisionMask].IsCeiling = IsCeilingButton.Checked; //Set the "IsCeiling" Value for Path A
-                }
-                if (showPathB)
-                {
                     tcf.CollisionPath2[curColisionMask].IsCeiling = IsCeilingButton.Checked; //Set the "IsCeiling" Value for Path B
                 }
+                else
+                {
+                    if (!showPathB)
+                    {
+                        tcf.CollisionPath1[curColisionMask].IsCeiling = IsCeilingButton.Checked; //Set the "IsCeiling" Value for Path A
+                    }
+                    if (showPathB)
+                    {
+                        tcf.CollisionPath2[curColisionMask].IsCeiling = IsCeilingButton.Checked; //Set the "IsCeiling" Value for Path B
+                    }
+                }
+
                 RefreshUI();
             }
         }
@@ -988,14 +1124,14 @@ namespace TileManiac
         {
             if (!showPathB)
             {
-                tcf.CollisionPath2[curColisionMask] = (RSDKv5.TilesConfig.ColllisionMask)tcf.CollisionPath1[curColisionMask].Collision.Clone();
+                tcf.CollisionPath2[curColisionMask] = (RSDKv5.TilesConfig.CollisionMask)tcf.CollisionPath1[curColisionMask].Collision.Clone();
                 //tcf.CollisionPath2[curColisionMask] = tc;RSDKv5.TilesConfig.ColllisionMask tc
                 CollisionListImgB[curColisionMask] = CollisionListImgA[curColisionMask];
                 RefreshUI();
             }
             else if (showPathB)
             {
-                tcf.CollisionPath1[curColisionMask] = (RSDKv5.TilesConfig.ColllisionMask)tcf.CollisionPath2[curColisionMask].Collision.Clone();
+                tcf.CollisionPath1[curColisionMask] = (RSDKv5.TilesConfig.CollisionMask)tcf.CollisionPath2[curColisionMask].Collision.Clone();
                 CollisionListImgA[curColisionMask] = CollisionListImgB[curColisionMask];
                 RefreshUI();
             }
@@ -1005,654 +1141,252 @@ namespace TileManiac
         {
             if (mirrorPathsToolStripMenuItem1.Checked)
             {
-                mirrorPathsToolStripMenuItem1.Checked = MirrorPaths = false;
+                Properties.Settings.Default.MirrorMode = true;
             }
             else if (!mirrorPathsToolStripMenuItem1.Checked)
             {
-                mirrorPathsToolStripMenuItem1.Checked = MirrorPaths = true;
+                Properties.Settings.Default.MirrorMode = false;
             }
+            UpdateMirrorModeStatusLabel();
         }
 
         #region Collision Mask Methods
-        private void lb00_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void lb_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tcf != null)
+            int row = GetLBSender(sender);
+            if (tcf != null && row != -1)
             {
-                if (!showPathB)
+                ListBox lb = (ListBox) sender;
+                if (Properties.Settings.Default.MirrorMode)
                 {
-                    tcf.CollisionPath1[curColisionMask].Collision[0] = (byte)lb00.SelectedIndex;
+                    tcf.CollisionPath1[curColisionMask].Collision[row] = (byte)lb.SelectedIndex;
                     CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].Collision[0] = (byte)lb00.SelectedIndex;
+                    tcf.CollisionPath2[curColisionMask].Collision[row] = (byte)lb.SelectedIndex;
                     CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
                     CollisionList.Refresh();
+                }
+                else
+                {
+                    if (!showPathB)
+                    {
+                        tcf.CollisionPath1[curColisionMask].Collision[row] = (byte)lb.SelectedIndex;
+                        CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
+                        CollisionList.Refresh();
+                    }
+                    if (showPathB)
+                    {
+                        tcf.CollisionPath2[curColisionMask].Collision[row] = (byte)lb.SelectedIndex;
+                        CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
+                        CollisionList.Refresh();
+                    }
                 }
                 RefreshUI();
             }
         }
 
-        private void lb01_SelectedIndexChanged(object sender, EventArgs e)
+        private int GetLBSender(object sender)
         {
-            if (tcf != null)
+            if (sender.Equals(lb00))
             {
-                if (!showPathB)
+                return 0;
+            }
+            else if (sender.Equals(lb01))
+            {
+                return 1;
+            }
+            else if (sender.Equals(lb02))
+            {
+                return 2;
+            }
+            else if (sender.Equals(lb03))
+            {
+                return 3;
+            }
+            else if (sender.Equals(lb04))
+            {
+                return 4;
+            }
+            else if (sender.Equals(lb05))
+            {
+                return 5;
+            }
+            else if (sender.Equals(lb06))
+            {
+                return 6;
+            }
+            else if (sender.Equals(lb07))
+            {
+                return 7;
+            }
+            else if (sender.Equals(lb08))
+            {
+                return 8;
+            }
+            else if (sender.Equals(lb09))
+            {
+                return 9;
+            }
+            else if (sender.Equals(lb10))
+            {
+                return 10;
+            }
+            else if (sender.Equals(lb11))
+            {
+                return 11;
+            }
+            else if (sender.Equals(lb12))
+            {
+                return 12;
+            }
+            else if (sender.Equals(lb13))
+            {
+                return 13;
+            }
+            else if (sender.Equals(lb14))
+            {
+                return 14;
+            }
+            else if (sender.Equals(lb15))
+            {
+                return 15;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        private int GetCBSender(object sender)
+        {
+            if (sender.Equals(cb00))
+            {
+                return 0;
+            }
+            else if (sender.Equals(cb01))
+            {
+                return 1;
+            }
+            else if (sender.Equals(cb02))
+            {
+                return 2;
+            }
+            else if (sender.Equals(cb03))
+            {
+                return 3;
+            }
+            else if (sender.Equals(cb04))
+            {
+                return 4;
+            }
+            else if (sender.Equals(cb05))
+            {
+                return 5;
+            }
+            else if (sender.Equals(cb06))
+            {
+                return 6;
+            }
+            else if (sender.Equals(cb07))
+            {
+                return 7;
+            }
+            else if (sender.Equals(cb08))
+            {
+                return 8;
+            }
+            else if (sender.Equals(cb09))
+            {
+                return 9;
+            }
+            else if (sender.Equals(cb10))
+            {
+                return 10;
+            }
+            else if (sender.Equals(cb11))
+            {
+                return 11;
+            }
+            else if (sender.Equals(cb12))
+            {
+                return 12;
+            }
+            else if (sender.Equals(cb13))
+            {
+                return 13;
+            }
+            else if (sender.Equals(cb14))
+            {
+                return 14;
+            }
+            else if (sender.Equals(cb15))
+            {
+                return 15;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        private void cb_CheckedChanged(object sender, EventArgs e)
+        {
+            int box = GetCBSender(sender);
+            if (tcf != null && box != -1)
+            {
+                CheckBox cb = (CheckBox)sender;
+                if (Properties.Settings.Default.MirrorMode)
                 {
-                    tcf.CollisionPath1[curColisionMask].Collision[1] = (byte)lb01.SelectedIndex;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
+                        tcf.CollisionPath1[curColisionMask].HasCollision[box] = cb.Checked;
+                        CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
+                        tcf.CollisionPath2[curColisionMask].HasCollision[box] = cb.Checked;
+                        CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
+                        CollisionList.Refresh();
                 }
-                if (showPathB)
+                else
                 {
-                    tcf.CollisionPath2[curColisionMask].Collision[1] = (byte)lb01.SelectedIndex;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
+                    if (!showPathB)
+                    {
+                        tcf.CollisionPath1[curColisionMask].HasCollision[box] = cb.Checked;
+                        CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
+                        CollisionList.Refresh();
+                    }
+                    if (showPathB)
+                    {
+                        tcf.CollisionPath2[curColisionMask].HasCollision[box] = cb.Checked;
+                        CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
+                        CollisionList.Refresh();
+                    }
                 }
+
+
                 RefreshUI();
             }
         }
 
-        private void lb02_SelectedIndexChanged(object sender, EventArgs e)
+        public void lb_scrolling(object sender, MouseEventArgs e)
         {
-            if (tcf != null)
+            int lb = GetLBSender(sender);
+            if (lb != -1)
             {
-                if (!showPathB)
+                ListBox list = (ListBox)sender;
+                if (e.Delta <= -1)
                 {
-                    tcf.CollisionPath1[curColisionMask].Collision[2] = (byte)lb02.SelectedIndex;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
+                    if (list.SelectedIndex > 0)
+                    {
+                        list.SelectedIndex--;
+                    }
                 }
-                if (showPathB)
+                else
                 {
-                    tcf.CollisionPath2[curColisionMask].Collision[2] = (byte)lb02.SelectedIndex;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
+                    if (list.SelectedIndex < 15)
+                    {
+                        list.SelectedIndex++;
+                    }
                 }
-                RefreshUI();
             }
-        }
 
-        private void lb03_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].Collision[3] = (byte)lb03.SelectedIndex;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].Collision[3] = (byte)lb03.SelectedIndex;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
 
-        private void lb04_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].Collision[4] = (byte)lb04.SelectedIndex;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].Collision[4] = (byte)lb04.SelectedIndex;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void lb05_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].Collision[5] = (byte)lb05.SelectedIndex;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].Collision[5] = (byte)lb05.SelectedIndex;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void lb06_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].Collision[6] = (byte)lb06.SelectedIndex;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].Collision[6] = (byte)lb06.SelectedIndex;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void lb07_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].Collision[7] = (byte)lb07.SelectedIndex;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].Collision[7] = (byte)lb07.SelectedIndex;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void lb08_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].Collision[8] = (byte)lb08.SelectedIndex;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].Collision[8] = (byte)lb08.SelectedIndex;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void lb09_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].Collision[9] = (byte)lb09.SelectedIndex;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].Collision[9] = (byte)lb09.SelectedIndex;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void lb10_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].Collision[10] = (byte)lb10.SelectedIndex;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].Collision[10] = (byte)lb10.SelectedIndex;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void lb11_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].Collision[11] = (byte)lb11.SelectedIndex;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].Collision[11] = (byte)lb11.SelectedIndex;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void lb12_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].Collision[12] = (byte)lb12.SelectedIndex;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].Collision[12] = (byte)lb12.SelectedIndex;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void lb13_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].Collision[13] = (byte)lb13.SelectedIndex;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].Collision[13] = (byte)lb13.SelectedIndex;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void lb14_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].Collision[14] = (byte)lb14.SelectedIndex;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].Collision[14] = (byte)lb14.SelectedIndex;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void lb15_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].Collision[15] = (byte)lb15.SelectedIndex;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].Collision[15] = (byte)lb15.SelectedIndex;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void cb00_CheckedChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].HasCollision[0] = cb00.Checked;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].HasCollision[0] = cb00.Checked;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void cb01_CheckedChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].HasCollision[1] = cb01.Checked;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].HasCollision[1] = cb01.Checked;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void cb02_CheckedChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].HasCollision[2] = cb02.Checked;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].HasCollision[2] = cb02.Checked;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void cb03_CheckedChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].HasCollision[3] = cb03.Checked;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].HasCollision[3] = cb03.Checked;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-
-                }
-                RefreshUI();
-            }
-        }
-
-        private void cb04_CheckedChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].HasCollision[4] = cb04.Checked;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].HasCollision[4] = cb04.Checked;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void cb05_CheckedChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].HasCollision[5] = cb05.Checked;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].HasCollision[5] = cb05.Checked;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void cb06_CheckedChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].HasCollision[6] = cb06.Checked;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].HasCollision[6] = cb06.Checked;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void cb07_CheckedChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].HasCollision[7] = cb07.Checked;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].HasCollision[7] = cb07.Checked;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void cb08_CheckedChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].HasCollision[8] = cb08.Checked;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].HasCollision[8] = cb08.Checked;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void cb09_CheckedChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].HasCollision[9] = cb09.Checked;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].HasCollision[9] = cb09.Checked;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void cb10_CheckedChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].HasCollision[10] = cb10.Checked;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].HasCollision[10] = cb10.Checked;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void cb11_CheckedChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].HasCollision[11] = cb11.Checked;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].HasCollision[11] = cb11.Checked;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void cb12_CheckedChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].HasCollision[12] = cb12.Checked;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].HasCollision[12] = cb12.Checked;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void cb13_CheckedChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].HasCollision[13] = cb13.Checked;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].HasCollision[13] = cb13.Checked;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void cb14_CheckedChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].HasCollision[14] = cb14.Checked;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].HasCollision[14] = cb14.Checked;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
-        }
-
-        private void cb15_CheckedChanged(object sender, EventArgs e)
-        {
-            if (tcf != null)
-            {
-                if (!showPathB)
-                {
-                    tcf.CollisionPath1[curColisionMask].HasCollision[15] = cb15.Checked;
-                    CollisionListImgA[curColisionMask] = tcf.CollisionPath1[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                if (showPathB)
-                {
-                    tcf.CollisionPath2[curColisionMask].HasCollision[15] = cb15.Checked;
-                    CollisionListImgB[curColisionMask] = tcf.CollisionPath2[curColisionMask].DrawCMask(Color.FromArgb(255, 0, 0, 0), Color.FromArgb(255, 0, 255, 0));
-                    CollisionList.Refresh();
-                }
-                RefreshUI();
-            }
         }
         #endregion
 
@@ -1763,310 +1497,6 @@ namespace TileManiac
 
         }
 
-        public void lb00_scrolling(object sender, MouseEventArgs e)
-        {
-            var list = lb00;
-            if (e.Delta <= -1)
-            {
-                if (list.SelectedIndex > 0)
-                {
-                    list.SelectedIndex--;
-                }
-            }
-            else
-            {
-                if (list.SelectedIndex < 15)
-                {
-                    list.SelectedIndex++;
-                }
-            }
-        }
-
-        public void lb01_scrolling(object sender, MouseEventArgs e)
-        {
-            var list = lb01;
-            if (e.Delta <= -1)
-            {
-                if (list.SelectedIndex > 0)
-                {
-                    list.SelectedIndex--;
-                }
-            }
-            else
-            {
-                if (list.SelectedIndex < 15)
-                {
-                    list.SelectedIndex++;
-                }
-            }
-        }
-
-        public void lb02_scrolling(object sender, MouseEventArgs e)
-        {
-            var list = lb02;
-            if (e.Delta <= -1)
-            {
-                if (list.SelectedIndex > 0)
-                {
-                    list.SelectedIndex--;
-                }
-            }
-            else
-            {
-                if (list.SelectedIndex < 15)
-                {
-                    list.SelectedIndex++;
-                }
-            }
-        }
-
-        public void lb03_scrolling(object sender, MouseEventArgs e)
-        {
-            var list = lb03;
-            if (e.Delta <= -1)
-            {
-                if (list.SelectedIndex > 0)
-                {
-                    list.SelectedIndex--;
-                }
-            }
-            else
-            {
-                if (list.SelectedIndex < 15)
-                {
-                    list.SelectedIndex++;
-                }
-            }
-        }
-
-        public void lb04_scrolling(object sender, MouseEventArgs e)
-        {
-            var list = lb04;
-            if (e.Delta <= -1)
-            {
-                if (list.SelectedIndex > 0)
-                {
-                    list.SelectedIndex--;
-                }
-            }
-            else
-            {
-                if (list.SelectedIndex < 15)
-                {
-                    list.SelectedIndex++;
-                }
-            }
-        }
-
-        public void lb05_scrolling(object sender, MouseEventArgs e)
-        {
-            var list = lb05;
-            if (e.Delta <= -1)
-            {
-                if (list.SelectedIndex > 0)
-                {
-                    list.SelectedIndex--;
-                }
-            }
-            else
-            {
-                if (list.SelectedIndex < 15)
-                {
-                    list.SelectedIndex++;
-                }
-            }
-        }
-
-        public void lb06_scrolling(object sender, MouseEventArgs e)
-        {
-            var list = lb06;
-            if (e.Delta <= -1)
-            {
-                if (list.SelectedIndex > 0)
-                {
-                    list.SelectedIndex--;
-                }
-            }
-            else
-            {
-                if (list.SelectedIndex < 15)
-                {
-                    list.SelectedIndex++;
-                }
-            }
-        }
-
-        public void lb07_scrolling(object sender, MouseEventArgs e)
-        {
-            var list = lb07;
-            if (e.Delta <= -1)
-            {
-                if (list.SelectedIndex > 0)
-                {
-                    list.SelectedIndex--;
-                }
-            }
-            else
-            {
-                if (list.SelectedIndex < 15)
-                {
-                    list.SelectedIndex++;
-                }
-            }
-        }
-
-        public void lb08_scrolling(object sender, MouseEventArgs e)
-        {
-            var list = lb08;
-            if (e.Delta <= -1)
-            {
-                if (list.SelectedIndex > 0)
-                {
-                    list.SelectedIndex--;
-                }
-            }
-            else
-            {
-                if (list.SelectedIndex < 15)
-                {
-                    list.SelectedIndex++;
-                }
-            }
-        }
-
-        public void lb09_scrolling(object sender, MouseEventArgs e)
-        {
-            var list = lb09;
-            if (e.Delta <= -1)
-            {
-                if (list.SelectedIndex > 0)
-                {
-                    list.SelectedIndex--;
-                }
-            }
-            else
-            {
-                if (list.SelectedIndex < 15)
-                {
-                    list.SelectedIndex++;
-                }
-            }
-        }
-
-        public void lb10_scrolling(object sender, MouseEventArgs e)
-        {
-            var list = lb10;
-            if (e.Delta <= -1)
-            {
-                if (list.SelectedIndex > 0)
-                {
-                    list.SelectedIndex--;
-                }
-            }
-            else
-            {
-                if (list.SelectedIndex < 15)
-                {
-                    list.SelectedIndex++;
-                }
-            }
-        }
-
-        public void lb11_scrolling(object sender, MouseEventArgs e)
-        {
-            var list = lb11;
-            if (e.Delta <= -1)
-            {
-                if (list.SelectedIndex > 0)
-                {
-                    list.SelectedIndex--;
-                }
-            }
-            else
-            {
-                if (list.SelectedIndex < 15)
-                {
-                    list.SelectedIndex++;
-                }
-            }
-        }
-
-        public void lb12_scrolling(object sender, MouseEventArgs e)
-        {
-            var list = lb12;
-            if (e.Delta <= -1)
-            {
-                if (list.SelectedIndex > 0)
-                {
-                    list.SelectedIndex--;
-                }
-            }
-            else
-            {
-                if (list.SelectedIndex < 15)
-                {
-                    list.SelectedIndex++;
-                }
-            }
-        }
-
-        public void lb13_scrolling(object sender, MouseEventArgs e)
-        {
-            var list = lb13;
-            if (e.Delta <= -1)
-            {
-                if (list.SelectedIndex > 0)
-                {
-                    list.SelectedIndex--;
-                }
-            }
-            else
-            {
-                if (list.SelectedIndex < 15)
-                {
-                    list.SelectedIndex++;
-                }
-            }
-        }
-
-        public void lb14_scrolling(object sender, MouseEventArgs e)
-        {
-            var list = lb14;
-            if (e.Delta <= -1)
-            {
-                if (list.SelectedIndex > 0)
-                {
-                    list.SelectedIndex--;
-                }
-            }
-            else
-            {
-                if (list.SelectedIndex < 15)
-                {
-                    list.SelectedIndex++;
-                }
-            }
-        }
-
-        public void lb15_scrolling(object sender, MouseEventArgs e)
-        {
-            var list = lb15;
-            if (e.Delta <= -1)
-            {
-                if (list.SelectedIndex > 0)
-                {
-                    list.SelectedIndex--;
-                }
-            }
-            else
-            {
-                if (list.SelectedIndex < 15)
-                {
-                    list.SelectedIndex++;
-                }
-            }
-        }
-
         private void tileViewRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             if (lockRadioButtons == false)
@@ -2174,7 +1604,7 @@ namespace TileManiac
 
         private void openSingleCollisionMaskToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            /*
+            
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.Title = "Import CollisionMask...";
             dlg.DefaultExt = ".rcm";
@@ -2191,7 +1621,7 @@ namespace TileManiac
             }
             RefreshUI();
             //RefreshCollisionList(true);
-            */
+            
             
         }
 
@@ -2416,6 +1846,7 @@ namespace TileManiac
         private void tableLayoutPanel1_MouseUp(object sender, MouseEventArgs e)
         {
             mouseHeldDown = false;
+            RefreshUI();
         }
 
         private void tableLayoutPanel1_MouseMove(object sender, MouseEventArgs e)
@@ -2553,6 +1984,47 @@ namespace TileManiac
                 Properties.Settings.Default.ClassicMode = false;
             }
             RefreshUI();
+        }
+
+        private void overlayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ViewAppearanceMode = 0;
+            UpdateViewApperancePlusButtons();
+
+        }
+
+        private void collisionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.ViewAppearanceMode = 1;
+            UpdateViewApperancePlusButtons();
+        }
+
+        private void UpdateViewApperancePlusButtons()
+        {
+            switch (Properties.Settings.Default.ViewAppearanceMode)
+            {
+                case 0:
+                    overlayToolStripMenuItem.Checked = true;
+                    collisionToolStripMenuItem.Checked = false;
+                    break;
+                case 1:
+                    overlayToolStripMenuItem.Checked = false;
+                    collisionToolStripMenuItem.Checked = true;
+                    break;
+            }
+            RefreshUI();
+        }
+
+        private void UpdateMirrorModeStatusLabel()
+        {
+            if (Properties.Settings.Default.MirrorMode)
+            {
+                mirrorModeStatusLabel.Text = "Mirror Mode: ON";
+            }
+            else
+            {
+                mirrorModeStatusLabel.Text = "Mirror Mode: OFF";
+            }
         }
     }
 }

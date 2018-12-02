@@ -214,5 +214,29 @@ namespace TileManiac.Properties {
                 this["ClassicMode"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int ViewAppearanceMode {
+            get {
+                return ((int)(this["ViewAppearanceMode"]));
+            }
+            set {
+                this["ViewAppearanceMode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MirrorMode {
+            get {
+                return ((bool)(this["MirrorMode"]));
+            }
+            set {
+                this["MirrorMode"] = value;
+            }
+        }
     }
 }

@@ -54,6 +54,11 @@ namespace TileManiac
             this.showPathBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.classicViewModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.appearanceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.overlayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.collisionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.developerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,6 +66,7 @@ namespace TileManiac
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.mirrorModeStatusLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label243 = new System.Windows.Forms.Label();
@@ -642,7 +648,7 @@ namespace TileManiac
             // 
             // mirrorPathsToolStripMenuItem1
             // 
-            this.mirrorPathsToolStripMenuItem1.Enabled = false;
+            this.mirrorPathsToolStripMenuItem1.CheckOnClick = true;
             this.mirrorPathsToolStripMenuItem1.Name = "mirrorPathsToolStripMenuItem1";
             this.mirrorPathsToolStripMenuItem1.Size = new System.Drawing.Size(248, 22);
             this.mirrorPathsToolStripMenuItem1.Text = "Mirror Paths";
@@ -653,7 +659,8 @@ namespace TileManiac
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.showPathBToolStripMenuItem,
             this.showGridToolStripMenuItem,
-            this.classicViewModeToolStripMenuItem});
+            this.classicViewModeToolStripMenuItem,
+            this.viewSettingsToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "View";
@@ -681,6 +688,43 @@ namespace TileManiac
             this.classicViewModeToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.classicViewModeToolStripMenuItem.Text = "Classic View Mode";
             this.classicViewModeToolStripMenuItem.Click += new System.EventHandler(this.classicViewModeToolStripMenuItem_Click);
+            // 
+            // viewSettingsToolStripMenuItem
+            // 
+            this.viewSettingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.appearanceToolStripMenuItem,
+            this.toolStripSeparator5,
+            this.overlayToolStripMenuItem,
+            this.collisionToolStripMenuItem});
+            this.viewSettingsToolStripMenuItem.Name = "viewSettingsToolStripMenuItem";
+            this.viewSettingsToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.viewSettingsToolStripMenuItem.Text = "View Settings";
+            // 
+            // appearanceToolStripMenuItem
+            // 
+            this.appearanceToolStripMenuItem.Enabled = false;
+            this.appearanceToolStripMenuItem.Name = "appearanceToolStripMenuItem";
+            this.appearanceToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.appearanceToolStripMenuItem.Text = "Appearance:";
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(137, 6);
+            // 
+            // overlayToolStripMenuItem
+            // 
+            this.overlayToolStripMenuItem.Name = "overlayToolStripMenuItem";
+            this.overlayToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.overlayToolStripMenuItem.Text = "Overlay";
+            this.overlayToolStripMenuItem.Click += new System.EventHandler(this.overlayToolStripMenuItem_Click);
+            // 
+            // collisionToolStripMenuItem
+            // 
+            this.collisionToolStripMenuItem.Name = "collisionToolStripMenuItem";
+            this.collisionToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.collisionToolStripMenuItem.Text = "Collision";
+            this.collisionToolStripMenuItem.Click += new System.EventHandler(this.collisionToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -726,7 +770,7 @@ namespace TileManiac
             // aboutToolStripMenuItem1
             // 
             this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.aboutToolStripMenuItem1.Text = "About";
             this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
             // 
@@ -739,6 +783,7 @@ namespace TileManiac
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.mirrorModeStatusLabel);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
             this.splitContainer1.Panel1.Controls.Add(this.panel1);
             // 
@@ -754,6 +799,18 @@ namespace TileManiac
             this.splitContainer1.SplitterDistance = 377;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 1;
+            // 
+            // mirrorModeStatusLabel
+            // 
+            this.mirrorModeStatusLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.mirrorModeStatusLabel.AutoSize = true;
+            this.mirrorModeStatusLabel.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.mirrorModeStatusLabel.Location = new System.Drawing.Point(8, 463);
+            this.mirrorModeStatusLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.mirrorModeStatusLabel.Name = "mirrorModeStatusLabel";
+            this.mirrorModeStatusLabel.Size = new System.Drawing.Size(89, 13);
+            this.mirrorModeStatusLabel.TabIndex = 113;
+            this.mirrorModeStatusLabel.Text = "Mirror Mode: OFF";
             // 
             // groupBox1
             // 
@@ -1068,7 +1125,7 @@ namespace TileManiac
             this.tableLayoutPanel1.Enabled = false;
             this.tableLayoutPanel1.ForeColor = System.Drawing.Color.Black;
             this.tableLayoutPanel1.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 16);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 15);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 16;
@@ -3680,7 +3737,7 @@ namespace TileManiac
             this.cb00.Size = new System.Drawing.Size(15, 38);
             this.cb00.TabIndex = 94;
             this.cb00.UseVisualStyleBackColor = true;
-            this.cb00.CheckedChanged += new System.EventHandler(this.cb00_CheckedChanged);
+            this.cb00.CheckedChanged += new System.EventHandler(this.cb_CheckedChanged);
             this.cb00.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseDown);
             this.cb00.MouseHover += new System.EventHandler(this.cb02_MouseHover);
             this.cb00.MouseMove += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseMove);
@@ -3695,7 +3752,7 @@ namespace TileManiac
             this.cb01.Size = new System.Drawing.Size(15, 38);
             this.cb01.TabIndex = 95;
             this.cb01.UseVisualStyleBackColor = true;
-            this.cb01.CheckedChanged += new System.EventHandler(this.cb01_CheckedChanged);
+            this.cb01.CheckedChanged += new System.EventHandler(this.cb_CheckedChanged);
             this.cb01.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseDown);
             this.cb01.MouseHover += new System.EventHandler(this.cb02_MouseHover);
             this.cb01.MouseMove += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseMove);
@@ -3710,7 +3767,7 @@ namespace TileManiac
             this.cb02.Size = new System.Drawing.Size(15, 38);
             this.cb02.TabIndex = 96;
             this.cb02.UseVisualStyleBackColor = true;
-            this.cb02.CheckedChanged += new System.EventHandler(this.cb02_CheckedChanged);
+            this.cb02.CheckedChanged += new System.EventHandler(this.cb_CheckedChanged);
             this.cb02.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseDown);
             this.cb02.MouseHover += new System.EventHandler(this.cb02_MouseHover);
             this.cb02.MouseMove += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseMove);
@@ -3725,7 +3782,7 @@ namespace TileManiac
             this.cb15.Size = new System.Drawing.Size(15, 38);
             this.cb15.TabIndex = 109;
             this.cb15.UseVisualStyleBackColor = true;
-            this.cb15.CheckedChanged += new System.EventHandler(this.cb15_CheckedChanged);
+            this.cb15.CheckedChanged += new System.EventHandler(this.cb_CheckedChanged);
             this.cb15.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseDown);
             this.cb15.MouseHover += new System.EventHandler(this.cb02_MouseHover);
             this.cb15.MouseMove += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseMove);
@@ -3740,7 +3797,7 @@ namespace TileManiac
             this.cb03.Size = new System.Drawing.Size(15, 38);
             this.cb03.TabIndex = 97;
             this.cb03.UseVisualStyleBackColor = true;
-            this.cb03.CheckedChanged += new System.EventHandler(this.cb03_CheckedChanged);
+            this.cb03.CheckedChanged += new System.EventHandler(this.cb_CheckedChanged);
             this.cb03.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseDown);
             this.cb03.MouseHover += new System.EventHandler(this.cb02_MouseHover);
             this.cb03.MouseMove += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseMove);
@@ -3755,7 +3812,7 @@ namespace TileManiac
             this.cb04.Size = new System.Drawing.Size(15, 38);
             this.cb04.TabIndex = 98;
             this.cb04.UseVisualStyleBackColor = true;
-            this.cb04.CheckedChanged += new System.EventHandler(this.cb04_CheckedChanged);
+            this.cb04.CheckedChanged += new System.EventHandler(this.cb_CheckedChanged);
             this.cb04.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseDown);
             this.cb04.MouseHover += new System.EventHandler(this.cb02_MouseHover);
             this.cb04.MouseMove += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseMove);
@@ -3770,7 +3827,7 @@ namespace TileManiac
             this.cb14.Size = new System.Drawing.Size(15, 38);
             this.cb14.TabIndex = 108;
             this.cb14.UseVisualStyleBackColor = true;
-            this.cb14.CheckedChanged += new System.EventHandler(this.cb14_CheckedChanged);
+            this.cb14.CheckedChanged += new System.EventHandler(this.cb_CheckedChanged);
             this.cb14.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseDown);
             this.cb14.MouseHover += new System.EventHandler(this.cb02_MouseHover);
             this.cb14.MouseMove += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseMove);
@@ -3785,7 +3842,7 @@ namespace TileManiac
             this.cb10.Size = new System.Drawing.Size(15, 38);
             this.cb10.TabIndex = 104;
             this.cb10.UseVisualStyleBackColor = true;
-            this.cb10.CheckedChanged += new System.EventHandler(this.cb10_CheckedChanged);
+            this.cb10.CheckedChanged += new System.EventHandler(this.cb_CheckedChanged);
             this.cb10.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseDown);
             this.cb10.MouseHover += new System.EventHandler(this.cb02_MouseHover);
             this.cb10.MouseMove += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseMove);
@@ -3800,7 +3857,7 @@ namespace TileManiac
             this.cb13.Size = new System.Drawing.Size(15, 38);
             this.cb13.TabIndex = 107;
             this.cb13.UseVisualStyleBackColor = true;
-            this.cb13.CheckedChanged += new System.EventHandler(this.cb13_CheckedChanged);
+            this.cb13.CheckedChanged += new System.EventHandler(this.cb_CheckedChanged);
             this.cb13.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseDown);
             this.cb13.MouseHover += new System.EventHandler(this.cb02_MouseHover);
             this.cb13.MouseMove += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseMove);
@@ -3815,7 +3872,7 @@ namespace TileManiac
             this.cb05.Size = new System.Drawing.Size(15, 38);
             this.cb05.TabIndex = 99;
             this.cb05.UseVisualStyleBackColor = true;
-            this.cb05.CheckedChanged += new System.EventHandler(this.cb05_CheckedChanged);
+            this.cb05.CheckedChanged += new System.EventHandler(this.cb_CheckedChanged);
             this.cb05.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseDown);
             this.cb05.MouseHover += new System.EventHandler(this.cb02_MouseHover);
             this.cb05.MouseMove += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseMove);
@@ -3830,7 +3887,7 @@ namespace TileManiac
             this.cb12.Size = new System.Drawing.Size(15, 38);
             this.cb12.TabIndex = 106;
             this.cb12.UseVisualStyleBackColor = true;
-            this.cb12.CheckedChanged += new System.EventHandler(this.cb12_CheckedChanged);
+            this.cb12.CheckedChanged += new System.EventHandler(this.cb_CheckedChanged);
             this.cb12.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseDown);
             this.cb12.MouseHover += new System.EventHandler(this.cb02_MouseHover);
             this.cb12.MouseMove += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseMove);
@@ -3845,7 +3902,7 @@ namespace TileManiac
             this.cb06.Size = new System.Drawing.Size(15, 38);
             this.cb06.TabIndex = 100;
             this.cb06.UseVisualStyleBackColor = true;
-            this.cb06.CheckedChanged += new System.EventHandler(this.cb06_CheckedChanged);
+            this.cb06.CheckedChanged += new System.EventHandler(this.cb_CheckedChanged);
             this.cb06.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseDown);
             this.cb06.MouseHover += new System.EventHandler(this.cb02_MouseHover);
             this.cb06.MouseMove += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseMove);
@@ -3860,7 +3917,7 @@ namespace TileManiac
             this.cb11.Size = new System.Drawing.Size(15, 38);
             this.cb11.TabIndex = 105;
             this.cb11.UseVisualStyleBackColor = true;
-            this.cb11.CheckedChanged += new System.EventHandler(this.cb11_CheckedChanged);
+            this.cb11.CheckedChanged += new System.EventHandler(this.cb_CheckedChanged);
             this.cb11.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseDown);
             this.cb11.MouseHover += new System.EventHandler(this.cb02_MouseHover);
             this.cb11.MouseMove += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseMove);
@@ -3875,7 +3932,7 @@ namespace TileManiac
             this.cb07.Size = new System.Drawing.Size(15, 38);
             this.cb07.TabIndex = 101;
             this.cb07.UseVisualStyleBackColor = true;
-            this.cb07.CheckedChanged += new System.EventHandler(this.cb07_CheckedChanged);
+            this.cb07.CheckedChanged += new System.EventHandler(this.cb_CheckedChanged);
             this.cb07.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseDown);
             this.cb07.MouseHover += new System.EventHandler(this.cb02_MouseHover);
             this.cb07.MouseMove += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseMove);
@@ -3890,7 +3947,7 @@ namespace TileManiac
             this.cb09.Size = new System.Drawing.Size(15, 38);
             this.cb09.TabIndex = 103;
             this.cb09.UseVisualStyleBackColor = true;
-            this.cb09.CheckedChanged += new System.EventHandler(this.cb09_CheckedChanged);
+            this.cb09.CheckedChanged += new System.EventHandler(this.cb_CheckedChanged);
             this.cb09.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseDown);
             this.cb09.MouseHover += new System.EventHandler(this.cb02_MouseHover);
             this.cb09.MouseMove += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseMove);
@@ -3905,7 +3962,7 @@ namespace TileManiac
             this.cb08.Size = new System.Drawing.Size(15, 38);
             this.cb08.TabIndex = 102;
             this.cb08.UseVisualStyleBackColor = true;
-            this.cb08.CheckedChanged += new System.EventHandler(this.cb08_CheckedChanged);
+            this.cb08.CheckedChanged += new System.EventHandler(this.cb_CheckedChanged);
             this.cb08.MouseDown += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseDown);
             this.cb08.MouseHover += new System.EventHandler(this.cb02_MouseHover);
             this.cb08.MouseMove += new System.Windows.Forms.MouseEventHandler(this.cb02_MouseMove);
@@ -3962,8 +4019,8 @@ namespace TileManiac
             this.lb00.Name = "lb00";
             this.lb00.Size = new System.Drawing.Size(15, 210);
             this.lb00.TabIndex = 93;
-            this.lb00.SelectedIndexChanged += new System.EventHandler(this.lb00_SelectedIndexChanged);
-            this.lb00.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb00_scrolling);
+            this.lb00.SelectedIndexChanged += new System.EventHandler(this.lb_SelectedIndexChanged);
+            this.lb00.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb_scrolling);
             // 
             // lb15
             // 
@@ -3993,8 +4050,8 @@ namespace TileManiac
             this.lb15.Name = "lb15";
             this.lb15.Size = new System.Drawing.Size(15, 210);
             this.lb15.TabIndex = 92;
-            this.lb15.SelectedIndexChanged += new System.EventHandler(this.lb15_SelectedIndexChanged);
-            this.lb15.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb15_scrolling);
+            this.lb15.SelectedIndexChanged += new System.EventHandler(this.lb_SelectedIndexChanged);
+            this.lb15.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb_scrolling);
             // 
             // lb14
             // 
@@ -4024,8 +4081,8 @@ namespace TileManiac
             this.lb14.Name = "lb14";
             this.lb14.Size = new System.Drawing.Size(15, 210);
             this.lb14.TabIndex = 91;
-            this.lb14.SelectedIndexChanged += new System.EventHandler(this.lb14_SelectedIndexChanged);
-            this.lb14.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb14_scrolling);
+            this.lb14.SelectedIndexChanged += new System.EventHandler(this.lb_SelectedIndexChanged);
+            this.lb14.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb_scrolling);
             // 
             // lb05
             // 
@@ -4055,8 +4112,8 @@ namespace TileManiac
             this.lb05.Name = "lb05";
             this.lb05.Size = new System.Drawing.Size(15, 210);
             this.lb05.TabIndex = 82;
-            this.lb05.SelectedIndexChanged += new System.EventHandler(this.lb05_SelectedIndexChanged);
-            this.lb05.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb05_scrolling);
+            this.lb05.SelectedIndexChanged += new System.EventHandler(this.lb_SelectedIndexChanged);
+            this.lb05.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb_scrolling);
             // 
             // lb04
             // 
@@ -4086,8 +4143,8 @@ namespace TileManiac
             this.lb04.Name = "lb04";
             this.lb04.Size = new System.Drawing.Size(15, 210);
             this.lb04.TabIndex = 81;
-            this.lb04.SelectedIndexChanged += new System.EventHandler(this.lb04_SelectedIndexChanged);
-            this.lb04.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb04_scrolling);
+            this.lb04.SelectedIndexChanged += new System.EventHandler(this.lb_SelectedIndexChanged);
+            this.lb04.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb_scrolling);
             // 
             // lb01
             // 
@@ -4117,8 +4174,8 @@ namespace TileManiac
             this.lb01.Name = "lb01";
             this.lb01.Size = new System.Drawing.Size(15, 210);
             this.lb01.TabIndex = 78;
-            this.lb01.SelectedIndexChanged += new System.EventHandler(this.lb01_SelectedIndexChanged);
-            this.lb01.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb01_scrolling);
+            this.lb01.SelectedIndexChanged += new System.EventHandler(this.lb_SelectedIndexChanged);
+            this.lb01.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb_scrolling);
             // 
             // lb08
             // 
@@ -4148,8 +4205,8 @@ namespace TileManiac
             this.lb08.Name = "lb08";
             this.lb08.Size = new System.Drawing.Size(15, 210);
             this.lb08.TabIndex = 85;
-            this.lb08.SelectedIndexChanged += new System.EventHandler(this.lb08_SelectedIndexChanged);
-            this.lb08.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb08_scrolling);
+            this.lb08.SelectedIndexChanged += new System.EventHandler(this.lb_SelectedIndexChanged);
+            this.lb08.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb_scrolling);
             // 
             // lb03
             // 
@@ -4179,8 +4236,8 @@ namespace TileManiac
             this.lb03.Name = "lb03";
             this.lb03.Size = new System.Drawing.Size(15, 210);
             this.lb03.TabIndex = 80;
-            this.lb03.SelectedIndexChanged += new System.EventHandler(this.lb03_SelectedIndexChanged);
-            this.lb03.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb03_scrolling);
+            this.lb03.SelectedIndexChanged += new System.EventHandler(this.lb_SelectedIndexChanged);
+            this.lb03.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb_scrolling);
             // 
             // lb13
             // 
@@ -4210,8 +4267,8 @@ namespace TileManiac
             this.lb13.Name = "lb13";
             this.lb13.Size = new System.Drawing.Size(15, 210);
             this.lb13.TabIndex = 90;
-            this.lb13.SelectedIndexChanged += new System.EventHandler(this.lb13_SelectedIndexChanged);
-            this.lb13.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb13_scrolling);
+            this.lb13.SelectedIndexChanged += new System.EventHandler(this.lb_SelectedIndexChanged);
+            this.lb13.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb_scrolling);
             // 
             // lb07
             // 
@@ -4241,8 +4298,8 @@ namespace TileManiac
             this.lb07.Name = "lb07";
             this.lb07.Size = new System.Drawing.Size(15, 210);
             this.lb07.TabIndex = 84;
-            this.lb07.SelectedIndexChanged += new System.EventHandler(this.lb07_SelectedIndexChanged);
-            this.lb07.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb07_scrolling);
+            this.lb07.SelectedIndexChanged += new System.EventHandler(this.lb_SelectedIndexChanged);
+            this.lb07.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb_scrolling);
             // 
             // lb09
             // 
@@ -4272,8 +4329,8 @@ namespace TileManiac
             this.lb09.Name = "lb09";
             this.lb09.Size = new System.Drawing.Size(15, 210);
             this.lb09.TabIndex = 86;
-            this.lb09.SelectedIndexChanged += new System.EventHandler(this.lb09_SelectedIndexChanged);
-            this.lb09.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb09_scrolling);
+            this.lb09.SelectedIndexChanged += new System.EventHandler(this.lb_SelectedIndexChanged);
+            this.lb09.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb_scrolling);
             // 
             // lb12
             // 
@@ -4303,8 +4360,8 @@ namespace TileManiac
             this.lb12.Name = "lb12";
             this.lb12.Size = new System.Drawing.Size(15, 210);
             this.lb12.TabIndex = 89;
-            this.lb12.SelectedIndexChanged += new System.EventHandler(this.lb12_SelectedIndexChanged);
-            this.lb12.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb12_scrolling);
+            this.lb12.SelectedIndexChanged += new System.EventHandler(this.lb_SelectedIndexChanged);
+            this.lb12.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb_scrolling);
             // 
             // lb06
             // 
@@ -4335,8 +4392,8 @@ namespace TileManiac
             this.lb06.Name = "lb06";
             this.lb06.Size = new System.Drawing.Size(15, 210);
             this.lb06.TabIndex = 83;
-            this.lb06.SelectedIndexChanged += new System.EventHandler(this.lb06_SelectedIndexChanged);
-            this.lb06.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb06_scrolling);
+            this.lb06.SelectedIndexChanged += new System.EventHandler(this.lb_SelectedIndexChanged);
+            this.lb06.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb_scrolling);
             // 
             // lb10
             // 
@@ -4366,8 +4423,8 @@ namespace TileManiac
             this.lb10.Name = "lb10";
             this.lb10.Size = new System.Drawing.Size(15, 210);
             this.lb10.TabIndex = 87;
-            this.lb10.SelectedIndexChanged += new System.EventHandler(this.lb10_SelectedIndexChanged);
-            this.lb10.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb10_scrolling);
+            this.lb10.SelectedIndexChanged += new System.EventHandler(this.lb_SelectedIndexChanged);
+            this.lb10.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb_scrolling);
             // 
             // lb11
             // 
@@ -4397,8 +4454,8 @@ namespace TileManiac
             this.lb11.Name = "lb11";
             this.lb11.Size = new System.Drawing.Size(15, 210);
             this.lb11.TabIndex = 88;
-            this.lb11.SelectedIndexChanged += new System.EventHandler(this.lb11_SelectedIndexChanged);
-            this.lb11.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb11_scrolling);
+            this.lb11.SelectedIndexChanged += new System.EventHandler(this.lb_SelectedIndexChanged);
+            this.lb11.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb_scrolling);
             // 
             // lb02
             // 
@@ -4428,8 +4485,8 @@ namespace TileManiac
             this.lb02.Name = "lb02";
             this.lb02.Size = new System.Drawing.Size(15, 210);
             this.lb02.TabIndex = 79;
-            this.lb02.SelectedIndexChanged += new System.EventHandler(this.lb02_SelectedIndexChanged);
-            this.lb02.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb02_scrolling);
+            this.lb02.SelectedIndexChanged += new System.EventHandler(this.lb_SelectedIndexChanged);
+            this.lb02.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.lb_scrolling);
             // 
             // panel1
             // 
@@ -4550,7 +4607,7 @@ namespace TileManiac
             this.degreeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.degreeLabel.AutoSize = true;
             this.degreeLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.degreeLabel.Location = new System.Drawing.Point(6, 462);
+            this.degreeLabel.Location = new System.Drawing.Point(6, 373);
             this.degreeLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.degreeLabel.Name = "degreeLabel";
             this.degreeLabel.Size = new System.Drawing.Size(165, 13);
@@ -5079,6 +5136,7 @@ namespace TileManiac
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -5541,6 +5599,12 @@ namespace TileManiac
         private Label label4;
         private ToolStripMenuItem classicViewModeToolStripMenuItem;
         private Panel panel3;
+        private ToolStripMenuItem viewSettingsToolStripMenuItem;
+        private ToolStripMenuItem appearanceToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator5;
+        private ToolStripMenuItem overlayToolStripMenuItem;
+        private ToolStripMenuItem collisionToolStripMenuItem;
+        private Label mirrorModeStatusLabel;
     }
 }
 

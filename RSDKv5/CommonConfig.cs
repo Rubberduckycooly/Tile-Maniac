@@ -11,6 +11,7 @@ namespace RSDKv5
     {
         public static readonly byte[] MAGIC = new byte[] { (byte)'C', (byte)'F', (byte)'G', (byte)'\0' };
 
+
         const int PALETTES_COUNT = 8;
 
         public List<string> ObjectsNames = new List<string>();

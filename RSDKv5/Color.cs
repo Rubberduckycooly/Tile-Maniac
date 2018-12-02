@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SystemColor = System.Drawing.Color;
 using System.IO;
 
 namespace RSDKv5
@@ -34,6 +35,22 @@ namespace RSDKv5
             G = reader.ReadByte();
             R = reader.ReadByte();
             A = reader.ReadByte();
+        }
+
+        internal SystemColor ToSystemColors()
+        {
+            SystemColor returnColor = SystemColor.FromArgb(this.R, this.G, this.B);
+            return returnColor;
+        }
+
+        internal Color FromSystemColor(SystemColor color)
+        {
+            Color returnColor = new Color();
+            returnColor.R = color.R;
+            returnColor.A = color.A;
+            returnColor.B = color.B;
+            returnColor.G = color.G;
+            return returnColor;
         }
 
         internal void Write(Writer writer)
